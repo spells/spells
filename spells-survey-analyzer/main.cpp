@@ -7,11 +7,9 @@
 using namespace std;
 
 #include "test.h"
-#include "SpellsSurvey.h"
+#include "kmeans.h"
 
-#include <mlpack/methods/kmeans/kmeans.hpp>
-
-void readInputFile(vector<DoubleVector> *input)
+void readInputFile(vector<vector<double> > *input)
 {
 	ifstream inputFile("input.txt");
 	int n, m;
@@ -27,44 +25,43 @@ void readInputFile(vector<DoubleVector> *input)
 	}
 }
 
-void normalizeDoubleVector(DoubleVector *doubleVector)
+void normalizeDoubleVector(vector<double> *doubleVector)
 {
 	double sum = 0;
-	for (const double &value : *doubleVector)
+	for (int i = 0; i < doubleVector->size(); i++)
 	{
-		sum += value;
+		sum += (*doubleVector)[i];
 	}
 	if (sum == 0)
 	{
 		return;
 	}
-	for (double &value : *doubleVector)
+	for (int i = 0; i < doubleVector->size(); i++)
 	{
-		value /= sum;
+		(*doubleVector)[i] /= sum;
 	}
 }
 
-void normalizeInput(vector<DoubleVector> *input)
+void normalizeInput(vector<vector<double> > *input)
 {
-	for (DoubleVector &vector : *input)
+	for (int i = 0; i < input->size(); i++)
 	{
-		normalizeDoubleVector(&vector);
+		normalizeDoubleVector(&(*input)[i]);
 	}
-}
-
-void kMeans(const vector<DoubleVector> &input)
-{
-
 }
 
 int main()
 {
 	testAll();
 
-	vector<DoubleVector> input;
+	vector<vector<double> > input;
 	readInputFile(&input);
 	normalizeInput(&input);
-	kMeans(&input);
+	
+	for (int k = 2; k <= 10; k++)
+	{
+		kMeans(input, k);
+	}
 
 	return 0;
 }
