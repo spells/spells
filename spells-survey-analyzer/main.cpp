@@ -11,16 +11,15 @@ using namespace std;
 
 void readInputFile(vector<vector<double> > *input)
 {
-	ifstream inputFile("input.txt");
 	int n, m;
-	inputFile >> n >> m;
+	cin >> n >> m;
 	input->resize(n);
 	for (int i = 0; i < n; i++)
 	{
 		(*input)[i].resize(m);
 		for (int j = 0; j < m; j++)
 		{
-			inputFile >> (*input)[i][j];
+			cin >> (*input)[i][j];
 		}
 	}
 }
