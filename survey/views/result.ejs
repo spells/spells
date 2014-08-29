@@ -1,0 +1,60 @@
+
+<!doctype html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Script-Type" content="text/javascript">
+		<meta http-equiv="Content-Style-Type" content="text/css">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title> 우리집은 내가 지킨다 AB테스트 설문조사</title>
+		<style>
+			@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+			* {
+				font-family: 'Nanum Gothic', serif;﻿
+			}
+			body {
+				background-color: #f3f3f3;
+				font-weight: bold;
+			}
+			#main {
+				position: relative;
+				background-image: url('/images/result.png');
+				border: 2px solid transparent;
+				border-color: #e9e9e9;
+				margin:0 auto;
+				margin-top: 50px;
+				width:650px;
+				height:600px;
+			}
+			#result {
+				position: absolute;
+				left: 0px;
+				top: 200px;
+				color: #637a32;
+				padding: 0px 20px 0px 20px;
+				text-align: center;
+				font-weight: bold;
+				width: 100%;
+			}
+			u,p>span {
+				font-size: 120%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="main">
+			<div id="result">
+				<p>설문조사에 응해주셔서 정말 감사합니다!</p>
+				<br>
+				<p>총 <span><%=tester_count%></span> 분들께서 설문조사에 참여해주셨습니다.</p>
+				<p>가장 많이 선택된 예시는</p>
+				<p><u>'<%=most_question%>'</u> 이며
+				<p>총 <span><%=most_question_count%></span> 번 선택되었습니다.</p>
+				<br>
+				<p>아래의 링크는 주관식 설문조사 주소이며</p>
+				<p>참가해주신다면 좋은 의견 잘 활용하여 멋진 프로젝트 결과를 보여드리겠습니다!</p>
+				<p><a href="http://goo.gl/Uc7A8u">http://goo.gl/Uc7A8u</a></p>
+			</div>
+		</div>
+	</body>
+</html>

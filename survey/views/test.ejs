@@ -1,0 +1,87 @@
+
+<!doctype html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Script-Type" content="text/javascript">
+		<meta http-equiv="Content-Style-Type" content="text/css">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title> 우리집은 내가 지킨다 AB테스트 설문조사</title>
+		<style>
+			@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+			* {
+				font-family: 'Nanum Gothic', serif;﻿
+			}
+			body {
+				background-color: #f3f3f3;
+				font-weight: bold;
+			}
+			#main {
+				position: relative;
+				background-image: url('/images/test.png');
+				border: 2px solid transparent;
+				border-color: #e9e9e9;
+				margin:0 auto;
+				margin-top: 50px;
+				width:650px;
+				height:600px;
+			}
+			#count {
+				font-size: 16px;
+				position: absolute;
+				bottom: 30px;
+				right: 50px;
+			}
+			.question {
+				border-radius: 10px;
+				border: 2px solid transparent;
+				border-color: #e9e9e9;
+				color: #637a32;
+				font-size: 18px;
+				position: absolute;
+				top: 280px;
+				width: 250px;
+				height: 230px;
+				cursor: pointer;
+				display: table;
+			}
+			.question:hover {
+				background-color: #f9f9f9;
+			}
+			#question_1 {
+				left: 50px;
+			}
+			#question_2 {
+				left: 350px;
+			}
+			.text {
+				display: table-cell;
+				vertical-align: middle;
+				padding: 0px 20px 0px 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="main">
+			<div id="count"><%=question_count%>/20</div>
+			<div id="question_1" class="question" idx="<%=question_data[0][0].idx%>">
+				<div class="text"><%=question_data[0][0].text%></div>
+			</div>
+			<div id="question_2" class="question" idx="<%=question_data[1][0].idx%>">
+				<div class="text"><%=question_data[1][0].text%></div>
+			</div>
+		</div>
+		<script src="/jquery-2.1.1/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$(".question").click(function(){
+					var selected_idx=$(this).attr("idx");
+					var not_selected_idx=$(".question[idx!='"+selected_idx+"']").attr("idx");
+					$.post("/select",{select:selected_idx,not_select:not_selected_idx},function(data){
+						if(data)location.href="/test";
+					});
+				});
+			});
+		</script>
+	</body>
+</html>
