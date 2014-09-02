@@ -4,6 +4,7 @@ void setup() {
 
 void loop() {
   for (;;) {
+    // 440Hz 톤의 주기는 2272.73us입니다.
     digitalWrite(4, HIGH);
     delayMicroseconds(1136);
     digitalWrite(4, LOW);
