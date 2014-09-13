@@ -1,0 +1,35 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Spells",
+  "dependencies": {
+    "hiredis": "*",
+    "moment": "*",
+    "redis": "*",
+    "serialport": "*",
+    "express": "*",
+    "morgan": "*",
+    "body-parser": "*",
+    "method-override": "*",
+    "cookie-parser": "*",
+    "express-session": "*",
+    "jade": "*",
+    "stylus": "*",
+    "consolidate": "*",
+    "passport": "*",
+    "passport-local": "*",
+    "lodash": "*",
+    "cookie": "*",
+    "csurf": "*",
+    "fetch": "*",
+    "riccardo": "*",
+    "markdown-pdf": "*",
+    "uglify-js": "*"
+  }
+}
