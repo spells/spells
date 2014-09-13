@@ -1,0 +1,26 @@
+doctype html
+html(lang='ko')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title Spells 서버 로그인
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    meta(name='description', content='Spells 서버 로그인')
+    meta(name='author', content='류형욱')
+    link(href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css", rel="stylesheet")
+    link(rel='stylesheet', href='/styles/login.css')
+  body
+    .container
+      .page-header
+        h1
+          | Spells 서버 로그인
+          small
+            |  제한된 사용자에게만 제공하는 서비스입니다.
+      form.form-signin(role='form', method='post')
+        input(type='hidden', name='username', value='spells')
+        input(type='hidden', name='_csrf', value='#{csrfToken}')
+        input.form-control(type='password', name='password', placeholder='암호', required, autofocus)
+        button.btn.btn-lg.btn-primary.btn-block(type='submit') 확인
+      hr
+      footer
+        address Spells 서버

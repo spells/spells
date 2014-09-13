@@ -1,0 +1,8 @@
+.container
+  .page-header
+    h1 대시보드
+  p 현재 모드: {{ mode }}
+  p 저장된 데이터 개수: {{ length }}
+  div(ng-repeat='row in recent')
+    p {{ row }}
+  button.btn.btn-default(ng-click='toggle()') 모드 전환
