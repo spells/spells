@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<title>soma index</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+	<!-- FontAwesome - http://fortawesome.github.io/Font-Awesome/ -->
+    <link rel="stylesheet" href="/nativeDroid/css/font-awesome.min.css" />
+	<!-- jQueryMobileCSS - original without styling -->
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+	<!-- nativeDroid core CSS -->
+    <link rel="stylesheet" href="/nativeDroid/css/jquerymobile.nativedroid.css" />
+	<!-- nativeDroid: Light/Dark -->
+    <link rel="stylesheet" href="/nativeDroid/css/jquerymobile.nativedroid.light.css"  id='jQMnDTheme' />
+	<!-- nativeDroid: Color Schemes -->
+    <link rel="stylesheet" href="/nativeDroid/css/jquerymobile.nativedroid.color.green.css" id='jQMnDColor' />
+    <!-- 나눔고딕 폰트 -->
+    <link href='/hangul/nanumbarungothic.css' rel='stylesheet' type='text/css'>
+
+	<style type="text/css">
+		div[data-role="header"] {
+			overflow: hidden;
+		}
+	</style>
+
+	<%- head %>
+</head>
+<body>
+    <div data-role="page" data-theme='b'>
+    	<div data-role="panel" data-display="push" data-position="right" id="mypanel" data-theme="b">
+	        <ul data-role="listview">
+	            <li>메뉴</li>
+	            <li data-icon='false'><a href="#"><i class='lIcon fa fa-user'></i>내 프로필</a></li>
+	            <li data-icon='false'><a href="#"><i class='lIcon fa fa-gear'></i>설정</a></li>
+	            <li data-icon='false'><a href="#"><i class='lIcon fa fa-shopping-cart'></i>기기 주문</a></li>
+	            <li data-icon='false'><a href="#"><i class='lIcon fa fa-envelope'></i>문의하기</a></li>
+	        </ul>
+	    </div>
+        <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+            <h1>우리집은 내가 지킨다</h1>
+            <a href="http://nativedroid.godesign.ch/" data-ajax='false' target='_blank'><i class='fa fa-home'></i></a>
+            <a href='#mypanel' data-role='button' data-iconpos='right' data-inline='true'><i class='lIcon fa fa-bars'></i></a>
+        </div>
+        <div data-role="content">
+       		<%- body %>
+        </div>
+    </div>
+
+
+	<!-- jQuery / jQueryMobile Scripts -->
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+	<%- script %>
+</body>
+</html>
+
+

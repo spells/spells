@@ -1,0 +1,22 @@
+{
+  "name": "soma-server",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.0.0",
+    "cookie-parser": "~1.0.1",
+    "debug": "^2.0.0",
+    "ejs": "^1.0.0",
+    "express": "~4.2.0",
+    "express-ejs-layouts": "^1.1.0",
+    "express-session": "^1.8.2",
+    "morgan": "~1.0.0",
+    "mysql": "^2.5.0",
+    "session.socket.io-express4": "0.0.3",
+    "socket.io": "^1.1.0",
+    "static-favicon": "~1.0.0"
+  }
+}
