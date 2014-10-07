@@ -1,12 +1,17 @@
-var express = require('express');
-var router = express.Router();
+module.exports=function(mysql,sio){
 
-/* GET home page. */
-router.get('/', function(req, res) {
-	res.render('index');
-});
-router.get('/test', function(req, res) {
-	res.render('test');
-});
+	var express = require('express');
+	var router = express.Router();
 
-module.exports = router;
+	router.get('/', function(req, res) {
+		res.render('index',{layout:false});
+	});
+	router.all('*',function(req,res,next){
+		if(req.session.login) next();
+		else res.status(500).send('500 error');
+	});
+	router.get('/main', function(req, res) {
+		res.render('main');
+	});
+	return router;
+}

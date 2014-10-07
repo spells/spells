@@ -1,37 +1,62 @@
-<%- contentFor('head') %>	
-	<style>
-	</style>
+<!doctype html>
+<html lang="ko">
+<head>
+    <title>soma index</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+    <!-- FontAwesome - http://fortawesome.github.io/Font-Awesome/ -->
+    <link rel="stylesheet" href="/nativeDroid/css/font-awesome.min.css" />
+    <!-- jQueryMobileCSS - original without styling -->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+    <!-- nativeDroid core CSS -->
+    <link rel="stylesheet" href="/nativeDroid/css/jquerymobile.nativedroid.css" />
+    <!-- nativeDroid: Light/Dark -->
+    <link rel="stylesheet" href="/nativeDroid/css/jquerymobile.nativedroid.light.css"  id='jQMnDTheme' />
+    <!-- nativeDroid: Color Schemes -->
+    <link rel="stylesheet" href="/nativeDroid/css/jquerymobile.nativedroid.color.green.css" id='jQMnDColor' />
+    <!-- 나눔고딕 폰트 -->
+    <link href='/hangul/nanumbarungothic.css' rel='stylesheet' type='text/css'>
 
-<%- contentFor('body') %>
-	
-        	
-	<ul data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b">
-        <li data-role="list-divider">
-        	<div>
-        		test1
-        	</div>
-        </li>
-        <li >
-			<a href="text.html" data-ajax="false"><i class='fa fa-align-left'></i> 1-1</a>
-        </li>
-        <li >
-			<a href="text.html" data-ajax="false"><i class='fa fa-align-left'></i> 1-2</a>
-        </li>
-        <li data-role="list-divider">
-        	<div>
-        		test2
-        	</div>
-        </li>
-        <li >
-			<a href="text.html" data-ajax="false"><i class='fa fa-align-left'></i> 2-1</a>
-        </li>
-        <li >
-			<a href="text.html" data-ajax="false"><i class='fa fa-align-left'></i> 2-2</a>
-        </li>
-    </ul>
+    <style type="text/css">
+        .ui-page-theme-b .ui-btn {
+            background-color: #e2f0b6 !important;
+        }
+        .ui-page-theme-b .ui-btn:hover {
+            color: #ffffff !important;
+            background-color: #B6DB49 !important;
+        }
+    </style>
 
-<%- contentFor('script') %>
-	<script>
-		$(document).ready(function(){
-		});
-	</script>
+</head>
+<body>
+    <div data-role="page" data-theme='b'>
+        <div data-role="content">
+            <h1>Demos</h1>
+            <img src="_assets/img/devices.png">
+            
+            <!--
+            <button data-inline='true'><i class='lIcon fa fa-facebook-square'></i>Facebook 로그인</button>
+            -->
+            <a href="/auth/facebook" data-ajax="false">
+                <button>
+                    <i class='lIcon fa fa-facebook-square'></i> <b>Facebook</b> 로그인
+                </button>
+            </a>
+            <button><i class='lIcon fa fa-google-plus-square  '></i> <b>Google</b> 로그인</button>
+        </div>
+    </div>
+    <!-- jQuery / jQueryMobile Scripts -->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+    <script>
+        $(document).ready(function(){
+        });
+    </script>
+
+</body>
+</html>
+

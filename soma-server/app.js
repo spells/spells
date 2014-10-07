@@ -18,6 +18,13 @@ var io = require('socket.io')(server);
 var sessionStore = new session.MemoryStore();
 var sessionSockets = require('session.socket.io-express4')
 var sio = new sessionSockets(io, sessionStore, cookieParser);
+
+// mysql
+var mysql = require('./modules/mysql')();
+
+// passport facebook
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
 //======================================================
 server.listen(80);
 console.log('Express server listening on port ' + server.address().port);
@@ -39,25 +46,9 @@ app.use(session({
     saveUninitialized: true
 }));
 //======================================================
-var routes = require('./routes/index');
-var users = require('./routes/users');
-
-app.use('/', routes);
-app.use('/users', users);
-
-
-//test
-var mysql = require('mysql');
-var pool  = mysql.createPool({
-    host    : '172.16.100.170',
-    user    : 'spells',
-    password: 'tmvpf123!@#',
-    database: 'spells',
-    charset : 'utf8',
-    multipleStatements: true,
-    debug   : true
-});
-
+require('./modules/passport')(app,passport,FacebookStrategy,mysql);
+//======================================================
+app.use('/',require('./routes/index')(mysql,sio));
 
 sio.on('connection',function (err, socket, session) {
     console.log(socket.handshake.address + " client connect!");
@@ -73,12 +64,6 @@ sio.on('connection',function (err, socket, session) {
 
     });
 });
-
-
-
-
-
-
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
