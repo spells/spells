@@ -1,5 +1,13 @@
 <%- contentFor('head') %>	
 	<style>
+        .user_image {
+            width: 80px;
+            height: 80px;
+            border-radius: 80px;
+            border: 3px solid #eee;
+            box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
+            margin-bottom: 15px;
+        }
 	</style>
 
 <%- contentFor('body') %>
@@ -8,7 +16,21 @@
 	<ul data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b">
         <li data-role="list-divider">
         	<div>
-        		test1
+                <%
+                    if(passport.provider=="google"){
+                        %>
+                            <img class="user_image" src="<%=JSON.parse(passport._raw).picture%>">
+                        <%
+                    }
+                    else {
+                        %>
+                            <img class="user_image" src="http://graph.facebook.com/<%=passport.id%>/picture?type=square&height=200&width=200">
+
+                        <%
+
+                    }
+                %>
+        		<%=passport.displayName%>
         	</div>
         </li>
         <li >

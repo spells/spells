@@ -6,12 +6,13 @@ module.exports=function(mysql,sio){
 	router.get('/', function(req, res) {
 		res.render('index',{layout:false});
 	});
-	router.all('*',function(req,res,next){
+	router.all('*',function(req, res, next) {
 		if(req.session.login) next();
-		else res.status(500).send('500 error');
+		else res.redirect('/');
 	});
 	router.get('/main', function(req, res) {
-		res.render('main');
+		console.log(req.session);
+		res.render('main',{passport:req.session.passport.user});
 	});
 	return router;
 }
