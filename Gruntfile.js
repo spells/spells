@@ -5,8 +5,14 @@ module.exports = function (grunt) {
     // Metadata.
     pkg: grunt.file.readJSON('package.json'),
     // Task configuration.
-    mocha: {
-      targets: {
+    mochaTest: {
+      test: {
+        options: {
+          run: true,
+          debug: true,
+          reporter: 'Spec'
+        },
+        src: 'test/'
       }
     }
   });
@@ -17,9 +23,9 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-mocha');
+  grunt.loadNpmTasks('grunt-mocha-test');
 
   // Default task.
   grunt.registerTask('default', ['test']);
-  grunt.registerTask('test', ['mocha']);
+  grunt.registerTask('test', ['mochaTest']);
 };
