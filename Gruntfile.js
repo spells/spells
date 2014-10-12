@@ -10,7 +10,7 @@ module.exports = function (grunt) {
         options: {
           run: true,
           debug: true,
-          reporter: 'Spec'
+          reporter: 'spec'
         },
         src: 'test/'
       }
