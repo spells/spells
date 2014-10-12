@@ -25,8 +25,9 @@ var mysql = require('./modules/mysql')();
 // passport facebook
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 //======================================================
-server.listen(80);
+server.listen(8080);
 console.log('Express server listening on port ' + server.address().port);
 //======================================================
 app.set('views', path.join(__dirname, 'views'));
@@ -46,7 +47,7 @@ app.use(session({
     saveUninitialized: true
 }));
 //======================================================
-require('./modules/passport')(app,passport,FacebookStrategy,mysql);
+require('./modules/passport')(app,passport,FacebookStrategy,GoogleStrategy,mysql);
 //======================================================
 app.use('/',require('./routes/index')(mysql,sio));
 
