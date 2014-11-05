@@ -16,7 +16,115 @@ module.exports = function () {
   // 위와 같이 사용할 수 있어야 합니다.
   // 뒤쪽의 함수 호출에 유의합니다. 의존성 주입을 지원하기 위함입니다.
 
+  var atmosphere = {
+    name: 'atmosphere',
+    methods: [
+      {
+        name: 'temperature',
+        fields: [
+          {
+            name: 'temperature',
+            type: 'integer',
+            min: -100,
+            max: 100
+          }
+        ],
+        name: 'particles',
+        fields: [
+          {
+            name: 'particles',
+            type: 'integer',
+            min: 0,
+            max: 1000
+          }
+        ]
+      }
+    ]
+  };
+
+  var window = {
+    name: 'window',
+    methods: [
+      {
+        name: 'move',
+        fields: [
+          name: 'open',
+          min: 0,
+          max: 1
+        ]
+      },
+      {
+        name: 'status',
+        fields: [
+          name: 'open',
+          min: 0,
+          max: 1000
+        ]
+      }
+    ]
+  };
+
+  var door = {
+    name: 'door',
+    methods: window.methods
+  };
+
+  var airConditioner = {
+    name: 'airConditioner',
+    methods: [
+      {
+        name: 'status',
+        fields: [
+          name: 'on',
+          min: 0,
+          max: 1
+        ]
+      }
+    ]
+  };
+
+  var doorLock = {
+    name: 'doorLock',
+    methods: [
+      {
+        name: 'doorOpenClose',
+        fields: [
+          {
+            name: 'isOpen'
+          }
+        ]
+      }
+    ]
+  };
+
+  var light = {
+    name: 'light',
+    methods: [
+      {
+        name: 'on',
+        fields: [
+          {
+            name: 'on',
+            type: 'integer',
+            min: 0,
+            max: 1
+          }
+        ]
+      }
+    ]
+  };
+
   protocol.features = [];
+
+  protocol.push(light);
+  protocol.push(doorLock);
+  protocol.push(airConditioner);
+  protocol.push(door);
+  protocol.push(window);
+  protocol.push(atmosphere);
+
+  return protocol;
+
   var led = {
     // 기능 이름
     name: 'led',
