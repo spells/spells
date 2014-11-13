@@ -1,24 +1,40 @@
 module.exports = function () {
+  var checkOption = function checkOption(option) {
+    if (typeof option !== 'object' ||
+      option.type === null || option.type === undefined ||
+      option.min === null || option.max === null) {
+      return false;
+    }
+    if (option.type !== 'integer') {
+      return false;
+    }
+    if (option.min === undefined) {
+      return false;
+    }
+    if (typeof option !== 'object' ||
+      option.type === null || option.type === undefined ||
+      option.min === null || option.max === null) {
+      return false;
+    }
+    if (option.type !== 'integer') {
+      return false;
+    }
+    if (option.min === undefined) {
+      return false;
+    }
+    if (option.max !== undefined && option.max < option.min) {
+      return false;
+    }
+  };
   return {
-    decisionType: function (data) {
-      if (typeof data !== 'object' ||
-        data.type === null || data.type === undefined ||
-        data.min === null || data.max === null) {
+    decisionType: function (option) {
+      if (checkOption(option) === false) {
         throw new Error();
       }
-      if (data.type !== 'integer') {
-        throw new Error();
-      }
-      if (data.min === undefined) {
-        throw new Error();
-      }
-      if (data.max === undefined) {
+      if (option.max === undefined) {
         return 'unsigned long';
       }
-      if (data.max < data.min) {
-        throw new Error();
-      }
-      var distance = data.max - data.min;
+      var distance = option.max - option.min;
       if (distance < 256) {
         return 'unsigned char';
       }
@@ -29,6 +45,26 @@ module.exports = function () {
         return 'unsigned long';
       }
       throw new Error();
+    },
+    getCodec: function (option) {
+      if (checkOption(option) === false) {
+        throw new Error();
+      }
+      var distance = option.max - option.min;
+      return {
+        encode: function (i) {
+          if (option.min > i || option.max < i) {
+            throw new Error();
+          }
+          return i - option.min;
+        },
+        decode: function (i) {
+          if (i < 0 || distance < i) {
+            throw new Error();
+          }
+          return i + option.min;
+        }
+      };
     }
   };
 };
