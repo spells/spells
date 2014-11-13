@@ -1,5 +1,5 @@
 {
-  "name": "spells",
+  "name": "spells-messaging-gateway",
   "private": true,
   "scripts": {
     "test": "grunt test"
@@ -11,7 +11,6 @@
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "*",
     "grunt-mocha-test": "*",
-    "grunt-subgrunt": "*",
     "mocha": "*"
   }
 }

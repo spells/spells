@@ -1,5 +1,5 @@
 {
-  "name": "spells",
+  "name": "spells-messaging",
   "private": true,
   "scripts": {
     "test": "grunt test"
