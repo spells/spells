@@ -6,6 +6,7 @@
   },
   "devDependencies": {
     "grunt": "*",
+    "grunt-cli": "*",
     "grunt-contrib-concat": "*",
     "grunt-contrib-jshint": "*",
     "grunt-contrib-uglify": "*",
