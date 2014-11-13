@@ -14,13 +14,6 @@ module.exports = function (grunt) {
         },
         src: 'test/'
       }
-    },
-    subgrunt: {
-      test: {
-        'spells-messaging-edge': 'test',
-        'spells-messaging-gateway': 'test',
-        'spells-messaging-server': 'test'
-      }
     }
   });
 
@@ -30,9 +23,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-mocha-test');
-  grunt.loadNpmTasks('grunt-subgrunt');
 
   // Default task.
   grunt.registerTask('default', ['test']);
-  grunt.registerTask('test', ['mochaTest', 'subgrunt:test']);
+  grunt.registerTask('test', ['mochaTest']);
 };

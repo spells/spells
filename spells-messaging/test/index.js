@@ -1,0 +1,2 @@
+require('./capitalizer');
+require('./numberTypes');
