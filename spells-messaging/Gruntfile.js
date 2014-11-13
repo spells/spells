@@ -17,7 +17,9 @@ module.exports = function (grunt) {
     },
     subgrunt: {
       test: {
-        'spells-messaging': 'test'
+        'spells-messaging-edge': 'test',
+        'spells-messaging-gateway': 'test',
+        'spells-messaging-server': 'test'
       }
     }
   });
