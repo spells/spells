@@ -1,3 +1,3 @@
 require('./capitalizer');
 require('./numberTypes');
-require('./edgeWriter');
+require('./codeWriter');
