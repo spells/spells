@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 module.exports = function () {
 
   const newLine = '\n';
@@ -7,6 +9,15 @@ module.exports = function () {
   var indent = 0;
 
   var write = function (content) {
+    
+    if (content.split('\n').join('') !== content)
+    {
+      _.forEach(content.split('\n'), function (line) {
+        write(line);
+      });
+      return;
+    }
+
     for (var i = 0; i < indent; i++) {
       content = tab + content;
     }
