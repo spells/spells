@@ -20,7 +20,11 @@ module.exports = function () {
   };
 
   var getReceivePrototypeWithoutSemicolon = function (method) {
-    return 'void receive' + capitalizer.toPascalCase(method.name) + getList(method);
+    return 'void _receive' + capitalizer.toPascalCase(method.name) + '(void)';
+  };
+
+  var getOnPrototype = function (method) {
+    return 'void on' + capitalizer.toPascalCase(method.name) + getList(method) + ';';
   };
 
   var getSendBody = function (method, ioGenerator) {
@@ -48,6 +52,7 @@ module.exports = function () {
     getSendBody: getSendBody,
     getReceiveBody: getReceiveBody,
     getSendPrototypeWithoutSemicolon: getSendPrototypeWithoutSemicolon,
-    getReceivePrototypeWithoutSemicolon: getReceivePrototypeWithoutSemicolon
+    getReceivePrototypeWithoutSemicolon: getReceivePrototypeWithoutSemicolon,
+    getOnPrototype: getOnPrototype
   };
 };

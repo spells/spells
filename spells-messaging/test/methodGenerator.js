@@ -17,6 +17,9 @@ describe('methodGenerator', function () {
   it('getReceivePrototypeWithoutSemicolon이 있어야 합니다.', function () {
     assert.strictEqual(typeof methodGenerator.getReceivePrototypeWithoutSemicolon, 'function');
   });
+  it('getOnPrototype이 있어야 합니다.', function () {
+    assert.strictEqual(typeof methodGenerator.getOnPrototype, 'function');
+  });
   
   var method0 = {
     name: 'temperatureZero',
@@ -54,7 +57,11 @@ describe('methodGenerator', function () {
     });
     it('getReceivePrototypeWithoutSemicolon', function () {
       var actual = methodGenerator.getReceivePrototypeWithoutSemicolon(method0);
-      assert.strictEqual(actual, 'void receiveTemperatureZero(void)');
+      assert.strictEqual(actual, 'void _receiveTemperatureZero(void)');
+    });
+    it('getOnPrototype', function () {
+      var actual = methodGenerator.getOnPrototype(method0);
+      assert.strictEqual(actual, 'void onTemperatureZero(void);');
     });
   });
 
@@ -86,7 +93,11 @@ describe('methodGenerator', function () {
     });
     it('getReceivePrototypeWithoutSemicolon', function () {
       var actual = methodGenerator.getReceivePrototypeWithoutSemicolon(method3);
-      assert.strictEqual(actual, 'void receiveTemperatureThree(long one, long two, long three)');
+      assert.strictEqual(actual, 'void _receiveTemperatureThree(void)');
+    });
+    it('getOnPrototype', function () {
+      var actual = methodGenerator.getOnPrototype(method3);
+      assert.strictEqual(actual, 'void onTemperatureThree(long one, long two, long three);');
     });
   });
 });
