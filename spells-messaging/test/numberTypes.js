@@ -162,4 +162,25 @@ describe('numberTypes', function () {
       testCodec(testCase1);
     });
   });
+  describe('typeToBytes', function () {
+    it('typeToBytes가 있어야 합니다.', function () {
+      assert.strictEqual(typeof numberTypes.typeToBytes, 'function');
+    });
+    it('잘못된 자료형이 주어지면 예외를 던져야 합니다.', function () {
+      assert.throws(function () {
+        numberTypes.typeToBytes(null);
+      });
+      assert.throws(function () {
+        numberTypes.typeToBytes(undefined);
+      });
+      assert.throws(function () {
+        numberTypes.typeToBytes('int');
+      });
+    });
+    it('unsigned char, unsigned int, unsigned long을 지원해야 합니다.', function () {
+      assert.strictEqual(numberTypes.typeToBytes('unsigned char'), 1);
+      assert.strictEqual(numberTypes.typeToBytes('unsigned int'), 2);
+      assert.strictEqual(numberTypes.typeToBytes('unsigned long'), 4);
+    });
+  });
 });

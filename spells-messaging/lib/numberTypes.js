@@ -46,6 +46,18 @@ module.exports = function () {
       }
       throw new Error();
     },
+    typeToBytes: function (type) {
+      if (type === 'unsigned char') {
+        return 1;
+      }
+      if (type === 'unsigned int') {
+        return 2;
+      }
+      if (type === 'unsigned long') {
+        return 4;
+      }
+      throw new Error();
+    },
     getCodec: function (option) {
       if (checkOption(option) === false) {
         throw new Error();
