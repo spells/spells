@@ -36,6 +36,8 @@ module.exports = function () {
   return {
     write: write,
     namespace: namespace,
-    render: render
+    render: render,
+    pushIndent: pushIndent,
+    popIndent: popIndent
   };
 };

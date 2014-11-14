@@ -6,6 +6,8 @@ describe('codeWriter', function () {
     assert.strictEqual(typeof codeWriter.write, 'function');
     assert.strictEqual(typeof codeWriter.render, 'function');
     assert.strictEqual(typeof codeWriter.namespace, 'function');
+    assert.strictEqual(typeof codeWriter.pushIndent, 'function');
+    assert.strictEqual(typeof codeWriter.popIndent, 'function');
   });
   it('제대로 동작되어야 합니다.', function () {
     assert.strictEqual(codeWriter.render(), '');
