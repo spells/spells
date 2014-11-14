@@ -14,7 +14,7 @@ namespace proto1
 			case 1:
 				_receiveM3();
 				break;
-			default:
+			default:;
 			}
 		}
 		void sendM0(void)
@@ -57,7 +57,7 @@ namespace proto1
 			case 1:
 				_receiveK3();
 				break;
-			default:
+			default:;
 			}
 		}
 		void sendK0(void)

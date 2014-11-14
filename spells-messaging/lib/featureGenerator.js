@@ -20,7 +20,7 @@ module.exports = function () {
       writer.write('break;');
       writer.popIndent();
     }
-    writer.write('default:');
+    writer.write('default:;');
     writer.write('}');
   };
 

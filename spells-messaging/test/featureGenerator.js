@@ -60,7 +60,7 @@ describe('featureGenerator', function () {
       expected += 'case 1:\n';
       expected += '\t_receiveM3();\n';
       expected += '\tbreak;\n';
-      expected += 'default:\n';
+      expected += 'default:;\n';
       expected += '}';
       assert.strictEqual(writer.render(), expected);
     });
