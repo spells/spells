@@ -32,10 +32,10 @@ describe('methodGenerator', function () {
     ]
   };
 
-  var mockIoGenerator = require('./mockIoGenerator');
+  var ioGeneratorMock = require('./ioGeneratorMock');
 
   describe('method0', function () {
-    var ioGenerator = mockIoGenerator();
+    var ioGenerator = ioGeneratorMock();
     it('getList', function () {
       var list = methodGenerator.getList(method0);
       assert.strictEqual(list, '(void)');
@@ -59,7 +59,7 @@ describe('methodGenerator', function () {
   });
 
   describe('method3', function () {
-    var ioGenerator = mockIoGenerator();
+    var ioGenerator = ioGeneratorMock();
     it('getList', function () {
       var list = methodGenerator.getList(method3);
       assert.strictEqual(list, '(long one, long two, long three)');
