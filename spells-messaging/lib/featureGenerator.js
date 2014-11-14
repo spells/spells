@@ -8,9 +8,9 @@ module.exports = function () {
     var methods = feature.methods;
     var count = methods.length;
     var type = { type: 'integer', min: 0, max: count - 1 };
-    writer.write('long featureId;');
-    writer.write(numberTypes.getEdgeCodec(type, ioGenerator).read('featureId'));
-    writer.write('switch (featureId)');
+    writer.write('long methodId;');
+    writer.write(numberTypes.getEdgeCodec(type, ioGenerator).read('methodId'));
+    writer.write('switch (methodId)');
     writer.write('{');
     for (var methodId = 0; methodId < count; methodId++) {
       writer.write('case ' + methodId + ':');
@@ -25,7 +25,7 @@ module.exports = function () {
   };
 
   var getReceiveFeaturePrototypeWithoutSemicolon = function (feature) {
-    var funcName = '_receive' + capitalizer.toPascalCase(feature.name);
+    var funcName = '_receive';
     return 'void ' + funcName + '(void)';
   };
 

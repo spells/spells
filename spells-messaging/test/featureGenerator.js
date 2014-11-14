@@ -36,7 +36,7 @@ describe('featureGenerator', function () {
       var ioGenerator = require('./ioGeneratorMock');
       featureGenerator.writeReceiveFeature(feature, writer, ioGenerator, writeReceiveFeatureBodyMock);
       var expected = '';
-      expected += 'void _receiveTheFeature(void)\n';
+      expected += 'void _receive(void)\n';
       expected += '{\n';
       expected += '\tbody\n';
       expected += '}';
@@ -50,9 +50,9 @@ describe('featureGenerator', function () {
       var writer = require('../lib/codeWriter')();
       featureGenerator.writeReceiveFeatureBody(feature, writer, ioGenerator);
       var expected = '';
-      expected += 'long featureId;\n';
-      expected += 'read:1:unsigned char:0:featureId\n';
-      expected += 'switch (featureId)\n';
+      expected += 'long methodId;\n';
+      expected += 'read:1:unsigned char:0:methodId\n';
+      expected += 'switch (methodId)\n';
       expected += '{\n';
       expected += 'case 0:\n';
       expected += '\t_receiveM0();\n'
