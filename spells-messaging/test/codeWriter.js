@@ -18,7 +18,7 @@ describe('codeWriter', function () {
     codeWriter.namespace('spells', function () {
       codeWriter.write('func1');
       codeWriter.namespace('inner', function () {
-        codeWriter.write('func2');
+        codeWriter.write('func2-1\nfunc2-2');
       });
       codeWriter.write('func3');
     });
@@ -30,7 +30,8 @@ describe('codeWriter', function () {
     e.push('\tfunc1');
     e.push('\tnamespace inner');
     e.push('\t{');
-    e.push('\t\tfunc2');
+    e.push('\t\tfunc2-1');
+    e.push('\t\tfunc2-2');
     e.push('\t}');
     e.push('\tfunc3');
     e.push('}');
