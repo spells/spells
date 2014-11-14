@@ -1,4 +1,5 @@
 var assert = require('assert');
+var helper = require('./helper');
 
 describe('capitalizer', function () {
   var capitalizer = require('../lib/capitalizer')();
@@ -34,9 +35,7 @@ describe('capitalizer', function () {
     testAllThrows('★');
   });
   describe('toCamelCase', function () {
-    it('toCamelCase 함수가 있어야 합니다.', function () {
-      assert.strictEqual(typeof capitalizer.toPascalCase, 'function');
-    });
+    helper.checkFunctionExists(capitalizer, 'toCamelCase');
     it('이름 camelCase를 그대로 반환해야 합니다.', function () {
       assert.strictEqual(capitalizer.toCamelCase('camelCase'), 'camelCase');
     });
@@ -50,9 +49,7 @@ describe('capitalizer', function () {
     });
   });
   describe('toPascalCase', function () {
-    it('toPascalCase 함수가 있어야 합니다.', function () {
-      assert.strictEqual(typeof capitalizer.toPascalCase, 'function');
-    });
+    helper.checkFunctionExists(capitalizer, 'toPascalCase');
     it('이름 PascalCase를 그대로 반영해야 합니다.', function () {
       assert.strictEqual(capitalizer.toPascalCase('PascalCase'), 'PascalCase');
     });

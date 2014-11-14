@@ -1,11 +1,10 @@
 var assert = require('assert');
+var helper = require('./helper');
 
 describe('numberTypes', function () {
   var numberTypes = require('../lib/numberTypes')();
   describe('decisionType', function () {
-    it('decisionType 함수가 있어야 합니다.', function () {
-      assert.strictEqual(typeof numberTypes.decisionType, 'function');
-    });
+    helper.checkFunctionExists(numberTypes, 'decisionType');
     it('type이 null이거나 undefined이면 예외를 던져야 합니다.', function () {
       assert.throws(function () {
         numberTypes.decisionType(null);
@@ -113,12 +112,9 @@ describe('numberTypes', function () {
     var testCase16 = { type: 'integer', min: -1000, max: 8000 };
     var testCase32 = { type: 'integer', min: -50000, max: 160000 };
 
-    it('getEdgeCodec 함수가 있어야 합니다.', function () {
-      assert.strictEqual(typeof numberTypes.getEdgeCodec, 'function');
-    });
-    it('getGatewayCodec 함수가 있어야 합니다.', function () {
-      assert.strictEqual(typeof numberTypes.getGatewayCodec, 'function');
-    });
+    helper.checkFunctionExists(numberTypes, 'getEdgeCodec');
+    helper.checkFunctionExists(numberTypes, 'getGatewayCodec');
+
     it('codec를 반환해야 합니다.', function () {
       assert.strictEqual(typeof numberTypes.getGatewayCodec(testCase1), 'object');
       assert.strictEqual(typeof numberTypes.getGatewayCodec(testCase8), 'object');
@@ -205,9 +201,7 @@ describe('numberTypes', function () {
     });
   });
   describe('typeToBytes', function () {
-    it('typeToBytes가 있어야 합니다.', function () {
-      assert.strictEqual(typeof numberTypes.typeToBytes, 'function');
-    });
+    helper.checkFunctionExists(numberTypes, 'typeToBytes');
     it('잘못된 자료형이 주어지면 예외를 던져야 합니다.', function () {
       assert.throws(function () {
         numberTypes.typeToBytes(null);

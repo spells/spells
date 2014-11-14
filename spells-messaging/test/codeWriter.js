@@ -1,14 +1,14 @@
 var assert = require('assert');
+var helper = require('./helper');
+
 describe('codeWriter', function () {
   var codeWriter = require('../lib/codeWriter')();
-  it('몇 가지 함수가 있어야 합니다.', function () {
-    assert.strictEqual(typeof codeWriter, 'object');
-    assert.strictEqual(typeof codeWriter.write, 'function');
-    assert.strictEqual(typeof codeWriter.render, 'function');
-    assert.strictEqual(typeof codeWriter.namespace, 'function');
-    assert.strictEqual(typeof codeWriter.pushIndent, 'function');
-    assert.strictEqual(typeof codeWriter.popIndent, 'function');
-  });
+  helper.checkFunctionExists(codeWriter, 'write');
+  helper.checkFunctionExists(codeWriter, 'render');
+  helper.checkFunctionExists(codeWriter, 'namespace');
+  helper.checkFunctionExists(codeWriter, 'pushIndent');
+  helper.checkFunctionExists(codeWriter, 'popIndent');
+  
   it('제대로 동작되어야 합니다.', function () {
     assert.strictEqual(codeWriter.render(), '');
     codeWriter.write('one1');

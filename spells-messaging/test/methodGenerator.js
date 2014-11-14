@@ -1,28 +1,16 @@
 var assert = require('assert');
+var helper = require('./helper');
 
 describe('methodGenerator', function () {
   var methodGenerator = require('../lib/methodGenerator')();
-  it('getList가 있어야 합니다.', function () {
-    assert.strictEqual(typeof methodGenerator.getList, 'function');
-  });
-  it('getSendBody가 있어야 합니다.', function () {
-    assert.strictEqual(typeof methodGenerator.getSendBody, 'function');
-  });
-  it('getReceiveBody가 있어야 합니다.', function () {
-    assert.strictEqual(typeof methodGenerator.getReceiveBody, 'function');
-  });
-  it('getSendPrototypeWithoutSemicolon이 있어야 합니다.', function () {
-    assert.strictEqual(typeof methodGenerator.getSendPrototypeWithoutSemicolon, 'function');
-  });
-  it('getReceivePrototypeWithoutSemicolon이 있어야 합니다.', function () {
-    assert.strictEqual(typeof methodGenerator.getReceivePrototypeWithoutSemicolon, 'function');
-  });
-  it('getOnPrototype이 있어야 합니다.', function () {
-    assert.strictEqual(typeof methodGenerator.getOnPrototype, 'function');
-  });
-  it('getListWithoutType이 있어야 합니다.', function () {
-    assert.strictEqual(typeof methodGenerator.getListWithoutType, 'function');
-  });
+
+  helper.checkFunctionExists(methodGenerator, 'getList');
+  helper.checkFunctionExists(methodGenerator, 'getSendBody');
+  helper.checkFunctionExists(methodGenerator, 'getReceiveBody');
+  helper.checkFunctionExists(methodGenerator, 'getSendPrototypeWithoutSemicolon');
+  helper.checkFunctionExists(methodGenerator, 'getReceivePrototypeWithoutSemicolon');
+  helper.checkFunctionExists(methodGenerator, 'getOnPrototype');
+  helper.checkFunctionExists(methodGenerator, 'getListWithoutType');
   
   var method0 = {
     name: 'temperatureZero',
