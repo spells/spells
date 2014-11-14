@@ -14,6 +14,12 @@ module.exports = function () {
     }
     return '(' + args.join(', ') + ')';
   };
+  var getListWithoutType = function (method) {
+    var args = _.map(method.fields, function (field) {
+      return field.name;
+    });
+    return '(' + args.join(', ') + ')';
+  };
 
   var getSendPrototypeWithoutSemicolon = function (method) {
     return 'void send' + capitalizer.toPascalCase(method.name) + getList(method);
@@ -31,7 +37,7 @@ module.exports = function () {
     var statements = [];
     _.forEach(method.fields, function (field) {
       var name = field.name;
-      statements.push(numberTypes.getEdgeCodec(field, ioGenerator).read(name));
+      statements.push(numberTypes.getEdgeCodec(field, ioGenerator).write(name));
       statements.push('\n');
     });
     return statements.join('');
@@ -41,9 +47,11 @@ module.exports = function () {
     var statements = [];
     _.forEach(method.fields, function (field) {
       var name = field.name;
-      statements.push(numberTypes.getEdgeCodec(field, ioGenerator).write(name));
+      statements.push(numberTypes.getEdgeCodec(field, ioGenerator).read(name));
       statements.push('\n');
     });
+    statements.push('on' + capitalizer.toPascalCase(method.name) + getListWithoutType(method) + ';');
+    statements.push('\n');
     return statements.join('');
   };
 
@@ -53,6 +61,7 @@ module.exports = function () {
     getReceiveBody: getReceiveBody,
     getSendPrototypeWithoutSemicolon: getSendPrototypeWithoutSemicolon,
     getReceivePrototypeWithoutSemicolon: getReceivePrototypeWithoutSemicolon,
-    getOnPrototype: getOnPrototype
+    getOnPrototype: getOnPrototype,
+    getListWithoutType: getListWithoutType
   };
 };
