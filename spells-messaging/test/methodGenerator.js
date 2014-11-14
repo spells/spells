@@ -44,7 +44,7 @@ describe('methodGenerator', function () {
     });
     it('getReceiveBody', function () {
       var receiveBody = methodGenerator.getReceiveBody(method0, ioGenerator);
-      assert.strictEqual(receiveBody, 'onTemperatureZero();\n');
+      assert.strictEqual(receiveBody, 'onTemperatureZero();');
     });
     it('getSendPrototypeWithoutSemicolon', function () {
       var actual = methodGenerator.getSendPrototypeWithoutSemicolon(method0);
@@ -75,16 +75,17 @@ describe('methodGenerator', function () {
       var expected = '';
       expected += 'write:1:unsigned char:-100:one\n';
       expected += 'write:2:unsigned int:-200:two\n';
-      expected += 'write:4:unsigned long:-50000:three\n';
+      expected += 'write:4:unsigned long:-50000:three';
       assert.strictEqual(sendBody, expected);
     });
     it('getReceiveBody', function () {
       var receiveBody = methodGenerator.getReceiveBody(method3, ioGenerator);
       var expected = '';
+      expected += 'long one, two, three;\n';
       expected += 'read:1:unsigned char:-100:one\n';
       expected += 'read:2:unsigned int:-200:two\n';
       expected += 'read:4:unsigned long:-50000:three\n';
-      expected += 'onTemperatureThree(one, two, three);\n';
+      expected += 'onTemperatureThree(one, two, three);';
       assert.strictEqual(receiveBody, expected);
     });
     it('getSendPrototypeWithoutSemicolon', function () {

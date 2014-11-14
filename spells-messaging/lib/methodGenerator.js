@@ -36,23 +36,25 @@ module.exports = function () {
   var getSendBody = function (method, ioGenerator) {
     var statements = [];
     _.forEach(method.fields, function (field) {
-      var name = field.name;
-      statements.push(numberTypes.getEdgeCodec(field, ioGenerator).write(name));
-      statements.push('\n');
+      statements.push(numberTypes.getEdgeCodec(field, ioGenerator).write(field.name));
     });
-    return statements.join('');
+    return statements.join('\n');
   };
 
   var getReceiveBody = function (method, ioGenerator) {
     var statements = [];
+    var decl = [];
     _.forEach(method.fields, function (field) {
-      var name = field.name;
-      statements.push(numberTypes.getEdgeCodec(field, ioGenerator).read(name));
-      statements.push('\n');
+      decl.push(field.name);
+    });
+    if (decl.length) {
+      statements.push('long ' + decl.join(', ') + ';');
+    }
+    _.forEach(method.fields, function (field) {
+      statements.push(numberTypes.getEdgeCodec(field, ioGenerator).read(field.name));
     });
     statements.push('on' + capitalizer.toPascalCase(method.name) + getListWithoutType(method) + ';');
-    statements.push('\n');
-    return statements.join('');
+    return statements.join('\n');
   };
 
   return {
