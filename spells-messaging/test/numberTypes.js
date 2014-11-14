@@ -107,49 +107,82 @@ describe('numberTypes', function () {
       }
     });
   });
-  describe('getCodec', function () {
-    
+  describe('getEdgeCodec, getGatewayCodec', function () {
     var testCase1 = { type: 'integer', min: -2, max: -1 };
     var testCase8 = { type: 'integer', min: -64, max: 128 };
     var testCase16 = { type: 'integer', min: -1000, max: 8000 };
     var testCase32 = { type: 'integer', min: -50000, max: 160000 };
 
-    it('getCodec 함수가 있어야 합니다.', function () {
-      assert.strictEqual(typeof numberTypes.getCodec, 'function');
+    it('getEdgeCodec 함수가 있어야 합니다.', function () {
+      assert.strictEqual(typeof numberTypes.getEdgeCodec, 'function');
+    });
+    it('getGatewayCodec 함수가 있어야 합니다.', function () {
+      assert.strictEqual(typeof numberTypes.getGatewayCodec, 'function');
     });
     it('codec를 반환해야 합니다.', function () {
-      assert.strictEqual(typeof numberTypes.getCodec(testCase1), 'object');
-      assert.strictEqual(typeof numberTypes.getCodec(testCase8), 'object');
-      assert.strictEqual(typeof numberTypes.getCodec(testCase16), 'object');
-      assert.strictEqual(typeof numberTypes.getCodec(testCase32), 'object');
+      assert.strictEqual(typeof numberTypes.getGatewayCodec(testCase1), 'object');
+      assert.strictEqual(typeof numberTypes.getGatewayCodec(testCase8), 'object');
+      assert.strictEqual(typeof numberTypes.getGatewayCodec(testCase16), 'object');
+      assert.strictEqual(typeof numberTypes.getGatewayCodec(testCase32), 'object');
+      assert.strictEqual(typeof numberTypes.getEdgeCodec(testCase1), 'object');
+      assert.strictEqual(typeof numberTypes.getEdgeCodec(testCase8), 'object');
+      assert.strictEqual(typeof numberTypes.getEdgeCodec(testCase16), 'object');
+      assert.strictEqual(typeof numberTypes.getEdgeCodec(testCase32), 'object');
     });
     var testCodec = function (option) {
-      var codec = numberTypes.getCodec(option);
-      it('codec이 반환되어야 합니다.', function () {
-        assert.strictEqual(typeof codec, 'object');
-        assert.strictEqual(typeof codec.encode, 'function');
-        assert.strictEqual(typeof codec.decode, 'function');
+      describe('edgeCodec', function () {
+        var ioGenerator = require('./ioGeneratorMock')();
+        var edgeCodec = numberTypes.getEdgeCodec(option, ioGenerator);
+        it('codec이 반환되어야 합니다.', function () {
+          assert.strictEqual(typeof edgeCodec, 'object');
+          assert.strictEqual(typeof edgeCodec.read, 'function');
+          assert.strictEqual(typeof edgeCodec.write, 'function');
+        });
+        describe('Mock을 사용하는 테스트', function () {
+          var type = numberTypes.decisionType(option);
+          var size = numberTypes.typeToBytes(type);
+          it('read', function () {
+            assert.strictEqual(
+              edgeCodec.read('myTarget'),
+              'read:' + size + ':' + type + ':' + option.min + ':myTarget'
+            );
+          });
+          it('write', function () {
+            assert.strictEqual(
+              edgeCodec.write('myTarget'),
+              'write:' + size + ':' + type + ':' + option.min + ':myTarget'
+            );
+          });
+        });
       });
-      it('범위 안 테스트', function () {
-        for (var i = option.min; i <= option.max; i++) {
-          assert.strictEqual(codec.encode(i), i - option.min);
-          assert.strictEqual(codec.decode(codec.encode(i)), i);
-          assert.strictEqual(codec.decode(i - option.min), i);
-        }
-      });
-      it('범위 밖 테스트', function () {
-        assert.throws(function () {
-          codec.decode(-1);
+      describe('gatewayCodec', function () {
+        var gatewayCodec = numberTypes.getGatewayCodec(option);
+        it('codec이 반환되어야 합니다.', function () {
+          assert.strictEqual(typeof gatewayCodec, 'object');
+          assert.strictEqual(typeof gatewayCodec.encode, 'function');
+          assert.strictEqual(typeof gatewayCodec.decode, 'function');
         });
-        codec.decode(option.max - option.min);
-        assert.throws(function () {
-          codec.decode(option.max - option.min + 1);
+        it('범위 안 테스트', function () {
+          for (var i = option.min; i <= option.max; i++) {
+            assert.strictEqual(gatewayCodec.encode(i), i - option.min);
+            assert.strictEqual(gatewayCodec.decode(gatewayCodec.encode(i)), i);
+            assert.strictEqual(gatewayCodec.decode(i - option.min), i);
+          }
         });
-        assert.throws(function () {
-          codec.encode(option.min - 1);
-        });
-        assert.throws(function () {
-          codec.encode(option.max + 1);
+        it('범위 밖 테스트', function () {
+          assert.throws(function () {
+            gatewayCodec.decode(-1);
+          });
+          gatewayCodec.decode(option.max - option.min);
+          assert.throws(function () {
+            gatewayCodec.decode(option.max - option.min + 1);
+          });
+          assert.throws(function () {
+            gatewayCodec.encode(option.min - 1);
+          });
+          assert.throws(function () {
+            gatewayCodec.encode(option.max + 1);
+          });
         });
       });
     };
@@ -160,6 +193,15 @@ describe('numberTypes', function () {
     });
     describe('testCase1', function () {
       testCodec(testCase1);
+    });
+    describe('testCase8', function () {
+      testCodec(testCase8);
+    });
+    describe('testCase16', function () {
+      testCodec(testCase16);
+    });
+    describe('testCase32', function () {
+      testCodec(testCase32);
     });
   });
   describe('typeToBytes', function () {

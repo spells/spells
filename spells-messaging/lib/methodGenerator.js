@@ -27,9 +27,7 @@ module.exports = function () {
     var statements = [];
     _.forEach(method.fields, function (field) {
       var name = field.name;
-      var type = numberTypes.decisionType(field);
-      var size = numberTypes.typeToBytes(type);
-      statements.push(ioGenerator.readBytesBiased(size, type, field.min, name));
+      statements.push(numberTypes.getEdgeCodec(field, ioGenerator).read(name));
       statements.push('\n');
     });
     return statements.join('');
@@ -39,9 +37,7 @@ module.exports = function () {
     var statements = [];
     _.forEach(method.fields, function (field) {
       var name = field.name;
-      var type = numberTypes.decisionType(field);
-      var size = numberTypes.typeToBytes(type);
-      statements.push(ioGenerator.writeBytesBiased(size, type, field.min, name));
+      statements.push(numberTypes.getEdgeCodec(field, ioGenerator).write(name));
       statements.push('\n');
     });
     return statements.join('');
