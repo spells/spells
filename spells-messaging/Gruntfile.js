@@ -14,7 +14,8 @@ module.exports = function (grunt) {
         },
         src: 'test/'
       }
-    }
+    },
+
   });
 
   // These plugins provide necessary tasks.
@@ -24,7 +25,10 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-mocha-test');
 
+  var build = require('./build')();
+  grunt.registerTask('buildEdge', '단말 장치 코드를 빌드합니다.', build);
+
   // Default task.
-  grunt.registerTask('default', ['test']);
+  grunt.registerTask('default', ['mochaTest', 'buildEdge']);
   grunt.registerTask('test', ['mochaTest']);
 };

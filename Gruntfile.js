@@ -18,6 +18,9 @@ module.exports = function (grunt) {
     subgrunt: {
       test: {
         'spells-messaging': 'test'
+      },
+      default: {
+        'spells-messaging': 'default'
       }
     }
   });
@@ -31,6 +34,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-subgrunt');
 
   // Default task.
-  grunt.registerTask('default', ['test']);
+  grunt.registerTask('default', ['mochaTest', 'subgrunt:default']);
   grunt.registerTask('test', ['mochaTest', 'subgrunt:test']);
 };
