@@ -4,6 +4,9 @@
   "scripts": {
     "test": "grunt test"
   },
+  "dependencies": {
+    "bluetooth-serial-port": "*"
+  },
   "devDependencies": {
     "grunt": "*",
     "grunt-contrib-concat": "*",
