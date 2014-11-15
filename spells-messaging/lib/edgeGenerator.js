@@ -56,6 +56,26 @@ module.exports = function () {
           });
           featureId++;
         });
+        writer.write('void _receive(void)');
+        writer.write('{');
+        writer.pushIndent();
+        var type = { type: 'integer', min: 0, max: protocol.features.length - 1 };
+        writer.write('long featureId;');
+        writer.write(numberTypes.getEdgeCodec(type, ioGenerator).read('featureId'));
+        writer.write('switch (featureId)');
+        writer.write('{');
+        for (var featureId = 0; featureId < protocol.features.length; featureId++) {
+          writer.write('case ' + featureId + ':');
+          writer.pushIndent();
+          var featureName = protocol.features[featureId].name;
+          writer.write(featureName + '::_receive();');
+          writer.write('break;');
+          writer.popIndent();
+        }
+        writer.write('default:;');
+        writer.write('}');
+        writer.popIndent();
+        writer.write('}');
       });
     }
   };
