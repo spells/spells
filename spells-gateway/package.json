@@ -1,8 +1,11 @@
 {
-  "name": "spells-messaging",
+  "name": "spells-gateway",
   "private": true,
   "scripts": {
     "test": "grunt test"
+  },
+  "dependencies": {
+    "bluetooth-serial-port": "*"
   },
   "devDependencies": {
     "grunt": "*",
