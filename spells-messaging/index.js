@@ -1,3 +1,11 @@
+module.exports = function () {
+  return {
+    capitalizer: require('./lib/capitalizer'),
+    edgeGenerator: require('./lib/edgeGenerator'),
+    numberTypes: require('./lib/numberTypes')
+  };
+};
+/*
 var _ = require('lodash');
 module.exports = function (protocol) {
   var server = {};
@@ -15,3 +23,4 @@ module.exports = function (protocol) {
   
   return server;
 };
+*/

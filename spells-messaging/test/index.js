@@ -1,3 +1,18 @@
+var assert = require('assert');
+
+describe('index.js', function () {
+  var index = require('../')();
+  it('capitalizer를 노출해야 합니다.', function () {
+    assert.strictEqual(index.capitalizer, require('../lib/capitalizer'));
+  });
+  it('edgeGenerator를 노출해야 합니다.', function () {
+    assert.strictEqual(index.edgeGenerator, require('../lib/edgeGenerator'));
+  });
+  it('numberTypes를 노출해야 합니다.', function () {
+    assert.strictEqual(index.numberTypes, require('../lib/numberTypes'));
+  });
+});
+
 require('./capitalizer');
 require('./numberTypes');
 require('./codeWriter');
