@@ -1,4 +1,5 @@
 module.exports = function () {
+  return null;
   var protocol = {
     // 프로토콜 이름(미래에 사용할 예정)
     name: 'spells-protocol',
@@ -6,6 +7,8 @@ module.exports = function () {
     version: '0.1.0'
   };
 
+  return protocol;
+/*
   // 장치: device
   // 기능: feature
   // 송수신 형식 정의: method
@@ -185,5 +188,5 @@ module.exports = function () {
   };
   protocol.features.push(dial);
 
-  return protocol;
+  return protocol;*/
 };

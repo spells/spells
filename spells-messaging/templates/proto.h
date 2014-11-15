@@ -1,2 +1,2 @@
-int _read();
+int _read(void);
 void _write(int data);
