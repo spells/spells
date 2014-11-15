@@ -55,7 +55,7 @@ describe('edgeGenerator', function () {
       var expected = fs.readFileSync(__dirname + '/expectedHeader.h', 'utf-8');
       var ioGenerator = require('./ioGeneratorMock')();
       var writer = require('../lib/codeWriter')();
-      edgeGenerator.generateHeader(protocol, writer, ioGenerator);
+      edgeGenerator.generateHeader(protocol, writer, ioGenerator, 'tpl.h');
       var actual = writer.render();
       assert.strictEqual(actual, expected);
     });
@@ -65,7 +65,7 @@ describe('edgeGenerator', function () {
       var expected = fs.readFileSync(__dirname + '/expectedSource.cpp', 'utf-8');
       var ioGenerator = require('./ioGeneratorMock')();
       var writer = require('../lib/codeWriter')();
-      edgeGenerator.generateSource(protocol, writer, ioGenerator);
+      edgeGenerator.generateSource(protocol, writer, ioGenerator, 'tpl.cpp');
       var actual = writer.render();
       assert.strictEqual(actual, expected);
     });

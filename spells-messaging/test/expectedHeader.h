@@ -21,4 +21,5 @@ namespace proto1
 		void onK3(long one, long two, long three);
 	}
 	void _receive(void);
+	tpl.h
 }

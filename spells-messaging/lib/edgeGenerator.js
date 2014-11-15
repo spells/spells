@@ -6,7 +6,7 @@ var numberTypes = require('./numberTypes')();
 
 module.exports = function () {
   return {
-    generateHeader: function (protocol, writer, ioGenerator) {
+    generateHeader: function (protocol, writer, ioGenerator, tpl) {
       writer.namespace(protocol.name, function () {
         _.forEach(protocol.features, function (feature) {
           writer.namespace(feature.name, function () {
@@ -18,10 +18,11 @@ module.exports = function () {
             });
           });
         });
-        writer.write('void _receive(void);')
+        writer.write('void _receive(void);');
+        writer.write(tpl);
       });
     },
-    generateSource: function (protocol, writer, ioGenerator) {
+    generateSource: function (protocol, writer, ioGenerator, tpl) {
       writer.namespace(protocol.name, function () {
         var featureId = 0;
         var featureIdCodec = numberTypes.getEdgeCodec({ type: 'integer', min: 0, max: protocol.features.length - 1}, ioGenerator);
@@ -76,6 +77,7 @@ module.exports = function () {
         writer.write('}');
         writer.popIndent();
         writer.write('}');
+        writer.write(tpl);
       });
     }
   };
