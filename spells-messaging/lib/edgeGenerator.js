@@ -56,34 +56,27 @@ module.exports = function () {
           });
           featureId++;
         });
+        writer.write('void _receive(void)');
+        writer.write('{');
+        writer.pushIndent();
+        var type = { type: 'integer', min: 0, max: protocol.features.length - 1 };
+        writer.write('long featureId;');
+        writer.write(numberTypes.getEdgeCodec(type, ioGenerator).read('featureId'));
+        writer.write('switch (featureId)');
+        writer.write('{');
+        for (var featureId = 0; featureId < protocol.features.length; featureId++) {
+          writer.write('case ' + featureId + ':');
+          writer.pushIndent();
+          var featureName = protocol.features[featureId].name;
+          writer.write(featureName + '::_receive();');
+          writer.write('break;');
+          writer.popIndent();
+        }
+        writer.write('default:;');
+        writer.write('}');
+        writer.popIndent();
+        writer.write('}');
       });
     }
   };
 };
-
-/*
-namespace proto1
-{
-  namespace f1
-  {
-    void _receive(void);
-    void sendM0(void);
-    void _receiveM0(void);
-    void onM0(void);
-    void sendM3(long a, long b, long c);
-    void _receiveM3(void);
-    void onM3(long a, long b, long c);
-  }
-  namespace f2
-  {
-    void _receive(void);
-    void sendK0(void);
-    void _receiveK0(void);
-    void onK0(void);
-    void sendK3(long one, long two, long three);
-    void _receiveK3(void);
-    void onK3(long one, long two, long three);
-  }
-  void _receive(void);
-}
-*/

@@ -86,4 +86,19 @@ namespace proto1
 			onK3(one, two, three);
 		}
 	}
+	void _receive(void)
+	{
+		long featureId;
+		read:1:unsigned char:0:featureId
+		switch (featureId)
+		{
+		case 0:
+			f1::_receive();
+			break;
+		case 1:
+			f2::_receive();
+			break;
+		default:;
+		}
+	}
 }
