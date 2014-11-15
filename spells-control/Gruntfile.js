@@ -15,18 +15,7 @@ module.exports = function (grunt) {
         src: 'test/'
       }
     },
-    subgrunt: {
-      test: {
-        'spells-messaging': 'test',
-        'spells-gateway': 'test',
-        'spells-control': 'test'
-      },
-      default: {
-        'spells-messaging': 'default',
-        'spells-gateway': 'default',
-        'spells-control': 'default'
-      }
-    }
+
   });
 
   // These plugins provide necessary tasks.
@@ -35,9 +24,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-mocha-test');
-  grunt.loadNpmTasks('grunt-subgrunt');
 
   // Default task.
-  grunt.registerTask('default', ['mochaTest', 'subgrunt:default']);
-  grunt.registerTask('test', ['mochaTest', 'subgrunt:test']);
+  grunt.registerTask('default', ['mochaTest']);
+  grunt.registerTask('test', ['mochaTest']);
 };

@@ -1,0 +1,20 @@
+{
+  "name": "spells-control",
+  "private": true,
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "riccardo": "*"
+  },
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-mocha-test": "*",
+    "mocha": "*",
+    "lodash": "*"
+  }
+}
