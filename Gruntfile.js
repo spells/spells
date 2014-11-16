@@ -28,7 +28,30 @@ module.exports = function (grunt) {
       }
     },
     jshint: {
-      files: ['**/*.js', '!**/node_modules/**', '!soma-server/**', '!survey/**', '!concepts/**'],
+      files: [
+
+        'Gruntfile.js',
+        'test/*.js',
+        
+        'spells-messaging/Gruntfile.js',
+        'spells-messaging/index.js',
+        'spells-messaging/lib/*.js',
+        'spells-messaging/test/*.js',
+        'spells-messaging/protocol/*.js',
+        'spells-messaging/build.js',
+
+
+        'spells-gateway/Gruntfile.js',
+        'spells-gateway/index.js',
+        'spells-gateway/lib/*.js',
+        'spells-gateway/test/*.js',
+
+        'spells-control/Gruntfile.js',
+        'spells-control/index.js',
+        'spells-control/lib/*.js',
+        'spells-control/test/*.js'
+
+      ],
       options: {
         nonbsp: true,
         nonew: true,
@@ -59,7 +82,7 @@ module.exports = function (grunt) {
         files: ['**/*', '!**/node_modules/**', '!**/build/**'],
         tasks: ['test'],
         options: {
-          spawn: true
+          spawn: false
         }
       }
     }
