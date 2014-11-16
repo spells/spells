@@ -1,6 +1,5 @@
 var _ = require('lodash');
 
-var featureGenerator = require('./featureGenerator')();
 var methodGenerator = require('./methodGenerator')();
 var numberTypes = require('./numberTypes')();
 
@@ -10,7 +9,6 @@ module.exports = function () {
       writer.namespace(protocol.name, function () {
         _.forEach(protocol.features, function (feature) {
           writer.namespace(feature.name, function () {
-            writer.write(featureGenerator.getReceiveFeaturePrototypeWithoutSemicolon() + ';');
             _.forEach(feature.methods, function (method) {
               writer.write(methodGenerator.getSendPrototypeWithoutSemicolon(method) + ';');
               writer.write(methodGenerator.getReceivePrototypeWithoutSemicolon(method) + ';');
@@ -24,20 +22,22 @@ module.exports = function () {
     },
     generateSource: function (protocol, writer, ioGenerator, tpl) {
       writer.namespace(protocol.name, function () {
-        var featureId = 0;
-        var featureIdCodec = numberTypes.getEdgeCodec({ type: 'integer', min: 0, max: protocol.features.length - 1}, ioGenerator);
+        var serviceIdCount = 0;
+        _.forEach(protocol.features, function (feature) {
+          _.forEach(feature.methods, function () {
+            serviceIdCount++;
+          });
+        });
+        var serviceIdType = { type: 'integer', min: 0, max: serviceIdCount - 1 };
+        var serviceIdCodec = numberTypes.getEdgeCodec(serviceIdType, ioGenerator);
+        var serviceId = 0;
         _.forEach(protocol.features, function (feature) {
           writer.namespace(feature.name, function () {
-            featureGenerator.writeReceiveFeature(feature, writer, ioGenerator, featureGenerator.writeReceiveFeatureBody);
-            var methodId = 0;
-            var methodIdCodec = numberTypes.getEdgeCodec({ type: 'integer', min: 0, max: feature.methods.length - 1}, ioGenerator);
             _.forEach(feature.methods, function (method) {
-              
               writer.write(methodGenerator.getSendPrototypeWithoutSemicolon(method));
               writer.write('{');
               writer.pushIndent();
-              writer.write(featureIdCodec.write(featureId));
-              writer.write(methodIdCodec.write(methodId));
+              writer.write(serviceIdCodec.write(serviceId));
               var body = methodGenerator.getSendBody(method, ioGenerator);
               if (body.length) {
                 writer.write(body);
@@ -52,27 +52,29 @@ module.exports = function () {
               writer.popIndent();
               writer.write('}');
 
-              methodId++;
+              serviceId++;
             });
           });
-          featureId++;
         });
         writer.write('void _receive(void)');
         writer.write('{');
         writer.pushIndent();
-        var type = { type: 'integer', min: 0, max: protocol.features.length - 1 };
-        writer.write('long featureId;');
-        writer.write(numberTypes.getEdgeCodec(type, ioGenerator).read('featureId'));
-        writer.write('switch (featureId)');
+        writer.write('long serviceId;');
+        writer.write(serviceIdCodec.read('serviceId'));
+        writer.write('switch (serviceId)');
         writer.write('{');
-        for (var fid = 0; fid < protocol.features.length; fid++) {
-          writer.write('case ' + fid + ':');
-          writer.pushIndent();
-          var featureName = protocol.features[fid].name;
-          writer.write(featureName + '::_receive();');
-          writer.write('break;');
-          writer.popIndent();
-        }
+        serviceId = 0;
+        _.forEach(protocol.features, function (feature) {
+          _.forEach(feature.methods, function (method) {
+            writer.write('case ' + serviceId + ':');
+            writer.pushIndent();
+            var featureName = feature.name;
+            writer.write(featureName + '::' + methodGenerator.getReceiveFunctionName(method) + '();');
+            writer.write('break;');
+            writer.popIndent();
+            serviceId++;
+          });
+        });
         writer.write('default:;');
         writer.write('}');
         writer.popIndent();

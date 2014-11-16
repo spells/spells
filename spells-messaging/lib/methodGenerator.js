@@ -25,8 +25,12 @@ module.exports = function () {
     return 'void send' + capitalizer.toPascalCase(method.name) + getList(method);
   };
 
+  var getReceiveFunctionName = function (method) {
+    return '_receive' + capitalizer.toPascalCase(method.name);
+  };
+
   var getReceivePrototypeWithoutSemicolon = function (method) {
-    return 'void _receive' + capitalizer.toPascalCase(method.name) + '(void)';
+    return 'void ' + getReceiveFunctionName(method) + '(void)';
   };
 
   var getOnPrototype = function (method) {
@@ -64,6 +68,7 @@ module.exports = function () {
     getSendPrototypeWithoutSemicolon: getSendPrototypeWithoutSemicolon,
     getReceivePrototypeWithoutSemicolon: getReceivePrototypeWithoutSemicolon,
     getOnPrototype: getOnPrototype,
-    getListWithoutType: getListWithoutType
+    getListWithoutType: getListWithoutType,
+    getReceiveFunctionName: getReceiveFunctionName
   };
 };
