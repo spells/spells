@@ -6,14 +6,20 @@ module.exports = function () {
   var crc24 = function (value) {
     return crc.crc24(value);
   };
-  
-  var parseText = function () {
+
+  var base64 = {
+    encode: function (buffer) {
+      return buffer;
+    },
+    decode: function (text) {
+      return text;
+    }
   };
 
   return {
     checksum: {
       crc24: crc24
     },
-    parseText: parseText
+    base64: base64
   };
 };

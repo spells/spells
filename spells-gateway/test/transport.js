@@ -9,8 +9,9 @@ describe('transport', function () {
     assert.ok(transport);
   });
 
-  helper.checkFunctionExists(transport.checksum, 'crc24');
-  helper.checkFunctionExists(transport, 'parseText');
+  helper.checkFunctionExists(transport.checksum, 'crc24', 'checksum.crc24');
+  helper.checkFunctionExists(transport.base64, 'encode', 'base64.encode');
+  helper.checkFunctionExists(transport.base64, 'decode', 'base64.decode');
 
   describe('checksum', function () {
     describe('crc24', function () {
@@ -23,6 +24,13 @@ describe('transport', function () {
         var buffer = new Buffer(data);
         assert.strictEqual(transport.checksum.crc24(buffer), 0x93f334);
       });
+    });
+  });
+
+  describe('base64', function () {
+    describe('encode', function () {
+    });
+    describe('decode', function () {
     });
   });
 });
