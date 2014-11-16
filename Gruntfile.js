@@ -26,6 +26,42 @@ module.exports = function (grunt) {
         'spells-gateway': 'default',
         'spells-control': 'default'
       }
+    },
+    jshint: {
+      files: ['**/*.js', '!**/node_modules/**', '!soma-server/**', '!survey/**', '!concepts/**'],
+      options: {
+        nonbsp: true,
+        nonew: true,
+        noyield: true,
+        curly: true,
+        eqeqeq: true,
+        immed: true,
+        latedef: true,
+        newcap: true,
+        noarg: true,
+        sub: true,
+        undef: true,
+        unused: true,
+        boss: true,
+        eqnull: true,
+        browser: false,
+        node: true,
+        quotmark: 'single',
+        camelcase: true,
+        globals: {
+          describe: true,
+          it: true
+        }
+      }
+    },
+    watch: {
+      all: {
+        files: ['**/*', '!**/node_modules/**', '!**/build/**'],
+        tasks: ['test'],
+        options: {
+          spawn: true
+        }
+      }
     }
   });
 
@@ -36,6 +72,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-subgrunt');
 
   // Default task.
-  grunt.registerTask('default', ['mochaTest', 'subgrunt:default']);
-  grunt.registerTask('test', ['mochaTest', 'subgrunt:test']);
+  grunt.registerTask('default', ['jshint', 'mochaTest', 'subgrunt:default']);
+  grunt.registerTask('test', ['jshint', 'mochaTest', 'subgrunt:test']);
 };

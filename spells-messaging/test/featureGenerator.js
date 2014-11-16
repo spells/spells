@@ -29,7 +29,7 @@ describe('featureGenerator', function () {
 
   describe('writeReceiveFeature', function () {
     it('예상되는 결과를 얻어야 합니다.', function () {
-      var writeReceiveFeatureBodyMock = function (feature, writer, ioGenerator) {
+      var writeReceiveFeatureBodyMock = function (feature, writer) {
         writer.write('body');
       };
       var writer = require('../lib/codeWriter')();
@@ -55,7 +55,7 @@ describe('featureGenerator', function () {
       expected += 'switch (methodId)\n';
       expected += '{\n';
       expected += 'case 0:\n';
-      expected += '\t_receiveM0();\n'
+      expected += '\t_receiveM0();\n';
       expected += '\tbreak;\n';
       expected += 'case 1:\n';
       expected += '\t_receiveM3();\n';

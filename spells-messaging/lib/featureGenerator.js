@@ -1,4 +1,3 @@
-var _ = require('lodash');
 var numberTypes = require('./numberTypes')();
 var capitalizer = require('./capitalizer')();
 
@@ -24,13 +23,13 @@ module.exports = function () {
     writer.write('}');
   };
 
-  var getReceiveFeaturePrototypeWithoutSemicolon = function (feature) {
+  var getReceiveFeaturePrototypeWithoutSemicolon = function () {
     var funcName = '_receive';
     return 'void ' + funcName + '(void)';
   };
 
   var writeReceiveFeature = function (feature, writer, ioGenerator, writeBody) {
-    writer.write(getReceiveFeaturePrototypeWithoutSemicolon(feature));
+    writer.write(getReceiveFeaturePrototypeWithoutSemicolon());
     writer.write('{');
     writer.pushIndent();
     writeBody(feature, writer, ioGenerator);

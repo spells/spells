@@ -1,5 +1,6 @@
+var pattern = new RegExp(/^[A-Za-z0-9]+$/);
+
 module.exports = function () {
-  const pattern = new RegExp(/^[A-Za-z0-9]+$/);
   return {
     toCamelCase: function (name) {
       var match = name.match(pattern);

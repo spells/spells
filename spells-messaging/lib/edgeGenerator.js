@@ -10,7 +10,7 @@ module.exports = function () {
       writer.namespace(protocol.name, function () {
         _.forEach(protocol.features, function (feature) {
           writer.namespace(feature.name, function () {
-            writer.write(featureGenerator.getReceiveFeaturePrototypeWithoutSemicolon(feature) + ';');
+            writer.write(featureGenerator.getReceiveFeaturePrototypeWithoutSemicolon() + ';');
             _.forEach(feature.methods, function (method) {
               writer.write(methodGenerator.getSendPrototypeWithoutSemicolon(method) + ';');
               writer.write(methodGenerator.getReceivePrototypeWithoutSemicolon(method) + ';');
@@ -65,10 +65,10 @@ module.exports = function () {
         writer.write(numberTypes.getEdgeCodec(type, ioGenerator).read('featureId'));
         writer.write('switch (featureId)');
         writer.write('{');
-        for (var featureId = 0; featureId < protocol.features.length; featureId++) {
-          writer.write('case ' + featureId + ':');
+        for (var fid = 0; fid < protocol.features.length; fid++) {
+          writer.write('case ' + fid + ':');
           writer.pushIndent();
-          var featureName = protocol.features[featureId].name;
+          var featureName = protocol.features[fid].name;
           writer.write(featureName + '::_receive();');
           writer.write('break;');
           writer.popIndent();

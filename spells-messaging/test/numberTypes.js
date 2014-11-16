@@ -99,10 +99,13 @@ describe('numberTypes', function () {
     });
     it('범위가 너무 넓으면 예외를 던져야 합니다.', function () {
       numberTypes.decisionType({ type: 'integer', min: -2147483648, max: 2147483647});
-      for (var i = -testSize; i <= testSize; i++) {
+      var test = function (i) {
         assert.throws(function () {
           numberTypes.decisionType({ type: 'integer', min: -2147483648 + i, max: 2147483648 + i});
         });
+      };
+      for (var i = -testSize; i <= testSize; i++) {
+        test(i);
       }
     });
   });

@@ -1,9 +1,9 @@
 var _ = require('lodash');
 
-module.exports = function () {
+var newLine = '\n';
+var tab = '\t';
 
-  const newLine = '\n';
-  const tab = '\t';
+module.exports = function () {
 
   var code = [];
   var indent = 0;

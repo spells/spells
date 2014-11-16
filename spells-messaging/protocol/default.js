@@ -1,5 +1,6 @@
 module.exports = function () {
   return null;
+  /*
   var protocol = {
     // 프로토콜 이름(미래에 사용할 예정)
     name: 'spells-protocol',
@@ -7,7 +8,7 @@ module.exports = function () {
     version: '0.1.0'
   };
 
-  return protocol;
+  return protocol;*/
 /*
   // 장치: device
   // 기능: feature
