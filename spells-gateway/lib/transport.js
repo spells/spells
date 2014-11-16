@@ -50,11 +50,25 @@ module.exports = function () {
     }
   };
 
+  var packet = {};
+  packet.encode = function (buffer) {
+    var body = armor.encode(buffer);
+    return '^' + body + '$';
+  };
+  packet.decode = function (text) {
+    if (text[0] !== '^' || text[text.length - 1] !== '$') {
+      throw new Error();
+    }
+    var body = text.slice(1, text.length - 1);
+    return armor.decode(body);
+  };
+
   return {
     checksum: {
       crc24: crc24
     },
     base64: base64,
-    armor: armor
+    armor: armor,
+    packet: packet
   };
 };

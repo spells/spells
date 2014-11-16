@@ -14,6 +14,8 @@ describe('transport', function () {
   helper.checkFunctionExists(transport.base64, 'decode', 'base64.decode');
   helper.checkFunctionExists(transport.armor, 'encode', 'armor.encode');
   helper.checkFunctionExists(transport.armor, 'decode', 'armor.decode');
+  helper.checkFunctionExists(transport.packet, 'encode', 'packet.encode');
+  helper.checkFunctionExists(transport.packet, 'decode', 'packet.decode');
 
   describe('checksum', function () {
     describe('crc24', function () {
@@ -120,6 +122,42 @@ describe('transport', function () {
         test('예외');
         test('오류');
         test('안녕하세요');
+      });
+    });
+  });
+
+  describe('packet', function () {
+    describe('encode', function () {
+      it('빈 버퍼에 대한 결과는 ^?twTO$', function () {
+        var buffer = new Buffer([]);
+        assert.strictEqual(transport.packet.encode(buffer), '^?twTO$');
+      });
+      it('버퍼 0x6F, 0x6E, 0x65, 0x00에 대한 결과는 ^b25lAA==?k/M0$', function () {
+        var buffer = new Buffer([0x6F, 0x6E, 0x65, 0x00]);
+        assert.strictEqual(transport.packet.encode(buffer), '^b25lAA==?k/M0$');
+      });
+    });
+    describe('decode', function () {
+      it('^?twTO$에 대한 결과는 빈 버퍼', function () {
+        var buffer = new Buffer([]);
+        assert.deepEqual(transport.packet.decode('^?twTO$'), buffer);
+      });
+      it('^b25lAA==?k/M0$에 대한 결과는 버퍼 0x6F, 0x6E, 0x65, 0x00', function () {
+        var buffer = new Buffer([0x6F, 0x6E, 0x65, 0x00]);
+        assert.deepEqual(transport.packet.decode('^b25lAA==?k/M0$'), buffer);
+      });
+      describe('잘못된 입력 테스트', function () {
+        var test = function (text) {
+          it('\"' + text + '\" 예외를 던져야 합니다.', function () {
+            assert.throws(function () {
+              transport.packet.decode(text);
+            });
+          });
+        };
+        test('');
+        test('^$');
+        test('b25lAA==?k/M0');
+        test(' b25lAA==?k/M0 ');
       });
     });
   });
