@@ -1,5 +1,6 @@
 var assert = require('assert');
 var helper = require('./helper');
+var _ = require('lodash');
 
 describe('transport', function () {
 
@@ -16,6 +17,7 @@ describe('transport', function () {
   helper.checkFunctionExists(transport.armor, 'decode', 'armor.decode');
   helper.checkFunctionExists(transport.frame, 'encode', 'frame.encode');
   helper.checkFunctionExists(transport.frame, 'decode', 'frame.decode');
+  helper.checkFunctionExists(transport, 'Detector');
 
   describe('checksum', function () {
     describe('crc24', function () {
@@ -158,6 +160,44 @@ describe('transport', function () {
         test('^$');
         test('b25lAA==?k/M0');
         test(' b25lAA==?k/M0 ');
+      });
+    });
+  });
+
+  describe('Detector', function () {
+    it('버퍼 0x6F, 0x6E, 0x65, 0x00를 2회 읽어야 하는 시나리오', function () {
+      var log = [];
+      var detector = new transport.Detector();
+      detector.on(function (body) {
+        log.push('1');
+        log.push(body);
+      });
+      detector.on(function (body) {
+        log.push('2');
+        log.push(body);
+      });
+      var scenario = 'bad-data^b25lAA==?k/M0bad$b25lAA==?k/M0^data^b25lAA==?k/M0^b25lAA==?k/M0$$b25lAA==?k/M0$^b25lAA==?k/M0$^b25lAA==?k/M0$^b25lAA==?k/M3$';
+      _.forEach(scenario, function (data) {
+        detector.push(data);
+      });
+      var buffer = new Buffer([0x6F, 0x6E, 0x65, 0x00]);
+      assert.strictEqual(log[0], '1');
+      assert.deepEqual(log[1], buffer);
+      assert.strictEqual(log[2], '2');
+      assert.deepEqual(log[3], buffer);
+      assert.strictEqual(log[4], '1');
+      assert.deepEqual(log[5], buffer);
+      assert.strictEqual(log[6], '2');
+      assert.deepEqual(log[7], buffer);
+    });
+    it('잡음만 존재하는 시나리오', function () {
+      var detector = new transport.Detector();
+      detector.on(function () {
+        throw new Error();
+      });
+      var scenario = '398r90qefhdavsnjkblvqiu4htt934qhuibefwjladksl20^b25lAA==?k/M1$23903903q49hurdjklsvqehwirulfvjfonsfsijoeauhbdki';
+      _.forEach(scenario, function (data) {
+        detector.push(data);
       });
     });
   });

@@ -1,4 +1,4 @@
-
+var _ = require('lodash');
 var crc = require('crc');
 
 module.exports = function () {
@@ -63,12 +63,45 @@ module.exports = function () {
     return armor.decode(body);
   };
 
+  var Detector = function () {
+    var subscribers = [];
+    var emit = function (body) {
+      _.forEach(subscribers, function (callback) {
+        callback(body);
+      });
+    };
+    this.on = function (callback) {
+      subscribers.push(callback);
+    };
+
+    var buffer = [];
+    this.push = function (data) {
+      if (data === '^') {
+        buffer = [];
+      }
+      buffer.push(data);
+      if (data === '$') {
+        var content = buffer.join('');
+        buffer = [];
+        var body = null;
+        try {
+          body = frame.decode(content); 
+        } catch(e) {
+          return;
+        }
+        emit(body);
+      }
+    };
+  };
+
+
   return {
     checksum: {
       crc24: crc24
     },
     base64: base64,
     armor: armor,
-    frame: frame
+    frame: frame,
+    Detector: Detector
   };
 };
