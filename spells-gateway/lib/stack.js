@@ -18,21 +18,22 @@ module.exports = function () {
     };
   };
 
-  var featureLayer = {};
-  featureLayer.encode = function () {
+  var serviceIdLayer = {};
+  serviceIdLayer.encode = function () {
+
   };
-  featureLayer.decode = function () {
+  serviceIdLayer.decode = function () {
   };
 
-  var methodLayer = {};
-  methodLayer.encode = function () {
+  var applicationLayer = {};
+  applicationLayer.encode = function () {
   };
-  methodLayer.decode = function () {
+  applicationLayer.decode = function () {
   };
 
   return {
     deviceIdLayer: deviceIdLayer,
-    featureLayer: featureLayer,
-    methodLayer: methodLayer
+    serviceIdLayer: serviceIdLayer,
+    applicationLayer: applicationLayer
   };
 };

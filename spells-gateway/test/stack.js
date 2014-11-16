@@ -6,10 +6,10 @@ describe('stack', function () {
 
   helper.checkFunctionExists(stack.deviceIdLayer, 'encode', 'deviceIdLayer.encode');
   helper.checkFunctionExists(stack.deviceIdLayer, 'decode', 'deviceIdLayer.decode');
-  helper.checkFunctionExists(stack.featureLayer, 'encode', 'featureLayer.encode');
-  helper.checkFunctionExists(stack.featureLayer, 'decode', 'featureLayer.decode');
-  helper.checkFunctionExists(stack.methodLayer, 'encode', 'methodLayer.encode');
-  helper.checkFunctionExists(stack.methodLayer, 'decode', 'methodLayer.decode');
+  helper.checkFunctionExists(stack.serviceIdLayer, 'encode', 'serviceIdLayer.encode');
+  helper.checkFunctionExists(stack.serviceIdLayer, 'decode', 'serviceIdLayer.decode');
+  helper.checkFunctionExists(stack.applicationLayer, 'encode', 'applicationLayer.encode');
+  helper.checkFunctionExists(stack.applicationLayer, 'decode', 'applicationLayer.decode');
 
   describe('deviceIdLayer', function () {
     describe('encode', function () {
@@ -93,16 +93,20 @@ describe('stack', function () {
       });
     });
   });
-  describe('featureLayer', function () {
+  describe('serviceIdLayer', function () {
     describe('encode', function () {
+
     });
     describe('decode', function () {
+    
     });
   });
-  describe('methodLayer', function () {
+  describe('applicationLayer', function () {
     describe('encode', function () {
+
     });
     describe('decode', function () {
+    
     });
   });
 });
