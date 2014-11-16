@@ -57,17 +57,17 @@ module.exports = function () {
     }
     throw new Error();
   };
-  var getEdgeCodec = function (option, ioGenerator) {
+  var getEdgeCodec = function (option) {
     if (checkOption(option) === false) {
       throw new Error();
     }
     var type = decisionType(option);
     var size = typeToBytes(type);
     return {
-      read: function (target) {
+      read: function (target, ioGenerator) {
         return ioGenerator.readBytesBiased(size, type, option.min, target);
       },
-      write: function (target) {
+      write: function (target, ioGenerator) {
         return ioGenerator.writeBytesBiased(size, type, option.min, target);
       }
     };

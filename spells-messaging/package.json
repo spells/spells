@@ -4,10 +4,13 @@
   "scripts": {
     "test": "grunt test"
   },
+  "dependencies": {
+    "lodash": "*",
+    "deepcopy": "*"
+  },
   "devDependencies": {
     "grunt": "*",
     "grunt-mocha-test": "*",
-    "mocha": "*",
-    "lodash": "*"
+    "mocha": "*"
   }
 }

@@ -1,15 +1,14 @@
 var _ = require('lodash');
-
 var methodGenerator = require('./methodGenerator')();
-var numberTypes = require('./numberTypes')();
+var compilers = require('./compilers')();
 
 module.exports = function () {
 
-  var generateMethod = function (writer, serviceId, method, ioGenerator, serviceIdCodec) {
+  var generateMethod = function (writer, serviceId, method, serviceIdEdgeCodec, ioGenerator) {
     writer.write(methodGenerator.getSendPrototypeWithoutSemicolon(method));
     writer.write('{');
     writer.pushIndent();
-    writer.write(serviceIdCodec.write(serviceId));
+    writer.write(serviceIdEdgeCodec.write(serviceId, ioGenerator));
     var body = methodGenerator.getSendBody(method, ioGenerator);
     if (body.length) {
       writer.write(body);
@@ -25,24 +24,24 @@ module.exports = function () {
     writer.write('}');
   };
 
-  var generateFeatureSourceAll = function (protocol, writer, serviceIdCodec, ioGenerator) {
+  var generateFeatureSourceAll = function (protocol, writer, ioGenerator) {
     var serviceId = 0;
     _.forEach(protocol.features, function (feature) {
       writer.namespace(feature.name, function () {
         _.forEach(feature.methods, function (method) {
-          generateMethod(writer, serviceId, method, ioGenerator, serviceIdCodec);
+          generateMethod(writer, serviceId, method, protocol.serviceIdEdgeCodec, ioGenerator);
           serviceId++;
         });
       });
     });
   };
 
-  var generateMainReceiveFunction = function (protocol, writer, serviceIdCodec) {
+  var generateMainReceiveFunction = function (protocol, writer, ioGenerator) {
     writer.write('void _receive(void)');
     writer.write('{');
     writer.pushIndent();
     writer.write('long serviceId;');
-    writer.write(serviceIdCodec.read('serviceId'));
+    writer.write(protocol.serviceIdEdgeCodec.read('serviceId', ioGenerator));
     writer.write('switch (serviceId)');
     writer.write('{');
     var serviceId = 0;
@@ -80,17 +79,10 @@ module.exports = function () {
       });
     },
     generateSource: function (protocol, writer, ioGenerator, tpl) {
+      protocol = compilers.compileProtocol(protocol);
       writer.namespace(protocol.name, function () {
-        var serviceIdCount = 0;
-        _.forEach(protocol.features, function (feature) {
-          serviceIdCount += feature.methods.length;
-        });
-        var serviceIdType = { type: 'integer', min: 0, max: serviceIdCount - 1 };
-        var serviceIdCodec = numberTypes.getEdgeCodec(serviceIdType, ioGenerator);
-        
-        generateFeatureSourceAll(protocol, writer, serviceIdCodec, ioGenerator);
-        generateMainReceiveFunction(protocol, writer, serviceIdCodec);
-
+        generateFeatureSourceAll(protocol, writer, ioGenerator);
+        generateMainReceiveFunction(protocol, writer, ioGenerator);
         writer.write(tpl);
       });
     }

@@ -1,6 +1,6 @@
 var _ = require('lodash');
-var numberTypes = require('./numberTypes')();
 var capitalizer = require('./capitalizer')();
+var compilers = require('./compilers')();
 
 module.exports = function () {
 
@@ -38,14 +38,16 @@ module.exports = function () {
   };
 
   var getSendBody = function (method, ioGenerator) {
+    method = compilers.compileMethod(method);
     var statements = [];
     _.forEach(method.fields, function (field) {
-      statements.push(numberTypes.getEdgeCodec(field, ioGenerator).write(field.name));
+      statements.push(field.edgeCodec.write(field.name, ioGenerator));
     });
     return statements.join('\n');
   };
 
   var getReceiveBody = function (method, ioGenerator) {
+    method = compilers.compileMethod(method);
     var statements = [];
     var decl = [];
     _.forEach(method.fields, function (field) {
@@ -55,7 +57,7 @@ module.exports = function () {
       statements.push('long ' + decl.join(', ') + ';');
     }
     _.forEach(method.fields, function (field) {
-      statements.push(numberTypes.getEdgeCodec(field, ioGenerator).read(field.name));
+      statements.push(field.edgeCodec.read(field.name, ioGenerator));
     });
     statements.push('on' + capitalizer.toPascalCase(method.name) + getListWithoutType(method) + ';');
     return statements.join('\n');

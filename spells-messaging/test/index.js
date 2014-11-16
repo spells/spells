@@ -22,3 +22,4 @@ require('./codeWriter');
 require('./methodGenerator');
 require('./edgeGenerator');
 require('./ioGenerator');
+require('./compilers');

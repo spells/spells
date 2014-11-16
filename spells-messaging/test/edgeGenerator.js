@@ -1,6 +1,6 @@
 var assert = require('assert');
 var helper = require('./helper');
-  var fs = require('fs');
+var fs = require('fs');
 
 describe('edgeGenerator', function () {
 

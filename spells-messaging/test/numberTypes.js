@@ -131,7 +131,7 @@ describe('numberTypes', function () {
     var testCodec = function (option) {
       describe('edgeCodec', function () {
         var ioGenerator = require('./ioGeneratorMock')();
-        var edgeCodec = numberTypes.getEdgeCodec(option, ioGenerator);
+        var edgeCodec = numberTypes.getEdgeCodec(option);
         it('codec이 반환되어야 합니다.', function () {
           assert.strictEqual(typeof edgeCodec, 'object');
           assert.strictEqual(typeof edgeCodec.read, 'function');
@@ -142,13 +142,13 @@ describe('numberTypes', function () {
           var size = numberTypes.typeToBytes(type);
           it('read', function () {
             assert.strictEqual(
-              edgeCodec.read('myTarget'),
+              edgeCodec.read('myTarget', ioGenerator),
               'read:' + size + ':' + type + ':' + option.min + ':myTarget'
             );
           });
           it('write', function () {
             assert.strictEqual(
-              edgeCodec.write('myTarget'),
+              edgeCodec.write('myTarget', ioGenerator),
               'write:' + size + ':' + type + ':' + option.min + ':myTarget'
             );
           });
