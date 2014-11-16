@@ -7,7 +7,8 @@
 
 uint32_t crc24(const uint8_t input[], size_t length)
 {
-	const uint32_t TABLE[256] = {
+	const uint32_t TABLE[256] =
+	{
 		0x00000000, 0x00864CFB, 0x008AD50D, 0x000C99F6, 0x0093E6E1, 0x0015AA1A,
 		0x001933EC, 0x009F7F17, 0x00A18139, 0x0027CDC2, 0x002B5434, 0x00AD18CF,
 		0x003267D8, 0x00B42B23, 0x00B8B2D5, 0x003EFE2E, 0x00C54E89, 0x00430272,
@@ -55,7 +56,7 @@ uint32_t crc24(const uint8_t input[], size_t length)
 
 	uint32_t tmp = 0xb704ce;
 
-	while(length >= 16)
+	while (length >= 16)
 	{
 		tmp = TABLE[((tmp >> 16) ^ input[ 0]) & 0xFF] ^ (tmp << 8);
 		tmp = TABLE[((tmp >> 16) ^ input[ 1]) & 0xFF] ^ (tmp << 8);
