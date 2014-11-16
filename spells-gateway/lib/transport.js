@@ -50,12 +50,12 @@ module.exports = function () {
     }
   };
 
-  var packet = {};
-  packet.encode = function (buffer) {
+  var frame = {};
+  frame.encode = function (buffer) {
     var body = armor.encode(buffer);
     return '^' + body + '$';
   };
-  packet.decode = function (text) {
+  frame.decode = function (text) {
     if (text[0] !== '^' || text[text.length - 1] !== '$') {
       throw new Error();
     }
@@ -69,6 +69,6 @@ module.exports = function () {
     },
     base64: base64,
     armor: armor,
-    packet: packet
+    frame: frame
   };
 };
