@@ -7,9 +7,7 @@
   "devDependencies": {
     "grunt": "*",
     "grunt-cli": "*",
-    "grunt-contrib-concat": "*",
     "grunt-contrib-jshint": "*",
-    "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "*",
     "grunt-mocha-test": "*",
     "grunt-subgrunt": "*",

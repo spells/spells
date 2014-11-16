@@ -5,14 +5,12 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "bluetooth-serial-port": "*"
+    "bluetooth-serial-port": "*",
+    "riccardo": "*",
+    "socket.io": "*"
   },
   "devDependencies": {
     "grunt": "*",
-    "grunt-contrib-concat": "*",
-    "grunt-contrib-jshint": "*",
-    "grunt-contrib-uglify": "*",
-    "grunt-contrib-watch": "*",
     "grunt-mocha-test": "*",
     "mocha": "*",
     "lodash": "*"

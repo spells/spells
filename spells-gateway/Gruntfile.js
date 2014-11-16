@@ -14,15 +14,10 @@ module.exports = function (grunt) {
         },
         src: 'test/'
       }
-    },
-
+    }
   });
 
   // These plugins provide necessary tasks.
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-mocha-test');
 
   // Default task.
