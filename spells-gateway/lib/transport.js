@@ -37,19 +37,16 @@ module.exports = function () {
     },
     decode: function (text) {
       text = text;
-      var q = text.indexOf('?');
-      var before = text.substr(0, q);
-      var after = text.substr(q + 1);
-      var beforeBuffer = base64.decode(before);
-      
-      var afterBuffer = base64.decode(after);
-      var checksumBuffer = crc24Buffer(beforeBuffer);
+      var separatorIndex = text.indexOf('?');
+      var body = base64.decode(text.substr(0, separatorIndex));
+      var checksum1 = base64.decode(text.substr(separatorIndex + 1));
+      var checksum2 = crc24Buffer(body);
       for (var i = 0; i < 3; i++) {
-        if (afterBuffer[i] !== checksumBuffer[i]) {
+        if (checksum1[i] !== checksum2[i]) {
           throw new Error();
         }
       }
-      return beforeBuffer;
+      return body;
     }
   };
 
