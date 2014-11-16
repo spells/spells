@@ -1,6 +1,9 @@
 var assert = require('assert');
 
 describe('index.js', function () {
+  it('함수가 있어야 합니다.', function () {
+    require('../')();
+  });
   var index = require('../')();
   it('capitalizer를 노출해야 합니다.', function () {
     assert.strictEqual(index.capitalizer, require('../lib/capitalizer'));
