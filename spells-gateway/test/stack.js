@@ -196,12 +196,25 @@ describe('stack', function () {
           var expected = new Buffer([0x01, 0x64, 0x03, 0xE8, 0x00, 0x00, 0xC3, 0x50]);
           assert.deepEqual(actual, expected);
         });
+        it('예외 상황이라면 예외를 던져야 합니다.', function () {
+          var payload = {
+            a1Bc: 0,
+            i3Jk: 0
+          };
+          assert.throws(function () {
+            stack.applicationLayer.encode(payload, method3, protocol);
+          });
+        });
       });
     });
     describe('decode', function () {
       describe('method0', function () {
+        it('정상 상황에서 정상적으로 동작해야 합니다.', function () {
+        });
       });
       describe('method3', function () {
+        it('정상 상황에서 정상적으로 동작해야 합니다.', function () {
+        });
       });
     });
   });
