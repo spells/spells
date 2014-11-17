@@ -66,6 +66,22 @@ describe('compilers', function () {
       it('feature 2개가 있어야 합니다.', function () {
         assert.strictEqual(result.features.length, 2);
       });
+      it('features 2개가 이름으로 지정되어야 합니다.', function () {
+        assert.ok(result.features.f1);
+        assert.ok(result.features.f2);
+        assert.strictEqual(result.features.f1, result.features[0]);
+        assert.strictEqual(result.features.f2, result.features[1]);
+      });
+      it('methods가 이름으로 지정되어야 합니다.', function () {
+        assert.ok(result.features.f1.methods.m0);
+        assert.ok(result.features.f1.methods.m3);
+        assert.ok(result.features.f2.methods.k0);
+        assert.ok(result.features.f2.methods.k3);
+        assert.strictEqual(result.features.f1.methods[0], result.features[0].methods.m0);
+        assert.strictEqual(result.features.f1.methods[1], result.features[0].methods.m3);
+        assert.strictEqual(result.features.f2.methods[0], result.features[1].methods.k0);
+        assert.strictEqual(result.features.f2.methods[1], result.features[1].methods.k3);
+      });
       it('두 feature에 각각 method 2개가 있어야 합니다.', function () {
         assert.strictEqual(result.features[0].methods.length, 2);
         assert.strictEqual(result.features[1].methods.length, 2);

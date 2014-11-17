@@ -31,8 +31,15 @@ module.exports = function () {
           feature: feature
         });
         feature.methods[methodId] = method;
+        feature.methods[method.name] = method;
       }
     });
+
+    var featuresLength = protocol.features.length;
+    for (var i = 0; i < featuresLength; i++) {
+      protocol.features[protocol.features[i].name] = protocol.features[i];
+    }
+
     var serviceIdType = { type: 'integer', min: 0, max: protocol.services.length - 1 };
     protocol.serviceIdGatewayCodec = numberTypes.getGatewayCodec(serviceIdType);
     protocol.serviceIdEdgeCodec = numberTypes.getEdgeCodec(serviceIdType);
