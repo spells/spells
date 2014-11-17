@@ -1,3 +1,19 @@
+void _beginRead()
+{
+}
+
+void _endRead()
+{
+}
+
+void _beginWrite()
+{
+}
+
+void _endWrite()
+{
+}
+
 int _read()
 {
 	while (Serial.available() <= 0);
