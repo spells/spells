@@ -1,9 +1,9 @@
 module.exports = function () {
 
   var deviceIdLayer = {};
-  deviceIdLayer.encode = function (featureLayerEncoded, deviceId) {
+  deviceIdLayer.encode = function (deviceId, payload) {
     var deviceIdBuffer = new Buffer(deviceId, 'hex');
-    var result = Buffer.concat([deviceIdBuffer, featureLayerEncoded]);
+    var result = Buffer.concat([deviceIdBuffer, payload]);
     return result;
   };
   deviceIdLayer.decode = function (buffer) {
@@ -19,10 +19,18 @@ module.exports = function () {
   };
 
   var serviceIdLayer = {};
-  serviceIdLayer.encode = function () {
-
+  serviceIdLayer.encode = function (serviceId, payload, codec) {
+    var serviceIdBuffer = codec.encode(serviceId);
+    var result = Buffer.concat([serviceIdBuffer, payload]);
+    return result;
   };
-  serviceIdLayer.decode = function () {
+  serviceIdLayer.decode = function (buffer, codec) {
+    var serviceIdBuffer = buffer.slice(0, codec.size);
+    var serviceId = codec.decode(serviceIdBuffer);
+    return {
+      serviceId: serviceId,
+      payload: buffer.slice(codec.size)
+    };
   };
 
   var applicationLayer = {};

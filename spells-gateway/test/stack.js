@@ -1,5 +1,6 @@
 var assert = require('assert');
 var helper = require('./helper');
+var numberTypes = require('../../spells-messaging/lib/numberTypes')();
 
 describe('stack', function () {
   var stack = require('../lib/stack')();
@@ -14,30 +15,30 @@ describe('stack', function () {
   describe('deviceIdLayer', function () {
     describe('encode', function () {
       it('deviceId가 0이고 페이로드가 있는 경우', function () {
-        var featureLayerEncoded = new Buffer([0x12, 0x34, 0x56]);
+        var payload = new Buffer([0x12, 0x34, 0x56]);
         var deviceId = '00000000000000000000000000000000';
-        var actual = stack.deviceIdLayer.encode(featureLayerEncoded, deviceId);
+        var actual = stack.deviceIdLayer.encode(deviceId, payload);
         var expected = new Buffer([0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x12, 0x34, 0x56]);
         assert.deepEqual(actual, expected);
       });
       it('deviceId가 0이고 페이로드가 없는 경우', function () {
-        var featureLayerEncoded = new Buffer([]);
+        var payload = new Buffer([]);
         var deviceId = '00000000000000000000000000000000';
-        var actual = stack.deviceIdLayer.encode(featureLayerEncoded, deviceId);
+        var actual = stack.deviceIdLayer.encode(deviceId, payload);
         var expected = new Buffer([0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]);
         assert.deepEqual(actual, expected);
       });
       it('deviceId가 특정한 값이고 페이로드가 있는 경우', function () {
-        var featureLayerEncoded = new Buffer([0x22, 0x11, 0x42]);
+        var payload = new Buffer([0x22, 0x11, 0x42]);
         var deviceId = '1212345698abcdef123412532674aedc';
-        var actual = stack.deviceIdLayer.encode(featureLayerEncoded, deviceId);
+        var actual = stack.deviceIdLayer.encode(deviceId, payload);
         var expected = new Buffer([0x12, 0x12, 0x34, 0x56, 0x98, 0xab, 0xcd, 0xef, 0x12, 0x34, 0x12, 0x53, 0x26, 0x74, 0xae, 0xdc, 0x22, 0x11, 0x42]);
         assert.deepEqual(actual, expected);
       });
       it('deviceId가 특정한 값이고 페이로드가 없는 경우', function () {
-        var featureLayerEncoded = new Buffer([]);
+        var payload = new Buffer([]);
         var deviceId = '1212345698abcdef123412532674aedc';
-        var actual = stack.deviceIdLayer.encode(featureLayerEncoded, deviceId);
+        var actual = stack.deviceIdLayer.encode(deviceId, payload);
         var expected = new Buffer([0x12, 0x12, 0x34, 0x56, 0x98, 0xab, 0xcd, 0xef, 0x12, 0x34, 0x12, 0x53, 0x26, 0x74, 0xae, 0xdc]);
         assert.deepEqual(actual, expected);
       });
@@ -94,19 +95,61 @@ describe('stack', function () {
     });
   });
   describe('serviceIdLayer', function () {
-    describe('encode', function () {
-
-    });
-    describe('decode', function () {
-    
-    });
+    var testServiceIdLayer = function (serviceIdMin, serviceIdMax, payload) {
+      describe(serviceIdMin + '부터 ' + serviceIdMax + '까지이고, 페이로드 길이가 ' + payload.length + '인 경우에', function () {
+        var codec = numberTypes.getGatewayCodec({ type: 'integer', min: serviceIdMin, max: serviceIdMax });
+        var run = function (serviceId) {
+          var encoded = stack.serviceIdLayer.encode(serviceId, payload, codec);
+          var decoded = stack.serviceIdLayer.decode(encoded, codec);
+          assert.strictEqual(typeof decoded, 'object');
+          assert.strictEqual(decoded.serviceId, serviceId);
+          assert.deepEqual(decoded.payload, payload);
+        };
+        it('정상 범위 테스트를 통과해야 합니다.', function () {
+          for (var serviceId = serviceIdMin; serviceId <= serviceIdMax; serviceId++) {
+            run(serviceId);
+          }
+        });
+        it('범위보다 1 작은 경우 예외를 던져야 합니다.', function () {
+          assert.throws(function () {
+            run(serviceIdMin - 1);
+          });
+        });
+        it('범위보다 1 큰 경우 예외를 던져야 합니다.', function () {
+          assert.throws(function () {
+            run(serviceIdMax + 1);
+          });
+        });
+        describe('serviceId 크기보다 짧은 버퍼가 주어진 경우 예외를 던져야 합니다.', function () {
+          var testSize = 0;
+          var run = function (testSize) {
+            it('버퍼 길이 ' + testSize + '에서 예외를 던져야 합니다.', function () {
+              var buffer = new Buffer(new Array(testSize));
+              assert.strictEqual(buffer.length, testSize);
+              assert.throws(function () {
+                stack.serviceIdLayer.decode(buffer, codec);
+              });
+            });
+          };
+          do {
+            run(testSize);
+          } while (++testSize < codec.size);
+        });
+      });
+    };
+    testServiceIdLayer(0, 0, new Buffer([]));
+    testServiceIdLayer(0, 0, new Buffer([0x12, 0x34, 0x23]));
+    testServiceIdLayer(0, 100, new Buffer([]));
+    testServiceIdLayer(0, 100, new Buffer([0x12, 0x34, 0x23]));
+    testServiceIdLayer(0, 600, new Buffer([]));
+    testServiceIdLayer(0, 600, new Buffer([0x12, 0x34, 0x23]));
+    testServiceIdLayer(0, 70000, new Buffer([]));
+    testServiceIdLayer(0, 70000, new Buffer([0x12, 0x34, 0x23]));
   });
   describe('applicationLayer', function () {
     describe('encode', function () {
-
     });
     describe('decode', function () {
-    
     });
   });
 });
