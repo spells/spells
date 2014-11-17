@@ -7,3 +7,5 @@ describe('index.js', function () {
 require('./gateway');
 require('./transport');
 require('./stack');
+require('./deviceId');
+require('./master');
