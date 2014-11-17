@@ -1,6 +1,7 @@
 var assert = require('assert');
 var helper = require('./helper');
 var numberTypes = require('../../spells-messaging/lib/numberTypes')();
+var compilers = require('../../spells-messaging/lib/compilers')();
 
 describe('stack', function () {
   var stack = require('../lib/stack')();
@@ -146,10 +147,62 @@ describe('stack', function () {
     testServiceIdLayer(0, 70000, new Buffer([]));
     testServiceIdLayer(0, 70000, new Buffer([0x12, 0x34, 0x23]));
   });
+
+  var method0 = {
+    name: method0,
+    fields: []
+  };
+  var method3 = {
+    name: 'm3',
+    fields: [
+      { name: 'a1Bc', type: 'integer', min: -100, max: 100 },
+      { name: 'e2Fg', type: 'integer', min: -1000, max: 1000 },
+      { name: 'i3Jk', type: 'integer', min: -50000, max : 50000 }
+    ]
+  };
+  var feature = {
+    name: 'f03',
+    methods: [
+      method0,
+      method3
+    ]
+  };
+  var protocol = {
+    name: 'pf03',
+    features: [feature]
+  };
+  protocol = compilers.compileProtocol(protocol);
+  method0 = protocol.features[0].methods[0];
+  method3 = protocol.features[0].methods[1];
+
   describe('applicationLayer', function () {
     describe('encode', function () {
+      describe('method0', function () {
+        it('정상 상황을 통과해야 합니다.', function () {
+          var payload = {};
+          var actual = stack.applicationLayer.encode(payload, method0, protocol);
+          var expected = new Buffer([0x00]);
+          assert.deepEqual(actual, expected);
+        });
+      });
+      describe('method3', function () {
+        it('정상 상황을 통과해야 합니다.', function () {
+          var payload = {
+            a1Bc: 0,
+            e2Fg: 0,
+            i3Jk: 0
+          };
+          var actual = stack.applicationLayer.encode(payload, method3, protocol);
+          var expected = new Buffer([0x01, 0x64, 0x03, 0xE8, 0x00, 0x00, 0xC3, 0x50]);
+          assert.deepEqual(actual, expected);
+        });
+      });
     });
     describe('decode', function () {
+      describe('method0', function () {
+      });
+      describe('method3', function () {
+      });
     });
   });
 });

@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 module.exports = function () {
 
   var deviceIdLayer = {};
@@ -34,9 +36,18 @@ module.exports = function () {
   };
 
   var applicationLayer = {};
-  applicationLayer.encode = function () {
+  applicationLayer.encode = function (payload, method, protocol) {
+    var buffers = [
+      protocol.serviceIdGatewayCodec.encode(method.serviceId)    
+    ];
+    _.forEach(method.fields, function (field) {
+      buffers.push(field.gatewayCodec.encode(payload[field.name]));
+    });
+    return Buffer.concat(buffers);
   };
-  applicationLayer.decode = function () {
+  applicationLayer.decode = function (buffer, method) {
+    buffer = buffer;
+    method = method;
   };
 
   return {
