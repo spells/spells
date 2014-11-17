@@ -2,7 +2,8 @@ module.exports = function () {
   return {
     capitalizer: require('./lib/capitalizer'),
     edgeGenerator: require('./lib/edgeGenerator'),
-    numberTypes: require('./lib/numberTypes')
+    numberTypes: require('./lib/numberTypes'),
+    compilers: require('./lib/compilers')
   };
 };
 /*

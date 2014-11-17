@@ -14,6 +14,9 @@ describe('index.js', function () {
   it('numberTypes를 노출해야 합니다.', function () {
     assert.strictEqual(index.numberTypes, require('../lib/numberTypes'));
   });
+  it('compilers를 노출해야 합니다.', function () {
+    assert.strictEqual(index.compilers, require('../lib/compilers'));
+  });
 });
 
 require('./capitalizer');
