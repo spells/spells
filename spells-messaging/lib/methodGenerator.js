@@ -43,6 +43,7 @@ module.exports = function () {
     _.forEach(method.fields, function (field) {
       statements.push(field.edgeCodec.write(field.name, ioGenerator));
     });
+    statements.push(ioGenerator.endWrite());
     return statements.join('\n');
   };
 
@@ -59,6 +60,7 @@ module.exports = function () {
     _.forEach(method.fields, function (field) {
       statements.push(field.edgeCodec.read(field.name, ioGenerator));
     });
+    statements.push(ioGenerator.endRead());
     statements.push('on' + capitalizer.toPascalCase(method.name) + getListWithoutType(method) + ';');
     return statements.join('\n');
   };

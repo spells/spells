@@ -5,6 +5,10 @@ describe('ioGenerator', function () {
   var ioGenerator = require('../lib/ioGenerator')();
   helper.checkFunctionExists(ioGenerator, 'readBytesBiased');
   helper.checkFunctionExists(ioGenerator, 'writeBytesBiased');
+  helper.checkFunctionExists(ioGenerator, 'beginRead');
+  helper.checkFunctionExists(ioGenerator, 'beginWrite');
+  helper.checkFunctionExists(ioGenerator, 'endRead');
+  helper.checkFunctionExists(ioGenerator, 'endWrite');
 
   it('readBytesBiased에서 예상되는 결과를 얻어야 합니다.', function () {
     var expected = '';

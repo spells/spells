@@ -7,6 +7,18 @@ module.exports = function () {
     }
   };
   return {
+    beginRead: function () {
+      return '_beginRead();';
+    },
+    endRead: function () {
+      return '_endRead();';
+    },
+    beginWrite: function () {
+      return '_beginWrite();';
+    },
+    endWrite: function () {
+      return '_endWrite();';
+    },
     readBytesBiased: function (bytes, type, min, target) {
       checkBytes(bytes);
       var writer = codeWriter();

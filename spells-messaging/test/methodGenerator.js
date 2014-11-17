@@ -40,11 +40,11 @@ describe('methodGenerator', function () {
     });
     it('getSendBody', function () {
       var sendBody = methodGenerator.getSendBody(method0, ioGenerator);
-      assert.strictEqual(sendBody, '');
+      assert.strictEqual(sendBody, 'endWrite');
     });
     it('getReceiveBody', function () {
       var receiveBody = methodGenerator.getReceiveBody(method0, ioGenerator);
-      assert.strictEqual(receiveBody, 'onTemperatureZero();');
+      assert.strictEqual(receiveBody, 'endRead\nonTemperatureZero();');
     });
     it('getSendPrototypeWithoutSemicolon', function () {
       var actual = methodGenerator.getSendPrototypeWithoutSemicolon(method0);
@@ -75,7 +75,8 @@ describe('methodGenerator', function () {
       var expected = '';
       expected += 'write:1:unsigned char:-100:one\n';
       expected += 'write:2:unsigned int:-200:two\n';
-      expected += 'write:4:unsigned long:-50000:three';
+      expected += 'write:4:unsigned long:-50000:three\n';
+      expected += 'endWrite';
       assert.strictEqual(sendBody, expected);
     });
     it('getReceiveBody', function () {
@@ -85,6 +86,7 @@ describe('methodGenerator', function () {
       expected += 'read:1:unsigned char:-100:one\n';
       expected += 'read:2:unsigned int:-200:two\n';
       expected += 'read:4:unsigned long:-50000:three\n';
+      expected += 'endRead\n';
       expected += 'onTemperatureThree(one, two, three);';
       assert.strictEqual(receiveBody, expected);
     });

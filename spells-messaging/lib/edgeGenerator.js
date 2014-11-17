@@ -8,6 +8,7 @@ module.exports = function () {
     writer.write(methodGenerator.getSendPrototypeWithoutSemicolon(method));
     writer.write('{');
     writer.pushIndent();
+    writer.write(ioGenerator.beginWrite());
     writer.write(serviceIdEdgeCodec.write(serviceId, ioGenerator));
     var body = methodGenerator.getSendBody(method, ioGenerator);
     if (body.length) {
@@ -41,6 +42,7 @@ module.exports = function () {
     writer.write('{');
     writer.pushIndent();
     writer.write('long serviceId;');
+    writer.write(ioGenerator.beginRead());
     writer.write(protocol.serviceIdEdgeCodec.read('serviceId', ioGenerator));
     writer.write('switch (serviceId)');
     writer.write('{');
@@ -56,7 +58,10 @@ module.exports = function () {
         serviceId++;
       });
     });
-    writer.write('default:;');
+    writer.write('default:');
+    writer.pushIndent();
+    writer.write(ioGenerator.endRead());
+    writer.popIndent();
     writer.write('}');
     writer.popIndent();
     writer.write('}');
