@@ -1,5 +1,6 @@
 var assert = require('assert');
 var helper = require('./helper');
+var _ = require('lodash');
 
 describe('numberTypes', function () {
   var numberTypes = require('../lib/numberTypes')();
@@ -156,31 +157,70 @@ describe('numberTypes', function () {
       });
       describe('gatewayCodec', function () {
         var gatewayCodec = numberTypes.getGatewayCodec(option);
+        var type = numberTypes.decisionType(option);
+
         it('codec이 반환되어야 합니다.', function () {
           assert.strictEqual(typeof gatewayCodec, 'object');
           assert.strictEqual(typeof gatewayCodec.encode, 'function');
           assert.strictEqual(typeof gatewayCodec.decode, 'function');
         });
-        it('범위 안 테스트', function () {
-          for (var i = option.min; i <= option.max; i++) {
-            assert.strictEqual(gatewayCodec.encode(i), i - option.min);
-            assert.strictEqual(gatewayCodec.decode(gatewayCodec.encode(i)), i);
-            assert.strictEqual(gatewayCodec.decode(i - option.min), i);
+
+        var getBuffer = function (size, value) {
+          var buffer = new Buffer(size);
+          if (size === 1) {
+            buffer.writeUInt8(value, 0);
+          } else if (size === 2) {
+            buffer.writeUInt16BE(value, 0);
+          } else if (size === 4) {
+            buffer.writeUInt32BE(value, 0);
+          } else {
+            throw new Error();
           }
+          return buffer;
+        };
+
+        var size = numberTypes.typeToBytes(type);
+        describe('크기 ' + size + ' 정상 테스트', function () {
+          it(option.min + '부터 ' + option.max + '까지 전체 범위 테스트', function () {
+            for (var i = option.min; i <= option.max; i++) {
+              var buffer = getBuffer(size, i - option.min);
+              assert.deepEqual(gatewayCodec.encode(i), buffer);
+              assert.strictEqual(gatewayCodec.decode(gatewayCodec.encode(i)), i);
+              assert.strictEqual(gatewayCodec.decode(buffer), i);
+            }
+          });
+          it('빈 버퍼 올바른 크기 테스트', function () {
+            var buffer = new Buffer(new Array(size));
+            assert.strictEqual(buffer.length, size);
+            gatewayCodec.decode(buffer);
+          });
         });
-        it('범위 밖 테스트', function () {
-          assert.throws(function () {
-            gatewayCodec.decode(-1);
+        describe('예외 테스트', function () {
+          _.forEach([0, 1, 2, 4, 3, 5, 6, 7], function (testSize) {
+            if (size !== testSize) {
+              it('빈 버퍼 크기 ' + testSize + ' 상황에서 예외를 던져야 합니다.', function () {
+                var buffer = new Buffer(new Array(testSize));
+                assert.strictEqual(buffer.length, testSize);
+                assert.throws(function () {
+                  gatewayCodec.decode(buffer);
+                });
+              });
+            }
           });
-          gatewayCodec.decode(option.max - option.min);
-          assert.throws(function () {
-            gatewayCodec.decode(option.max - option.min + 1);
+          it('범위보다 1 큰 decode 상황에서 예외를 던져야 합니다.', function () {
+            assert.throws(function () {
+              gatewayCodec.decode(getBuffer(size, option.max - option.min + 1));
+            });
           });
-          assert.throws(function () {
-            gatewayCodec.encode(option.min - 1);
+          it('범위 1 작은 encode 상황에서 예외를 던져야 합니다.', function () {
+            assert.throws(function () {
+              gatewayCodec.encode(option.min - 1);
+            });
           });
-          assert.throws(function () {
-            gatewayCodec.encode(option.max + 1);
+          it('범위 1 큰 encode 상황에서 예외를 던져야 합니다.', function () {
+            assert.throws(function () {
+              gatewayCodec.encode(option.max + 1);
+            });
           });
         });
       });
