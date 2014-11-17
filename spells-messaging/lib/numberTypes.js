@@ -115,7 +115,8 @@ module.exports = function () {
           throw new Error();
         }        
         return value + option.min;
-      }
+      },
+      size: size
     };
   };
   return {

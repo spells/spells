@@ -180,6 +180,9 @@ describe('numberTypes', function () {
         };
 
         var size = numberTypes.typeToBytes(type);
+        it('크기가 지정되어야 합니다.', function () {
+          assert.strictEqual(gatewayCodec.size, size);
+        });
         describe('크기 ' + size + ' 정상 테스트', function () {
           it(option.min + '부터 ' + option.max + '까지 전체 범위 테스트', function () {
             for (var i = option.min; i <= option.max; i++) {
