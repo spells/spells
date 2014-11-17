@@ -32,9 +32,8 @@ describe('ioGenerator', function () {
     expected += '{\n';
     expected += '\tlong __temp__ = 42;\n';
     expected += '\t__temp__ -= 4000;\n';
-    expected += '\t_write(__temp__ & 0xFF);\n';
-    expected += '\t__temp__ >>= 8;\n';
-    expected += '\t_write(__temp__ & 0xFF);\n';
+    expected += '\t_write(((__temp__ & 0x0000FF00) >> 8) & 0xFF);\n';
+    expected += '\t_write(((__temp__ & 0x000000FF) >> 0) & 0xFF);\n';
     expected += '}';
     var actual = ioGenerator.writeBytesBiased(2, 'unsigned int', 4000, 42);
     assert.strictEqual(actual, expected);

@@ -21,9 +21,10 @@ module.exports = function () {
       var edgeGenerator = require('./lib/edgeGenerator')();
 
       var protoHeader = fs.readFileSync(__dirname + '/templates/proto.h', 'utf-8');
+      var postHeader = fs.readFileSync(__dirname + '/templates/post.h', 'utf-8');
       var protoSource = fs.readFileSync(__dirname + '/templates/proto.cpp', 'utf-8');
 
-      edgeGenerator.generateHeader(protocol, headerWriter, ioGenerator, protoHeader);
+      edgeGenerator.generateHeader(protocol, headerWriter, ioGenerator, protoHeader, postHeader);
       edgeGenerator.generateSource(protocol, sourceWriter, ioGenerator, protoSource);
 
       var header = headerWriter.render();

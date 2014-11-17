@@ -55,7 +55,7 @@ describe('edgeGenerator', function () {
       var expected = fs.readFileSync(__dirname + '/expectedHeader.h', 'utf-8');
       var ioGenerator = require('./ioGeneratorMock')();
       var writer = require('../lib/codeWriter')();
-      edgeGenerator.generateHeader(protocol, writer, ioGenerator, 'tpl.h');
+      edgeGenerator.generateHeader(protocol, writer, ioGenerator, 'tpl.h', 'post.h');
       var actual = writer.render();
       assert.strictEqual(actual, expected);
     });

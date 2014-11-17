@@ -68,7 +68,7 @@ module.exports = function () {
   };
 
   return {
-    generateHeader: function (protocol, writer, ioGenerator, tpl) {
+    generateHeader: function (protocol, writer, ioGenerator, tpl, post) {
       writer.namespace(protocol.name, function () {
         _.forEach(protocol.features, function (feature) {
           writer.namespace(feature.name, function () {
@@ -82,6 +82,7 @@ module.exports = function () {
         writer.write('void _receive(void);');
         writer.write(tpl);
       });
+      writer.write(post);
     },
     generateSource: function (protocol, writer, ioGenerator, tpl) {
       protocol = compilers.compileProtocol(protocol);

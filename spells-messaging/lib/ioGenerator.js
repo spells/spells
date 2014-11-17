@@ -56,21 +56,17 @@ module.exports = function () {
       writer.write('long __temp__ = ' + target + ';');
       writer.write('__temp__ -= ' + min + ';');
       if (bytes === 1) {
-        writer.write('_write(__temp__ & 0xFF);');
+        writer.write('_write(((__temp__ & 0x000000FF) >> 0) & 0xFF);');
       }
       if (bytes === 2) {
-        writer.write('_write(__temp__ & 0xFF);');
-        writer.write('__temp__ >>= 8;');
-        writer.write('_write(__temp__ & 0xFF);');
+        writer.write('_write(((__temp__ & 0x0000FF00) >> 8) & 0xFF);');
+        writer.write('_write(((__temp__ & 0x000000FF) >> 0) & 0xFF);');
       }
       if (bytes === 4) {
-        writer.write('_write(__temp__ & 0xFF);');
-        writer.write('__temp__ >>= 8;');
-        writer.write('_write(__temp__ & 0xFF);');
-        writer.write('__temp__ >>= 8;');
-        writer.write('_write(__temp__ & 0xFF);');
-        writer.write('__temp__ >>= 8;');
-        writer.write('_write(__temp__ & 0xFF);');
+        writer.write('_write(((__temp__ & 0xFF000000) >> 24) & 0xFF);');
+        writer.write('_write(((__temp__ & 0x00FF0000) >> 16) & 0xFF);');
+        writer.write('_write(((__temp__ & 0x0000FF00) >> 8) & 0xFF);');
+        writer.write('_write(((__temp__ & 0x000000FF) >> 0) & 0xFF);');
       }
       writer.popIndent();
       writer.write('}');

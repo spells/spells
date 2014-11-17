@@ -21,3 +21,4 @@ namespace proto1
 	void _receive(void);
 	tpl.h
 }
+post.h
