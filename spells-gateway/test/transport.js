@@ -165,7 +165,7 @@ describe('transport', function () {
   });
 
   describe('Detector', function () {
-    it('버퍼 0x6F, 0x6E, 0x65, 0x00를 2회 읽어야 하는 시나리오', function () {
+    it('버퍼 0x6F, 0x6E, 0x65, 0x00를 2회 읽어야 하는 시나리오', function (done) {
       var log = [];
       var detector = new transport.Detector();
       detector.on(function (body) {
@@ -180,15 +180,18 @@ describe('transport', function () {
       _.forEach(scenario, function (data) {
         detector.push(data);
       });
-      var buffer = new Buffer([0x6F, 0x6E, 0x65, 0x00]);
-      assert.strictEqual(log[0], '1');
-      assert.deepEqual(log[1], buffer);
-      assert.strictEqual(log[2], '2');
-      assert.deepEqual(log[3], buffer);
-      assert.strictEqual(log[4], '1');
-      assert.deepEqual(log[5], buffer);
-      assert.strictEqual(log[6], '2');
-      assert.deepEqual(log[7], buffer);
+      process.nextTick(function () {
+        var buffer = new Buffer([0x6F, 0x6E, 0x65, 0x00]);
+        assert.strictEqual(log[0], '1');
+        assert.deepEqual(log[1], buffer);
+        assert.strictEqual(log[2], '2');
+        assert.deepEqual(log[3], buffer);
+        assert.strictEqual(log[4], '1');
+        assert.deepEqual(log[5], buffer);
+        assert.strictEqual(log[6], '2');
+        assert.deepEqual(log[7], buffer);
+        done();
+      });
     });
     it('잡음만 존재하는 시나리오', function () {
       var detector = new transport.Detector();

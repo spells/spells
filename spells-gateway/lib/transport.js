@@ -67,7 +67,9 @@ module.exports = function () {
     var subscribers = [];
     var emit = function (body) {
       _.forEach(subscribers, function (callback) {
-        callback(body);
+        process.nextTick(function () {
+          callback(body);
+        });
       });
     };
     this.on = function (callback) {
@@ -93,7 +95,6 @@ module.exports = function () {
       }
     };
   };
-
 
   return {
     checksum: {
