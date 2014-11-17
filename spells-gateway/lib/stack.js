@@ -37,17 +37,37 @@ module.exports = function () {
 
   var applicationLayer = {};
   applicationLayer.encode = function (payload, method, protocol) {
-    var buffers = [
-      protocol.serviceIdGatewayCodec.encode(method.serviceId)    
-    ];
+    var buffers = [];
     _.forEach(method.fields, function (field) {
       buffers.push(field.gatewayCodec.encode(payload[field.name]));
     });
-    return Buffer.concat(buffers);
+    payload = Buffer.concat(buffers);
+    return serviceIdLayer.encode(method.serviceId, payload, protocol.serviceIdGatewayCodec);
   };
-  applicationLayer.decode = function (buffer, method) {
-    buffer = buffer;
-    method = method;
+  applicationLayer.decode = function (data, protocol) {
+    data = serviceIdLayer.decode(data, protocol.serviceIdGatewayCodec);
+    var serviceId = data.serviceId;
+    var method = protocol.services[serviceId].method;
+    var feature = protocol.services[serviceId].feature;
+    data = data.payload;
+    var decoded = {};
+
+    _.forEach(method.fields, function (field) {
+      var view = data.slice(0, field.gatewayCodec.size);
+      decoded[field.name] = field.gatewayCodec.decode(view);
+      data = data.slice(field.gatewayCodec.size);
+    });
+
+    if (data.length) {
+      throw new Error();
+    }
+
+    return {
+      serviceId: serviceId,
+      method: method,
+      feature: feature,
+      payload: decoded
+    };
   };
 
   return {

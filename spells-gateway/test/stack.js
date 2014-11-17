@@ -149,7 +149,7 @@ describe('stack', function () {
   });
 
   var method0 = {
-    name: method0,
+    name: 'm0',
     fields: []
   };
   var method3 = {
@@ -210,10 +210,80 @@ describe('stack', function () {
     describe('decode', function () {
       describe('method0', function () {
         it('정상 상황에서 정상적으로 동작해야 합니다.', function () {
+          var buffer = new Buffer([0x00]);
+          var actual = stack.applicationLayer.decode(buffer, protocol);
+          var expected = {
+            serviceId: 0,
+            method: protocol.services[0].method,
+            feature: protocol.services[0].feature,
+            payload: {}
+          };
+          assert.deepEqual(actual, expected);
+        });
+        it('빈 버퍼 상황이면 예외를 던져야 합니다.', function () {
+          var buffer = new Buffer([]);
+          assert.throws(function () {
+            stack.applicationLayer.decode(buffer, protocol);
+          });
+        });
+        it('지나치게 긴 버퍼 상황이면 예외를 던져야 합니다.', function () {
+          var buffer = new Buffer([0x00, 0x00]);
+          assert.throws(function () {
+            stack.applicationLayer.decode(buffer, protocol);
+          });
         });
       });
       describe('method3', function () {
         it('정상 상황에서 정상적으로 동작해야 합니다.', function () {
+          var buffer = new Buffer([0x01, 0x64, 0x03, 0xE8, 0x00, 0x00, 0xC3, 0x50]);
+          var actual = stack.applicationLayer.decode(buffer, protocol);
+          var expected = {
+            serviceId: 1,
+            method: protocol.services[1].method,
+            feature: protocol.services[1].feature,
+            payload: {
+              a1Bc: 0,
+              e2Fg: 0,
+              i3Jk: 0
+            }
+          };
+          assert.deepEqual(actual, expected);
+        });
+        it('빈 버퍼 상황이면 예외를 던져야 합니다.', function () {
+          var buffer = new Buffer([]);
+          assert.throws(function () {
+            stack.applicationLayer.decode(buffer, protocol);
+          });
+        });
+        it('지나치게 짧은 버퍼 상황이면 예외를 던져야 합니다.', function () {
+          var buffer = new Buffer([0x01]);
+          assert.throws(function () {
+            stack.applicationLayer.decode(buffer, protocol);
+          });
+        });
+        it('약간 짧은 버퍼 상황이면 예외를 던져야 합니다.', function () {
+          var buffer = new Buffer([0x01, 0x64, 0x03, 0xE8, 0x00, 0x00, 0xC3]);
+          assert.throws(function () {
+            stack.applicationLayer.decode(buffer, protocol);
+          });
+        });
+        it('지나치게 긴 버퍼 상황이면 예외를 던져야 합니다.', function () {
+          var buffer = new Buffer([0x01, 0x64, 0x03, 0xE8, 0x00, 0x00, 0xC3, 0x50, 0x00]);
+          assert.throws(function () {
+            stack.applicationLayer.decode(buffer, protocol);
+          });
+        });
+        it('값이 잘못된 상황이면 예외를 던져야 합니다.', function () {
+          var buffer = new Buffer([0x01, 0x64, 0x03, 0xE8, 0x01, 0x00, 0xC3, 0x50]);
+          assert.throws(function () {
+            stack.applicationLayer.decode(buffer, protocol);
+          });
+        });
+      });
+      it('잘못된 서비스 번호가 들어가면 예외를 던져야 합니다.', function () {
+        var buffer = new Buffer([0x02]);
+        assert.throws(function () {
+          stack.applicationLayer.decode(buffer, protocol);
         });
       });
     });
