@@ -47,6 +47,10 @@ module.exports = function () {
     name: 'userId',
     methods: [
       {
+        name: 'requestUserId',
+        fields: []
+      },
+      {
         name: 'userId',
         fields: [
           {
