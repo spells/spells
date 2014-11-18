@@ -77,7 +77,14 @@ module.exports = function () {
     };
 
     var buffer = [];
-    this.push = function (data) {
+    var push = function (data) {
+      if (data.writeDoubleBE) {
+        for (var i = 0; i < data.length; i++) {
+          var value = String.fromCharCode(data[i]);
+          push(value);
+        }
+        return;
+      }
       if (data === '^') {
         buffer = [];
       }
@@ -94,6 +101,7 @@ module.exports = function () {
         emit(body);
       }
     };
+    this.push = push;
   };
 
   return {
