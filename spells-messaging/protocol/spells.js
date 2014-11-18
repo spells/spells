@@ -3,7 +3,7 @@ module.exports = function () {
     name: 'spells',
     features: []
   };
-  
+
   var deviceId = {
     name: 'deviceId',
     methods: [
@@ -63,28 +63,66 @@ module.exports = function () {
   protocol.features.push(deviceId);
   protocol.features.push(userId);
 
-  var atmosphere = {
-    name: 'atmosphere',
+  var air = {
+    name: 'air',
     methods: [
+      {
+        name: 'requestTemperature',
+        fields: []
+      },
       {
         name: 'temperature',
         fields: [
           {
             name: 'temperature',
             type: 'integer',
-            min: -100,
+            min: -20,
             max: 100
           }
         ]
       },
       {
-        name: 'particles',
+        name: 'requestDust',
+        fields: []
+      },
+      {
+        name: 'dust',
         fields: [
           {
-            name: 'particles',
+            name: 'dust',
             type: 'integer',
             min: 0,
-            max: 1000
+            max: 10000
+          }
+        ]
+      },
+      {
+        name: 'requestCarbonDioxide',
+        fields: []
+      },
+      {
+        name: 'carbonDioxide',
+        fields: [
+          {
+            name: 'carbonDioxide',
+            type: 'integer',
+            min: 450,
+            max: 2000
+          }
+        ]
+      },
+      {
+        name: 'requestHumidity',
+        fields: []
+      },
+      {
+        name: 'humidity',
+        fields: [
+          {
+            name: 'humidity',
+            type: 'integer',
+            min: 0,
+            max: 100
           }
         ]
       }
@@ -94,13 +132,32 @@ module.exports = function () {
     name: 'window',
     methods: [
       {
+        name: 'requestTarget',
+        fields: []
+      },
+      {
+        name: 'target',
+        fields: [
+          {
+            name: 'position',
+            type: 'integer',
+            min: 0,
+            max: 100
+          }
+        ]
+      },
+      {
+        name: 'requestStatus',
+        fields: []
+      },
+      {
         name: 'status',
         fields: [
           {
             name: 'position',
             type: 'integer',
             min: 0,
-            max: 1000
+            max: 100
           }
         ]
       }
@@ -110,13 +167,17 @@ module.exports = function () {
     name: 'door',
     methods: [
       {
+        name: 'requestStatus',
+        fields: []
+      },
+      {
         name: 'status',
         fields: [
           {
-            name: 'position',
+            name: 'isOpen',
             type: 'integer',
             min: 0,
-            max: 1000
+            max: 1
           }
         ]
       }
@@ -126,10 +187,14 @@ module.exports = function () {
     name: 'airConditioner',
     methods: [
       {
+        name: 'requestStatus',
+        fields: []
+      },
+      {
         name: 'status',
         fields: [
           {
-            name: 'on',
+            name: 'isOn',
             type: 'integer',
             min: 0,
             max: 1
@@ -142,10 +207,14 @@ module.exports = function () {
     name: 'doorLock',
     methods: [
       {
+        name: 'requestStatus',
+        fields: []
+      },
+      {
         name: 'status',
         fields: [
           {
-            name: 'open',
+            name: 'isOpen',
             type: 'integer',
             min: 0,
             max: 1
@@ -159,10 +228,14 @@ module.exports = function () {
     name: 'light',
     methods: [
       {
+        name: 'requestStatus',
+        fields: []
+      },
+      {
         name: 'status',
         fields: [
           {
-            name: 'on',
+            name: 'isOn',
             type: 'integer',
             min: 0,
             max: 1
@@ -177,7 +250,7 @@ module.exports = function () {
   protocol.features.push(airConditioner);
   protocol.features.push(door);
   protocol.features.push(window);
-  protocol.features.push(atmosphere);
+  protocol.features.push(air);
 
   return protocol;
 };
