@@ -196,13 +196,15 @@ unsigned char _base64Next;
 unsigned char _data[DATA_BUFFER_SIZE];
 unsigned char _dataNext;
 
+#define SERIAL Serial1
+
 void _beginRead()
 {
 	_base64Next = 0;
 	for (;;)
 	{
-		while (Serial.available() <= 0);
-		int value = Serial.read();
+		while (SERIAL.available() <= 0);
+		int value = SERIAL.read();
 		if (value == '^') {
 			_base64Next = 0;
 			continue;
@@ -228,22 +230,16 @@ void _beginWrite()
 void _endWrite()
 {
 	_base64Next = base64_encode(_base64, _data, _dataNext);
-	Serial.write('^');
-	for (int i = 0; i < _base64Next; i++)
-	{
-		Serial.write(_base64[i]);
-	}
-	Serial.write('?');
+	SERIAL.write('^');
+	SERIAL.write(_base64, _base64Next);
+	SERIAL.write('?');
 	uint32_t checksum = crc24(_data, _dataNext);
 	_data[0] = (checksum & 0x00FF0000) >> 16;
 	_data[1] = (checksum & 0x0000FF00) >> 8;
 	_data[2] = (checksum & 0x000000FF) >> 0;
 	base64_encode(_base64, _data, 3);
-	Serial.write(_base64[0]);
-	Serial.write(_base64[1]);
-	Serial.write(_base64[2]);
-	Serial.write(_base64[3]);
-	Serial.write('$');
+	SERIAL.write(_base64, 4);
+	SERIAL.write('$');
 }
 
 int _read()
@@ -258,12 +254,12 @@ void _write(int data)
 
 void _setup()
 {
-	Serial.begin(9600);
+	SERIAL.begin(115200);
 }
 
 void _loop()
 {
-	if (Serial.available() > 0)
+	if (SERIAL.available() > 0)
 	{
 		_receive();
 	}
