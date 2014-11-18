@@ -28,6 +28,7 @@ protocol = compilers.compileProtocol(protocol);
 method0 = protocol.features[0].methods[0];
 method3 = protocol.features[0].methods[1];
 var master = require('../lib/master')(protocol);
+var transport = require('../lib/transport')();
 
 var assert = require('assert');
 
@@ -39,11 +40,15 @@ describe('master', function () {
       i3Jk: 50000
     };
     var actual = master.decode(
-      master.encode(
-        master.decode(
-          master.encode(payload, method3)
-        ).payload,
-        method3
+      transport.frame.decode(
+        master.encode(
+          master.decode(
+            transport.frame.decode(
+              master.encode(payload, method3).toString()
+            )
+          ).payload,
+          method3
+        ).toString()
       )
     ).payload;
 
@@ -59,6 +64,10 @@ describe('master', function () {
       assert.deepEqual(payload, data.payload);
       done();
     });
-    master.decodeAsyncSafely(master.encode(payload, method3));
+    master.decodeAsyncSafely(
+      transport.frame.decode(
+        master.encode(payload, method3).toString()
+      )
+    );
   });
 });
