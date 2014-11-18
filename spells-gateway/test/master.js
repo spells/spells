@@ -49,4 +49,16 @@ describe('master', function () {
 
     assert.deepEqual(actual, payload);
   });
+  it('안전한 이벤트를 지원해야 합니다.', function (done) {
+    var payload = {
+      a1Bc: 64,
+      e2Fg: 567,
+      i3Jk: 50000
+    };
+    master.on(function (data) {
+      assert.deepEqual(payload, data.payload);
+      done();
+    });
+    master.decodeAsyncSafely(master.encode(payload, method3));
+  });
 });
