@@ -205,14 +205,25 @@ void _beginRead()
 	{
 		while (SERIAL.available() <= 0);
 		int value = SERIAL.read();
-		if (value == '^') {
+		if (value == '^')
+		{
 			_base64Next = 0;
 			continue;
 		}
-		if (value == '?') {
+		if (value == '?')
+		{
 			break;
 		}
 		_base64[_base64Next++] = value;
+	}
+	for (;;)
+	{
+		while (SERIAL.available() <= 0);
+		int value = SERIAL.read();
+		if (value == '$')
+		{
+			break;
+		}
 	}
 	base64_decode(_data, _base64, _base64Next);
 	_dataNext = 0;
@@ -240,6 +251,7 @@ void _endWrite()
 	base64_encode(_base64, _data, 3);
 	SERIAL.write(_base64, 4);
 	SERIAL.write('$');
+	delay(10);
 }
 
 int _read()
