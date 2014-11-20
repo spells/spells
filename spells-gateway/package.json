@@ -7,7 +7,7 @@
   "dependencies": {
     "bluetooth-serial-port": "*",
     "riccardo": "*",
-    "socket.io": "*",
+    "socket.io-client": "*",
     "crc": "*"
   },
   "devDependencies": {
