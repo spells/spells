@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<head>
+<meta charset="utf-8" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<title>Cloud Room</title>
+
+<link href="styles/style.css"     		 rel="stylesheet" type="text/css">
+<link href="styles/framework.css" 		 rel="stylesheet" type="text/css">
+<link href="styles/owl.theme.css" 		 rel="stylesheet" type="text/css">
+<link href="styles/swipebox.css"		 rel="stylesheet" type="text/css">
+<link href="styles/font-awesome.css"	 rel="stylesheet" type="text/css">
+<link href="styles/animate.css"			 rel="stylesheet" type="text/css">
+<link type="text/css" rel="stylesheet" href="plugin/socicon/socicon.css"/>
+
+<script type="text/javascript" src="scripts/jquery.js"></script>
+<script type="text/javascript" src="scripts/jqueryui.js"></script>
+<script type="text/javascript" src="scripts/framework.plugins.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="PushNotification.js"></script>
+<script type="text/javascript" src="scripts/init.js"></script>
+
+<style>
+    .profile-header-logo {
+        margin-bottom: 20px;
+    }
+    .profile-header-socials {
+        margin-top: 35px;
+    }
+    .profile-header-socials a .fa-cubes{background-color:rgba(39, 174, 96, 0.5)!important;}
+    .profile-header-socials a .fa-cloud{background-color:rgba(64, 153, 255, 0.5)!important;}
+    .profile-header-socials a .fa-envelope{background-color:rgba(211, 72, 54, 0.5)!important;}
+    .container .decoration {
+        margin-bottom: 15px;
+    }
+</style>
+
+<script type="text/javascript" charset="utf-8">
+    jQuery(document).ready(function($){
+        $.post(app.serverURL+"/ajax/get/main",{},function(data){
+            $(".profile-header-logo").attr("src",data.profile.src);
+            $(".profile-header-heading").text(window.localStorage.name);
+            var logCnt=0;
+            data.log.master.forEach(function(index){
+                logCnt+=index.cnt;
+            });
+            data.log.sub.forEach(function(index){
+                logCnt+=index.cnt;
+            });
+            $(".profile-device").text(data.device.master.length+data.device.sub.length);
+            $(".profile-log").text(logCnt);
+            $(".profile-message").text(data.profile.alertCnt);
+            $(".device_content").empty();
+
+            data.device.master.forEach(function(index){
+                if(index.master_name=="")index.master_name="[메인"+index.master_idx+"]";
+                if(index.master_comment=="")index.master_comment="[코멘트 내용 없음]";
+                var subCnt=0;
+                var logCnt=0;
+                data.log.master.forEach(function(index_){
+                    if(index_.master_idx==index.master_idx)logCnt+=index_.cnt;                    
+                });
+                data.device.sub.forEach(function(index_){
+                    if(index_.master_idx==index.master_idx){
+                        subCnt++;
+                        data.log.sub.forEach(function(index__){
+                            if(index_.sub_idx==index__.sub_idx)logCnt+=index__.cnt;
+                        });
+                    }
+                });
+                var diffTmp=(new Date())-(new Date(index.master_connect_date));
+                var dayTmp=Math.floor(diffTmp/86400000);
+                diffTmp-=dayTmp*86400000;
+                var hourTmp=Math.floor(diffTmp/3600000);
+                diffTmp-=hourTmp*3600000;
+                var minTmp=Math.floor(diffTmp/60000);
+                diffTmp-=minTmp*60000;
+                /*
+                var secTmp=Math.floor(diffTmp/1000);
+                console.log(dayTmp,hourTmp,minTmp,secTmp);
+                */
+                var regDate=new Date(index.master_register_date);
+                var tmpSource=
+                    '<div class="content device_content">'+
+                        '<div class="container boxed">'+
+                            '<h2 class="no-bottom">'+index.master_name+'</h2>'+
+                            '<p class="half-bottom">'+index.master_comment+'</p>'+
+                            '<div class="decoration"></div>'+
+                            '<ul class="font-icon-list">'+
+                                '<li><i class="fa fa-calendar"></i>'+regDate.getFullYear()+'년 '+(regDate.getMonth()+1)+'월 '+regDate.getDate()+'일 등록</li>'+
+                                '<li><i class="fa fa-cube"></i>서브 기기 '+subCnt+' 기</li>'+
+                                '<li><i class="fa fa-cloud"></i>누적 로그 '+logCnt+' 개</li>'+
+                                '<li><i class="fa fa-envelope"></i>미확인 메시지 '+index.unconfirmed_cnt+' 건</li>'+
+                                '<li><i class="fa fa-clock-o"></i>'+(dayTmp>0?dayTmp+"일 ":"")+(hourTmp>0?hourTmp+"시간 ":"")+(minTmp>0?minTmp+"분 ":"")+'전 업데이트 됨</li>'+
+                            '</ul>'+
+                            '<div class="portfolio-one-links">'+
+                                '<a href="device.html?master_idx='+index.master_idx+'"><i class="fa fa-arrow-right"></i> 자세히 보기</a>'+
+                            '</div>'+
+                        '</div>'+
+                    '</div>';
+                $('.register_btn').before(tmpSource);
+            });
+        },"json");
+    });
+</script>
+
+</head>
+<body>
+
+<div id="preloader">
+    <div id="status">
+        <p class="center-text">
+            Loading the content...
+            <em>Loading depends on your connection speed!</em>
+        </p>
+    </div>
+</div>
+
+
+<div class="header">
+    <a class="deploy-logo" href="main.html"><img src="images/logo-large__.png" alt="img"></a>
+    <a class="deploy-menu" href="#"><i class="fa fa-angle-down"></i></a> 
+</div>
+
+<div class="header-clear"></div>
+
+<div class="all-elements">
+    <div class="navigation">
+    </div>   
+    
+    <div class="profile-header full-bottom">
+        <div class="profile-header-contents">
+            <img class="profile-header-logo" src="images/pictures/5s.jpg" alt="img">
+            <h4 class="profile-header-heading"></h4>
+            <div class="profile-header-socials">
+                <a href="#">
+                    <i class="fa fa-cubes"></i>
+                    등록된 기기<br>
+                    <span class="profile-device">-</span> 기
+                </a>
+                <a href="#">
+                    <i class="fa fa-cloud"></i>
+                    누적 로그<br>
+                    <span class="profile-log">-</span> 개
+                </a>
+                <a href="#">
+                    <i class="fa fa-envelope"></i>
+                    미확인 메시지<br>
+                    <span class="profile-message">-</span> 건
+                </a>
+            </div>
+        </div>
+        <div class="profile-header-background"></div>
+        <div class="profile-header-overlay"></div>
+    </div>
+
+    <div class="content register_btn">
+        <div class="container">
+            <a href="register.html" class="button button-full-screen button-center-text button-green"><i class="fa fa-cube"></i>Register Device</a>
+        </div>
+    </div>    
+
+    <p class="footer-text">Software Maestro 5th, &nbsp;Spells Team.</p>
+  
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

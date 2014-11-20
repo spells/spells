@@ -1,0 +1,290 @@
+<!DOCTYPE HTML>
+<head>
+<meta charset="utf-8" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<title>Cloud Room</title>
+
+<link href="styles/style.css"     		 rel="stylesheet" type="text/css">
+<link href="styles/framework.css" 		 rel="stylesheet" type="text/css">
+<link href="styles/owl.theme.css" 		 rel="stylesheet" type="text/css">
+<link href="styles/swipebox.css"		 rel="stylesheet" type="text/css">
+<link href="styles/font-awesome.css"	 rel="stylesheet" type="text/css">
+<link href="styles/animate.css"			 rel="stylesheet" type="text/css">
+<link type="text/css" rel="stylesheet" href="plugin/socicon/socicon.css"/>
+
+<script type="text/javascript" src="scripts/jquery.js"></script>
+<script type="text/javascript" src="scripts/jqueryui.js"></script>
+<script type="text/javascript" src="scripts/framework.plugins.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="PushNotification.js"></script>
+<script type="text/javascript" src="scripts/init.js"></script>
+
+<style>
+    .content .container:first-child {
+        margin-top: 20px;
+    }
+    .container .decoration {
+        margin-bottom: 15px;
+    }
+    .master_device ul,.sub_device ul {
+        margin-bottom: 0px;
+    }
+    .master_device > div > a,.sub_device > div > a {
+        color: #666666;
+        opacity: 0.600000023841858;
+    }
+    .master_device > a:last-child,.sub_device > a:last-child {
+        border:none;
+    }
+    .master_device > a,.sub_device > a {
+        display:inline-block;
+        float:right;
+        text-align:right;
+        padding-left:10px;
+        margin-left:10px;
+        border-left:solid 1px #cacaca;
+        line-height:12px;
+        margin-top:20px;
+        font-size:11px;
+    }
+    .alert_time {
+        padding-bottom: 0px !important;
+    }
+
+    .big-notification {
+        margin-bottom: 15px;
+    }
+    .big-notification:last-child {
+        margin-bottom: 0px;
+    }
+    .setStatus_div {
+        margin: 10px 0px 0px 0px;
+        height: 40px;
+    }
+    .setStatus_btn { /* 임시 작성 */
+        padding: 0px;
+        height: 40px;
+        width: 100%;
+    }
+</style>
+
+<script type="text/javascript" charset="utf-8">
+    jQuery(document).ready(function($){
+        $.urlParam = function(name){
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            if(results==null){
+                return null;
+            }
+            else{
+               return results[1] || 0;
+            }
+        }
+        $.post(app.serverURL+"/ajax/get/master",{master_idx:parseInt($.urlParam('master_idx'))},function(data){
+            var master=data.device.master[0];
+            if(master.master_name=="")master.master_name="[메인"+master.master_idx+"]";
+            if(master.master_comment=="")master.master_comment="[코멘트 내용 없음]";
+            $('.master-name').text(master.master_name);
+            $('.master-comment').text(master.master_comment);
+            var regDate=new Date(master.master_register_date);
+            $('.master-register').text(regDate.getFullYear()+'년 '+(regDate.getMonth()+1)+'월 '+regDate.getDate()+'일');
+            var logCnt=(data.log.master[0]?data.log.master[0].cnt:0);
+            data.log.sub.forEach(function(index){
+                logCnt+=index.cnt;
+            });
+            $('.master-log').text(logCnt);
+            $('.master-ip').text(master.master_connect_ip);
+            var diffTmp=(new Date())-(new Date(master.master_connect_date));
+            var dayTmp=Math.floor(diffTmp/86400000);
+            diffTmp-=dayTmp*86400000;
+            var hourTmp=Math.floor(diffTmp/3600000);
+            diffTmp-=hourTmp*3600000;
+            var minTmp=Math.floor(diffTmp/60000);
+            diffTmp-=minTmp*60000;
+            $('.master-update').text((dayTmp>0?dayTmp+"일 ":"")+(hourTmp>0?hourTmp+"시간 ":"")+(minTmp>0?minTmp+"분 ":""));
+
+            var colorArr=["blue","green","yellow","red"];
+            if(data.alert.length==0) $('.unconfirmed-alert,.unconfirmed-alert~.decoration').hide();
+            data.alert.forEach(function(index){
+                var regDate=new Date(index.register_date);
+                var tmpSource=
+                    '<div class="big-notification '+colorArr[index.flag]+'-notification">'+
+                        '<h4 class="uppercase">'+index.title+'</h4>'+
+                        '<a class="close-big-notification" onClick="confirmAlert('+index.idx+',this)"><i class="fa fa-times"></i></a>'+
+                        '<p class="alert_time"><i class="fa fa-clock-o"></i> '+regDate.getFullYear()+'년 '+(regDate.getMonth()+1)+'월 '+regDate.getDate()+'일 '+regDate.getHours()+'시'+regDate.getMinutes()+'분'+'</p>'+
+                        '<p>'+index.message+'</p>'+
+                    '</div>';
+                $('.unconfirmed-alert').append(tmpSource);
+            });
+
+            data.device.sub.forEach(function(index){
+                if(index.sub_name=="")index.sub_name="[서브"+index.sub_idx+"]";
+                if(index.sub_comment=="")index.sub_comment="[코멘트 내용 없음]";
+                var regDate=new Date(index.sub_register_date);
+                var logCnt=0;
+                data.log.sub.forEach(function(index_){
+                    if(index.sub_idx==index_.sub_idx)logCnt=index_.cnt;
+                });
+                var diffTmp=(new Date())-(new Date(index.sub_connect_date));
+                var dayTmp=Math.floor(diffTmp/86400000);
+                diffTmp-=dayTmp*86400000;
+                var hourTmp=Math.floor(diffTmp/3600000);
+                diffTmp-=hourTmp*3600000;
+                var minTmp=Math.floor(diffTmp/60000);
+                diffTmp-=minTmp*60000;
+                var tmpSource=
+                    '<div class="container boxed sub_device">'+ 
+                        '<div>'+
+                            '<h2 class="no-bottom" style="float:left;">'+index.sub_name+'</h2>'+
+                            '<a href="#" style="float:right;"><i class="fa fa-pencil"></i></a>'+
+                        '</div>'+
+                        '<p class="half-bottom">'+index.sub_comment+'</p>'+
+                        '<div class="decoration"></div>'+
+                        '<ul class="font-icon-list">'+
+                            '<li><i class="fa fa-calendar"></i>'+regDate.getFullYear()+'년 '+(regDate.getMonth()+1)+'월 '+regDate.getDate()+'일'+' 등록</li>'+
+                            '<li><i class="fa fa-cloud"></i>누적 로그 '+logCnt+' 개</li>'+
+                            '<li><i class="fa fa-clock-o"></i><span class="master-update">'+(dayTmp>0?dayTmp+"일 ":"")+(hourTmp>0?hourTmp+"시간 ":"")+(minTmp>0?minTmp+"분 ":"")+'</span>전 업데이트 됨</li>'+
+                            '<li><i class="fa fa-check"></i>Device Type : '+index.device_type+'</li>'+
+                            '<li><i class="fa fa-check"></i>Device Status : '+index.sub_status+'</li>'+
+                            '<li><i class="fa fa-check"></i>Device Value : '+index.sub_value+'</li>'+
+                        '</ul>'+
+                        '<div class="container setStatus_div">'+
+                            '<div class="one-half" style="width:70%"><input type="text" value="" class="contactField"></div>'+
+                            '<div class="one-half last-column" style="width:20%"><button class="button button-blue no-bottom setStatus_btn" onClick="setStatus('+index.sub_idx+',\''+index.sub_hash+'\',this)">Send</button></div>'+
+                        '</div>'+
+                        '<a href="#"><i class="fa fa-gear"></i> 기기 제어</a>'+
+                        '<a href="#"><i class="fa fa-align-left"></i> 수신 로그</a>'+
+                    '</div>';
+
+
+                            '<li></li>'+
+
+
+                $(".content").append(tmpSource);
+            });
+        },"json");
+    });
+    function confirmAlert(idx,self){
+        jQuery.post(app.serverURL+"/ajax/set/confirmAlert",{idx:idx},function(data){
+            if(data.result){
+                jQuery(self).parent().remove();
+                if(jQuery('.big-notification').length==0) jQuery('.unconfirmed-alert,.unconfirmed-alert~.decoration').hide();
+            }
+        });
+    }
+    function setStatus(sub_idx,hash,self){ // sub_idx 불필요 // 임시로 만든거라 지울듯
+        jQuery.post(app.serverURL+"/ajax/set/status",{hash:hash,status:jQuery(self).parent().parent().find('input').val()},function(data){
+            console.log(data);
+        });
+    }
+</script>
+
+</head>
+<body>
+
+<div id="preloader">
+    <div id="status">
+        <p class="center-text">
+            Loading the content...
+            <em>Loading depends on your connection speed!</em>
+        </p>
+    </div>
+</div>
+
+
+<div class="header">
+    <a class="deploy-logo" href="main.html"><img src="images/logo-large__.png" alt="img"></a>
+    <a class="deploy-menu" href="#"><i class="fa fa-angle-down"></i></a> 
+</div>
+
+<div class="header-clear"></div>
+
+<div class="all-elements">
+    <div class="navigation">
+    </div>
+
+    <div class="content">
+        <div class="container boxed master_device">
+            <div>
+                <h2 class="no-bottom master-name" style="float:left;">-</h2>
+                <a href="#" style="float:right;"><i class="fa fa-pencil"></i></a>
+            </div>            
+            <p class="half-bottom master-comment">-</p>
+            <div class="decoration"></div>
+            <ul class="font-icon-list">
+                <li><i class="fa fa-calendar"></i><span class="master-register">-</span> 등록</li>
+                <li><i class="fa fa-cloud"></i>누적 로그 <span class="master-log">-</span> 개</li>
+                <li><i class="fa fa-location-arrow"></i>접속 IP <span class="master-ip">0</span></li>                    
+                <li><i class="fa fa-clock-o"></i><span class="master-update">-</span> 전 업데이트 됨</li>
+            </ul>               
+            <a href="#"><i class="fa fa-envelope"></i> 메시지 로그</a>
+            <a href="#"><i class="fa fa-align-left"></i> 수신 로그</a>
+        </div>
+        <div class="container">
+            <a href="#" class="button button-full-screen button-center-text button-green"><i class="fa fa-area-chart"></i> View Statistics</a>
+        </div>
+        <div class="decoration"></div>
+        <div class="container boxed unconfirmed-alert">
+            <h2>미확인 메시지</h2>
+            <div class="decoration"></div>
+            <!--
+            <div class="big-notification red-notification">
+                <h4 class="uppercase">제목</h4>
+                <a href="#" class="close-big-notification"><i class="fa fa-times"></i></a>
+                <p class="alert_time"><i class="fa fa-clock-o"></i> 2014년 11월 18일 10시 14분</p>
+                
+                <p>내용 내용내용</p>
+            </div>
+            -->
+        </div>
+        <div class="decoration"></div>
+        <!--
+        <div class="container boxed sub_device">
+            <div>
+                <h2 class="no-bottom" style="float:left;">[서브19]</h2>
+                <a href="#" style="float:right;"><i class="fa fa-pencil"></i></a>
+            </div>            
+            <p class="half-bottom">[코멘트 없음]</p>
+            <div class="decoration"></div>
+            <ul class="font-icon-list">
+                <li><i class="fa fa-calendar"></i>2014년 11월 18일 등록</li>
+                <li><i class="fa fa-cloud"></i>누적 로그 123 개</li>
+                <li><i class="fa fa-clock-o"></i>2분 전 업데이트 됨</li>
+                <li><i class="fa fa-check"></i>Device Type : 1</li>
+                <li><i class="fa fa-check"></i>Device Status : 1</li>
+                <li><i class="fa fa-check"></i>Device Value : 1</li>
+            </ul>               
+            <a href="#"><i class="fa fa-gear"></i> 기기 제어</a>
+            <a href="#"><i class="fa fa-align-left"></i> 수신 로그</a>
+        </div>
+        -->
+    </div>
+
+    <p class="footer-text">Software Maestro 5th, &nbsp;Spells Team.</p>
+  
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

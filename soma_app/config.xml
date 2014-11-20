@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="kr.spells" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>CloudRoom</name>
+    <description>
+        test
+    </description>
+    <author email="ksh900311@gmail.com" href="http://exor.kr">
+        SW MAESTRO 5TH - KANG SEONGHYEON
+    </author>
+    <content src="index.html" />
+    <access origin="*" />    
+    <!--
+    <preference name="SplashScreen" value="screen" />
+	<preference name="SplashScreenDelay" value="10000" />
+    -->
+    <icon src="res/icon.png" />
+    <platform name="android">
+        <icon src="res/android/icon/ldpi.png" density="ldpi" />
+        <icon src="res/android/icon/mdpi.png" density="mdpi" />
+        <icon src="res/android/icon/hdpi.png" density="hdpi" />
+        <icon src="res/android/icon/xhdpi.png" density="xhdpi" />
+
+        <splash src="res/android/screen/port-ldpi.png" density="port-ldpi"/>
+        <splash src="res/android/screen/port-mdpi.png" density="port-mdpi"/>
+        <splash src="res/android/screen/port-hdpi.png" density="port-hdpi"/>
+        <splash src="res/android/screen/port-xhdpi.png" density="port-xhdpi"/>
+    </platform>
+</widget>

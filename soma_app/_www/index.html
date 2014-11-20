@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <title>Cloud Room</title>
+        <link type='text/css' rel='stylesheet' href='font/nanumbarungothic.css'/>
+        <link type='text/css' rel='stylesheet' href='font-awesome-4.2.0/css/font-awesome.min.css'/>
+        <link type='text/css' rel='stylesheet' href='http://fonts.googleapis.com/css?family=Lato:400'/>
+        <link type='text/css' rel='stylesheet' href="jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css" />
+        <link type='text/css' rel='stylesheet' href="nativeDroid/css/jquerymobile.nativedroid.css" />
+        <link type='text/css' rel='stylesheet' href="nativeDroid/css/jquerymobile.nativedroid.light.css" />
+        <link type='text/css' rel='stylesheet' href="nativeDroid/css/jquerymobile.nativedroid.color.yellow.css" />
+        <link type="text/css" rel="stylesheet" href="socicon/socicon.css"/>
+        <link type='text/css' rel='stylesheet' href="css/index.css" />
+    </head>
+    <body>
+        <!-- login page -->
+        <div data-role="page" id="login" data-theme='b'>
+            <div data-role="content">
+                <img src="img/main_.png">
+                <button class="facebook_btn" onClick="loginProc('facebook')">
+                    <div class="facebook_join_icon"></div>
+                    Facebook 로그인
+                </button>
+                <button class="google_btn" onClick="loginProc('google')">
+                    <div class="google_join_icon"></div>
+                    Google 로그인
+                </button>
+                <center>
+                    <h5><b>Software Maestro 5th, &nbsp;Spells Team</b></h5>
+                </center>
+            </div>
+        </div>
+        <!-- main -->
+        <div data-role="page" id="main" data-theme='b'>
+            <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+                <img src="img/top.png">
+                <h4><a href="#menu" data-inline='true'><i class='fa fa-bars'></i></a></h4>
+            </div>
+            <div data-role="content" class="profile">
+                <h3 class="content-title">
+                    <span>내 프로필</span>
+                </h3>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a profile_image" style="width:33%;">
+                        <img />
+                    </div>
+                    <div class="ui-block-b profile_text" style="width:66%;">
+                        <ul>
+                            <li>
+                                <span class="socicon profile_icon">b</span>&nbsp;&nbsp;<span class="profile_name">KangSeonghyeon</span>
+                            </li>
+                            <li>
+                                등록된 기기 : <span class="profile_device">-</span> 기
+                            </li>
+                            <li>
+                                미확인 기록 : <span class="profile_alert">-</span> 건
+                            </li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </div>
+            <div data-role="content" class="device_list">
+                <h3 class="content-title">
+                    <span>등록 기기</span>
+                </h3>
+                <ul></ul>
+                <a href="#register" class="device_list_register" data-transition="slideup" data-inline="true">
+                    <button><i class='lIcon fa fa-check'></i>기기 등록</button>
+                </a>
+                
+            </div>
+            <!-- 요거 전체 다 똑같아야함 -->
+            <div data-role="panel" id="menu" data-display="push" data-position="right" data-theme="b">
+                <ul data-role="listview">
+                    <li>바로 가기</li>
+                    <li data-icon='false'><a href="#"><i class='lIcon fa fa-coffee'></i>프로필 수정</a></li>
+                    <li data-icon='false'><a href="#"><i class='lIcon fa fa-beer'></i>로그아웃</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- register -->
+        <div data-role="page" id="register" data-theme='b'>
+            <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+                <img src="img/top.png">
+                <h4><a href="#menu" data-inline='true'><i class='fa fa-bars'></i></a></h4>
+            </div>
+            <div data-role="content" class="profile">
+                <h3 class="content-title">
+                    <span>메인 기기 등록</span>
+                </h3>
+                <h3>아래의 화면을 센서로 향해주세요.</h3>
+                <input type="text" id="testtest" value="XXX101101"/>
+                <div class="register_display">
+                    <div></div>
+                </div>
+                <button class="register_btn" type="submit" data-inline='true' onClick="registerDisplayStart()"><i class='lIcon fa fa-check'></i>시작</button>
+                <button class="register_btn_quit" type="submit" data-inline='true' onClick="registerDisplayStop()"><i class='lIcon fa fa-check'></i>종료</button>
+            </div>
+        </div>
+
+
+        <!-- device -->
+        <div data-role="page" id="device" data-theme='b'>
+            <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+                <img src="img/top.png">
+                <h4><a href="#menu" data-inline='true'><i class='fa fa-bars'></i></a></h4>
+            </div>
+            <div data-role="content" class="profile">
+                <h3 class="content-title">
+                    <span>기기 명</span>
+                </h3>
+                코멘트<br>
+                기기 등록 날짜 : <br>
+                최근 연결 시간 : <br>
+            </div>
+            <div data-role="content" class="device_list">
+                <h3 class="content-title">
+                    <span>등록 기기</span>
+                </h3>
+                <ul></ul>
+                
+            </div>
+        </div>
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="PushNotification.js"></script>
+        <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <!--
+        <script type="text/javascript" src="js/socket.io.js"></script>
+        -->
+        <script type="text/javascript" src="js/init.js"></script>
+        <script type="text/javascript" src="js/page.js"></script>
+        <script type="text/javascript" src="js/function.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            function loginProc(type){
+                var ref = window.open("http://172.16.101.231/auth/"+type,'_blank','location=no');
+                ref.addEventListener('loadstop',function(event){
+                    if(event.url.indexOf("http://172.16.101.231/auth/result")>=0){
+                        ref.executeScript({
+                            code:"document.body.innerHTML"
+                        },function(result){
+                            var auth=JSON.parse(result[0]);
+                            if(auth.result){
+                                for(var index in auth.user){
+                                    window.localStorage.setItem(index,auth.user[index]);
+                                }
+                                //console.log(JSON.stringify(window.localStorage));
+                                //window.localStorage.id=auth.user.id;
+                                app.gcmUpdate();
+                                document.location.href="#main";
+                            }
+                            else{
+                                navigator.notification.alert("login fail!!");
+                            }
+                            ref.close();
+                        });
+                    }                    
+                });
+            }
+            $(document).ready(function(){
+                $.post("http://172.16.101.231/ajax/login",{id:"592767504166918"},function(data){
+                    if(data.result){
+                       for(var index in data.user){
+                            window.localStorage.setItem(index,data.user[index]);
+                        }
+                        //window.localStorage.id=data.user.id;
+                        //console.log(JSON.stringify(window.localStorage));
+                        $.post("http://172.16.101.231/ajax/gcmUpdate",{gcmid:'APA91bESJAtv33DgkyQY6rJZfvf4_9rMPBhguMAXqTKABbS1IoSkF3vCx3v82mr6CYUeKY6bifUetDNPiGqSG1mhmk0FDrjZlAc1t4R30Uhq0Zo2k1P71OcMVGyOI8YXCKgi0XpqsXQozuNkV-D5-anQowqVvNnYxgA'},function(data){
+                            $.mobile.changePage('#main',{
+                                transition:'pop'
+                            });
+                        },"json");                    
+
+                    }
+                },"json");
+            });
+        </script>
+    </body>
+</html>

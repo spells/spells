@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<head>
+<meta charset="utf-8" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<title>Cloud Room</title>
+
+<link href="styles/style.css"     		 rel="stylesheet" type="text/css">
+<link href="styles/framework.css" 		 rel="stylesheet" type="text/css">
+<link href="styles/owl.theme.css" 		 rel="stylesheet" type="text/css">
+<link href="styles/swipebox.css"		 rel="stylesheet" type="text/css">
+<link href="styles/font-awesome.css"	 rel="stylesheet" type="text/css">
+<link href="styles/animate.css"			 rel="stylesheet" type="text/css">
+<link type="text/css" rel="stylesheet" href="plugin/socicon/socicon.css"/>
+
+<script type="text/javascript" src="scripts/jquery.js"></script>
+<script type="text/javascript" src="scripts/jqueryui.js"></script>
+<script type="text/javascript" src="scripts/init.js"></script>
+<script type="text/javascript" src="scripts/framework.plugins.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="PushNotification.js"></script>
+
+<style>
+    .content .container:first-child {
+        margin-top: 20px;
+    }
+    .container .decoration {
+        margin-bottom: 15px;
+    }    
+    #dispaly {
+        background-color: rgba(0,0,0,0.1);
+        padding-top: 100%;
+        margin-bottom: 0px;
+    }
+    .display_btn {
+        height: 35px;
+        margin-top: 20px;
+    }
+</style>
+
+<script type="text/javascript" charset="utf-8">
+    var tmpInterval;
+    var intervalTime=399;
+    function registerDisplayStart(){
+        jQuery("#display_start").attr("disabled",true);
+        event.preventDefault();
+        var dataBinary="XXX"+Number(window.localStorage.idx).toString(2);
+        var eleDisplay=jQuery("#dispaly");
+        var tmpIndex=0;
+        tmpInterval=setInterval(function(){
+            // up : white, down : balck;
+            if(dataBinary[tmpIndex]=="0"){
+                eleDisplay.css("background-color","white");
+                setTimeout(function(){
+                    eleDisplay.css("background-color","black");
+                },intervalTime*0.15);
+            }
+            else if(dataBinary[tmpIndex]=="1"){
+                eleDisplay.css("background-color","white");
+                setTimeout(function(){
+                    eleDisplay.css("background-color","black");
+                },intervalTime*0.85);
+            }
+            else{
+                eleDisplay.css("background-color","white");
+                setTimeout(function(){
+                    eleDisplay.css("background-color","black");
+                },intervalTime*0.5);
+            }
+            tmpIndex++;
+            if(tmpIndex==dataBinary.length)tmpIndex=0;
+        },intervalTime);    
+    }
+    function registerDisplayStop(){
+        clearInterval(tmpInterval);
+        jQuery("#display_start").removeAttr("disabled");
+        setTimeout(function(){
+            jQuery("#dispaly").css("background-color","rgba(0,0,0,0.1)");
+        },intervalTime);
+    }
+</script>
+
+</head>
+<body>
+
+<div id="preloader">
+    <div id="status">
+        <p class="center-text">
+            Loading the content...
+            <em>Loading depends on your connection speed!</em>
+        </p>
+    </div>
+</div>
+
+
+<div class="header">
+    <a class="deploy-logo" href="main.html"><img src="images/logo-large__.png" alt="img"></a>
+    <a class="deploy-menu" href="#"><i class="fa fa-angle-down"></i></a> 
+</div>
+
+<div class="header-clear"></div>
+
+<div class="all-elements">
+    <div class="navigation">
+    </div>   
+    
+    <div class="content">
+        <div class="container boxed">
+            <h3>메인 기기 등록</h3>
+            <div class="decoration"></div>
+            <p class="half-bottom"><i class="fa fa-check"></i> 센서를 아래의 화면에 가깝게 해주세요.</p>
+            <div class="decoration" id="dispaly"></div>
+            <p class="no-bottom display_btn">
+                <button class="button button-blue no-bottom" id="display_start" onClick="registerDisplayStart()">시작</button>
+                <button class="button button-red no-bottom" id="display_stop" onClick="registerDisplayStop()" style="float:right;">정지</button>
+            </p>
+        </div>
+    </div>
+
+
+
+
+
+    <p class="footer-text">Software Maestro 5th, &nbsp;Spells Team.</p>
+  
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
