@@ -1,0 +1,71 @@
+<%- contentFor('head') %>   
+    <style>
+        .pages_container {
+            background-color: transparent;
+            border: none;
+        }
+        .facebook_btn {
+            background-color: #3f5aa9;
+            border-bottom: 3px #374e91 solid;
+        }
+        .google_btn {
+            background-color: #dd4b39;
+            border-bottom: 3px #bb4030 solid;
+        }
+        .facebook_join_icon {
+            background-image: url('/go-mobile/images/icons/social/facebook.png');
+            width: 22px;
+            height: 22px;
+            background-size: 22px;
+            display: inline-block;
+            margin-bottom: -5px;
+            margin-right: 5px;
+        }
+        .google_join_icon {
+            background-image: url('/go-mobile/images/icons/social/google.png');
+            width: 22px;
+            height: 22px;
+            background-size: 22px;
+            display: inline-block;
+            margin-bottom: -5px;
+            margin-right: 5px;
+        }
+    </style>
+
+<%- contentFor('body') %>
+    <div class="swiper-container swiper-parent">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide sliderbg_menu">
+                <div class="swiper-container swiper-nested">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="slide-inner">
+                                <div class="logo">
+                                    <a href="#"><img src="/images/logo_4_.png" alt="" title="" border="0" /></a>
+                                </div>
+                                <div class="pages_container">
+                                    <a href="/auth/facebook" class="button_11 facebook_btn radius4">
+                                        <div class="facebook_join_icon"></div>
+                                        Facebook 로그인
+                                    </a>
+                                    <a href="/auth/google" class="button_11 google_btn radius4">
+                                        <div class="google_join_icon"></div>
+                                        Google 로그인
+                                    </a>
+                                    <center>
+                                        <h5><b>Software Maestro 5th, &nbsp;Spells Team</b></h5>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+<%- contentFor('script') %>
+    <script>
+        $(document).ready(function(){
+        });
+    </script>

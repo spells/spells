@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Cloud Room</title>
+	<!--
+	<script type="text/javascript" src="/go-mobile/js/jquery-1.10.1.min.js"></script>
+	-->
+	<style>
+		body {
+			background-color: blue;
+		}
+	</style>
+	<script>
+
+
+		function stringToBinary(stringValue) {
+			return stringValue.replace(/.{1}/g, function (matchedString) {
+				var binString = matchedString.charCodeAt(0).toString(2);
+				return '00000000'.substring(0, 8 - binString.length) + binString;
+			});
+		}
+		var tmpStr=stringToBinary("qwertqwert");
+		console.log(tmpStr.length);
+		var start = +new Date();
+		setTimeout(function(){
+			console.log("start!!");
+			console.log(tmpStr);
+			setInterval(function(){
+				if(tmpStr.length>0){
+					console.log(tmpStr.substr(0,1));
+					if(tmpStr.substr(0,1)=="0") document.querySelector("body").style.backgroundColor='black';
+					else document.querySelector("body").style.backgroundColor='white';
+					tmpStr=tmpStr.slice(1,tmpStr.length);
+					var end =  +new Date();
+					var diff = end - start;
+					console.log(diff);
+				}
+			},200);
+
+		},500);		
+
+
+		//$('body').css("background-color","white")		
+	</script>
+</head>
+<body>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

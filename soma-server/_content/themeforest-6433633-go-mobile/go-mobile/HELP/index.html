@@ -1,0 +1,544 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head lang="en">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<title>Go Mobile V4 Web App Template Documentation</title>
+	<link rel="stylesheet" href="assets/screen.css" type="text/css" media="screen, projection">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'/></head>
+
+
+<body>
+<div id="main_container">
+
+
+  <div id="header">
+  
+  	<div class="logo"><a href="index.html"><img src="assets/images/logo.png" alt="FamousThemes.com" title="FamousThemes" /></a></div>
+    
+    <div class="social_icons">
+    <a href="https://twitter.com/FamousThemes" target="_blank"><img src="assets/images/twitter.png" alt="FamousThemes.com" title="FamousThemes" /></a>
+    <a href="http://dribbble.com/FamousThemes" target="_blank"><img src="assets/images/dribbble.png" alt="FamousThemes.com" title="FamousThemes" /></a>
+    <a href="http://www.youtube.com/user/FamousThemes" target="_blank"><img src="assets/images/youtube.png" alt="FamousThemes.com" title="FamousThemes" /></a>
+    </div>
+  <div class="clear"></div>
+  </div><!-- End of Header-->
+  
+  
+
+         <div class="headerinfo">
+
+            	<h1>Go Mobile HTML/CSS Template Documentation</h1>
+                
+                <div class="cteated_by">
+                        <strong>Created: </strong><i> Wednesday, December 18, 2013</i><br>
+                        <strong>Last Updated: </strong><i> Saturday, May 10, 2014</i><br>
+                        <strong>Current Version: </strong>2.0<br>
+                </div>	
+            
+                <div class="thankyou">
+                Thank you for purchasing our item. If you have any questions that are beyond the scope of this help file, please feel free to email via our profile page <a href="http://themeforest.net/user/famousthemes">here</a>.</p>
+                </div>
+
+        
+         </div>
+         
+         
+         
+<div class="main_content">
+<div class="main_menu">
+<h2 id="toc">Table of Contents</h2>
+<ol class="enumar">
+    <li><a href="#intro">Introduction</a>
+        <ol class="alpha">
+         <li><a href="#definition">What is a HTML/CSS Template. The diference between HTML and Wordpress items</a></li>
+         <li><a href="#installing">Installing/Editing a HTML/CSS template</a></li>
+         <li><a href="#redirect">Redirect users from a normal/desktop website to a mobile website</a></li>
+         <li><a href="#webapp">Launching the mobile website as a web app from your iphome home screen</a></li>
+        </ol>
+    </li>
+    <li><a href="#htmlStructure">Editing the HTML Structure</a>
+      <ol class="alpha">
+    <li><a href="#homepage">Creating a menu section</a></li>
+    <li><a href="#secondary">Creating and editing pages sections</a></li>
+    <li><a href="#blog">Blog page</a></li>
+    <li><a href="#gallery">Gallery page</a></li>
+    <li><a href="#contact">Contact page</a></li>
+    <li><a href="#twitter">Twitter page</a></li>
+      </ol>
+    </li>
+    	
+    <li><a href="#cssFiles">CSS Files and Structure</a></li>
+    <li><a href="#javascript">JavaScript</a></li>
+
+    <li><a href="#credits">Sources and Credits</a></li>
+    </ol>
+</div>
+
+<hr>
+
+<h3 id="intro" class="subtitle"><span>1</span> Introduction</h3>
+<p> Go Mobile is our 4'th mobile theme after V1, V2 and V3.  This V4 is the first one from our mobile themes that is actually a web app. All  content is inside one file that will make the theme behave like an app when browsing through pages. You can navigate using the menu icons or just by sliding from one page to another. This new version comes with a better design concept, a new functionality, improved code and some amazing features. More easy to customize and to create a new design style to suit your needs. It allready comes with 10 diferent styles included. </p>
+<h3 id="definition" class="subtitle"><span>1.A</span> What is a HTML/CSS Template. The diference between HTML and Wordpress items - <a href="#toc">top ^</a></h3>
+<p>A HTML/CSS Template is a pre-designed layout that will help you build a final website. HTML ( HyperText Markup Language) is the basic coding to create web pages. CSS stands for Cascading Style Sheets and it's used to define and style the HTML elements. </p>
+<p>The diference between HTML templates and Wordpress themes, is that Wordpress themes as the name says uses <a href="http://wordpress.org/">Wordpress</a> as CMS, and include other than HTML coding, programming language like PHP and Javascript. </p>
+<h3 id="installing" class="subtitle"><span>1.B</span> Installing/Editing a HTML/CSS template - <a href="#toc">top ^</a></h3>
+<p> To install a HTML/CSS template requires just to copy the template files on your webserver. This can be done using your hosting provider custom interface or a FTP (File Transfer Protocol) software. Our recommandation is <a href="https://filezilla-project.org/">FileZilla</a>.</p>
+<p>A regular HTML/CSS template does NOT include a CMS (Content Management System) to edit/add content of the pages. All content is edited using a HTML editor. HTML editors can be found as free and paid editors. Some modern HTML editors  have included a DESIGN view mode of the code, making it easier for templates to be edited. Regular ones will let you edit the content only from the code mode, meaning you will need to have a <strong>basic HTML coding knowledge</strong>.</p>
+<h3 id="detection" class="subtitle"><span>1.C</span> Redirect users from a normal/desktop website to a mobile website - <a href="#toc">top ^</a></h3>
+<p>After building your mobile website you want to let mobile users access it, and not viewing the desktop website on their mobiles. This will require to add a detection/redirection code on your desktop website. Mobile users comming on your desktop website will be detected and redirected to your mobile website. Most of mobile websites are build on separate subdomains or domains, like <strong>mobile.yourwebsite.com</strong> or <strong>m.yourwebsite.com</strong>, so users will be redirected from <strong>yourwebsite.com</strong> to<strong> m.yourwebsite.com</strong></p>
+<p>We have created a simple tutorial for this detection/redirection process. Just go <a href="http://famousthemes.com/mobile-detection-code-tutorial/" target="_blank">HERE</a> and choose the solution that suits your needs, depending on the way your main desktop website is buit (HTML, PHP or Wordpress). You can download the source files and add them to your website.</p>
+<h3 id="webapp" class="subtitle"><span>1.D</span>Launching the mobile website as a web app from your iphome home screen - <a href="#toc">top ^</a></h3>
+<p>Any mobile website as you know can be saved on iphone home screen. Te purpose of this is to access the website easier and faster. Also the mobile will load the website as a web app, fullscreen, making the navigation more pleasant.</p>
+<p>&quot;Go Mobile&quot; web template is build all in one page. All sections/pages are dinamically loaded without leaving the main window, so users experience when launching this as a web app will be better.</p>
+<p><strong>To save your final created mobile website on your iphone home screen you need to:</strong></p>
+<p>1. Load the template using your default Safari browser. </p>
+<p>2. Click the bottom center icon (Bookmark)</strong> of the browser, and from the popup that will apear press &quot;Add to Home Screen&quot;. This will save an icon to you screen, just like in the below screenshot.</p>
+<p> <img src="assets/images/code2.jpg" alt="" title=""></p>
+<p><strong>To edit the icon and the loading image you need to:</strong></p>
+<p>Open each  HTML file and edit the code and image from the header lines:</p>
+<p><strong>&lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot; /&gt;<br>
+&lt;meta name=&quot;apple-mobile-web-app-status-bar-style&quot; content=&quot;black&quot; /&gt;<br>
+&lt;link rel=&quot;apple-touch-icon&quot; href=&quot;images/apple-touch-icon.png&quot; /&gt;<br>
+&lt;link rel=&quot;apple-touch-startup-image&quot; href=&quot;images/apple-touch-startup-image-320x460.png&quot; /&gt;</strong></p>
+<p><strong>apple-touch-icon</strong> is the icon and <strong>apple-touch-startup-image</strong> is the background image.</p>
+<p>Both are locaded inside the images folder.</p>
+<p> <img src="assets/images/apple-touch-icon.png" alt="" title=""></p>
+<p> <img src="assets/images/apple-touch-startup-image-320x460.png" alt="" title=""></p>
+<h3 id="htmlStructure" class="subtitle"><span>2</span> Editing the HTML Structure - <a href="#toc">top ^</a></h3>
+<p>The template is using a responsive design starting from 800px and down. Responsive means it will strech in width depending on the resolution your device have.
+<p>All theme content is added in one index main file. We have provided more custom designs, and more index pages. As you can see in your archive, we have 13 index HTML pages.
+<p>Each index HTML page loads a diferent design, and the file is named by the design it's using, like &quot;beauty&quot; style design is index_beauty.html
+<p>All custom design files are in the folder called &quot;colors&quot;. For each design we have a custom CSS style and a folder with images. For example index.html the main green default design is using the folder green, with green.css style and the images folder next to it.
+<p>In the HTML code you can see how index.html is loading the specifid style:
+<p><strong>&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;colors/green/green.css&quot;/&gt;
+</strong>
+<p>Also how it using some images from green style folder:
+<p><strong>&lt;img src=&quot;colors/green/images/logo.png&quot; alt=&quot;&quot; title=&quot;&quot; border=&quot;0&quot; /&gt;</strong>
+<p>Other than the custom design styles, all files are loading a general CSS file style.css from the CSS folder.
+<p><strong>&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;css/style.css&quot;/&gt;
+</strong>
+<p>Each HTML
+
+index page starts in code with the HEADER
+<pre><strong> &lt;div id=&quot;header&quot;&gt;
+ &lt;div class=&quot;gohome radius20&quot;&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/icons/home.png&quot; alt=&quot;&quot; title=&quot;&quot; /&gt;&lt;/a&gt;&lt;/div&gt;
+ &lt;div class=&quot;gomenu radius20&quot;&gt;&lt;a href=&quot;#&quot; onclick=&quot;swiperParent.swipeTo(9);&quot;&gt;&lt;img src=&quot;images/icons/contact.png&quot; alt=&quot;&quot; title=&quot;&quot; /&gt;&lt;/a&gt;&lt;/div&gt;
+ &lt;/div&gt; </strong> </pre>
+<p>The header will only be available for the secondary pages. All pages will use the same header.
+<p>The header si positionated right at the top section of the theme, and it's hidden when the menu section is visible. The general style of the header is found in the general style.css file.
+<pre><strong>#header{ position:absolute; top:-100px; left:0px; z-index:9999; width:94%; height:40px;padding:6px 3%;} </strong> </pre>
+<p>To customize the header color and style, use the custom CSS file under each color folder.
+<p>For example in green.css file we have the header with:
+<pre><strong>#header{ background-color:#738c5b; color:#FFFFFF;} </strong> </pre>
+<p>After the header layout comes the page sections of the themes. Each section is one slide. In the HTML code we have delimited the sections by some commented text like &lt;!--Menu page--&gt; &lt;!--Page 1 content--&gt; and so on.</p>
+<pre>&lt;!--Page 1 content--&gt;
+ &lt;div class=&quot;swiper-slide sliderbg&quot;&gt;
+ &lt;div class=&quot;swiper-container swiper-nested&quot;&gt;
+ &lt;div class=&quot;swiper-wrapper&quot;&gt;
+ &lt;div class=&quot;swiper-slide&quot;&gt;
+ &lt;div class=&quot;slide-inner&quot;&gt;
+ &lt;div class=&quot;pages_container&quot;&gt;
+ &lt;h2 class=&quot;page_title&quot;&gt;About Us&lt;/h2&gt;
+   ...................PAGE CONTENT HERE..................................
+   &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;
+   &lt;div class=&quot;scrolltop radius20&quot;&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/icons/top.png&quot; alt=&quot;Go on top&quot; title=&quot;Go on top&quot; /&gt;&lt;/a&gt;&lt;/div&gt;
+   &lt;/div&gt;
+   &lt;!--End of page container--&gt;
+   &lt;/div&gt;
+   &lt;/div&gt;
+   &lt;/div&gt;
+   &lt;div class=&quot;swiper-scrollbar&quot;&gt;&lt;/div&gt;
+   &lt;/div&gt;
+   &lt;/div&gt;</pre>
+<p>We will describe below how to add/edit this section starting with the menu section.</p>
+<h3 id="homepage" class="subtitle"><span>2.A</span> Creating a menu section - <a href="#toc">top ^</a></h3>
+<p>The first section under the header is the menu. This will be the slide that will first be visible when your theme loads.
+<p>On each design we have diferent menus styles.
+<p>The HTML structure for the menu is almost the same for all designs:
+<pre>&lt;div class=&quot;menu&quot;&gt;<br>&lt;ul&gt;<br>&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/icons/about.png&quot; alt=&quot;&quot; title=&quot;&quot; /&gt;&lt;span&gt;About Us&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;<br>&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/icons/tools.png&quot; alt=&quot;&quot; title=&quot;&quot; /&gt;&lt;span&gt;Services&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;<br>&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/icons/blog.png&quot; alt=&quot;&quot; title=&quot;&quot; /&gt;&lt;span&gt;Blog&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;<br>&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/icons/docs.png&quot; alt=&quot;&quot; title=&quot;&quot; /&gt;&lt;span&gt;Portfolio&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;<br>&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/icons/photos.png&quot; alt=&quot;&quot; title=&quot;&quot; /&gt;&lt;span&gt;Gallery&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;<br>&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/icons/videos.png&quot; alt=&quot;&quot; title=&quot;&quot; /&gt;&lt;span&gt;Videos&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;<br>&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/icons/clients.png&quot; alt=&quot;&quot; title=&quot;&quot; /&gt;&lt;span&gt;Clients&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;<br>&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/icons/twitter.png&quot; alt=&quot;&quot; title=&quot;&quot; /&gt;&lt;span&gt;Twitter&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;<br>&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/icons/contact.png&quot; alt=&quot;&quot; title=&quot;&quot; /&gt;&lt;span&gt;Contact&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;<br>&lt;/ul&gt;<br>&lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;<br>&lt;/div&gt;</pre>
+<p>We have one image followed by a SPAN text wich is the menu item text.</p>
+<p>The icons we are using comes in <strong>white and black</strong> png images. Both are found under the main images folder of the theme. You can use them on white or black depending on the style you want. You can allways use your own icons if you want, but keep the most important thing in mind, to use them at the same size as this ones, not to modify the visual design.
+<p><strong>The corect size for an icon to be used in the mene is 114px width and 114px height</strong>.</p>
+<p><img src="assets/images/about.png" alt="" title=""></p>
+<p>All the CSS style for the menu is found under each design folder, in the custom CSS file. 
+<p>For example the menu from the green design is found in green.css file
+<pre><strong>/* Menu style
+   /*------------------------------------------*/
+   .menu{ width:100%; padding:0px;margin:0px 0 50px 0;}
+   .menu ul{ list-style:none; padding:0px; margin:0px; width:100%;}
+   .menu ul li{ list-style:none; margin:1% 0 2% 4%; padding:5.5% 0; width:28%;height:auto; float:left; display:block; text-align:center;
+   background-image: url(images/transparent_circle.png);
+   background-repeat: no-repeat;
+   background-position: center center; 
+   background-size: cover;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   }
+   .menu ul li a{ color:#FFFFFF; text-decoration:none;  text-align: center;} 
+   .menu ul li a span{ display:block; text-align:center; font-size:11px; line-height:15px;}
+   .menu ul li img{ display:inline-block;max-width:50%;}</strong> </pre>
+<p>This menu style is using as you can see a background image as icons bg. It's a png transparent circle.
+<p>The metro style theme for another example is using a diferent menu style:
+<pre><strong>/* Menu style
+   /*------------------------------------------*/
+   .menu{ width:100%; padding:0px; margin:0px 0 50px 0;}
+   .menu ul{ list-style:none; padding:0px; margin:0px; width:100%;}
+   .menu ul li{ list-style:none; margin:3% 0 0 3%; padding:5.5% 0; width:45.5%;height:auto; float:left; display:block; text-align:center;}
+   .menu ul li a{ color:#FFFFFF; text-decoration:none;  text-align: center;} 
+   .menu ul li a span{ display:block; text-align:center; font-size:14px; line-height:25px;}
+   .menu ul li img{ display:inline-block;max-width:50%;} </strong> </pre>
+<p>And so on, each design will use his own style. 
+<p>Remember that you can use any of this style in any theme. Just copy/replace the Menu style code from one style to another. Also the images containing, if they use some.
+<p> <img src="assets/images/screenshot2.jpg" alt="" title=""><img src="assets/images/screenshot8.jpg" alt="" title=""></p>
+<p>Beeing a responsive design remember that some menus styles requires some CSS media queries. This Media Queries code is located at the bottom of each CSS file.
+<p>For example the green.css file use for the menu
+<pre><strong>/* CSS Media Queries
+   /*-----------------------------------------------------------------------------------*/
+   @media screen and (max-width: 480px) {
+   .menu ul li{  padding:5% 0%;width:28.5%;margin:1% 0 2% 3.5%;}
+   }
+   @media screen and (max-width: 360px) {
+   .menu ul li{  padding:4.6% 0.3%;width:28.5%;margin:1% 0 2% 3.2%;}
+   }
+   @media screen and (max-width: 320px) {
+   .menu ul li{  padding:4.1% 0.1%;width:28.5%;margin:1% 0 2% 3.5%;}
+   }</strong> </pre>
+<p>&nbsp;</p>
+<h3 id="secondary" class="subtitle"><span>2.B</span> Creating and editing pages sections - <a href="#toc">top ^</a></h3>
+<p>After the menu slide comes the pages slides. Like we first mentioned each page is a new slide.</p>
+<p> <img src="assets/images/screenshot3.jpg" alt="" title=""><img src="assets/images/screenshot4.jpg" alt="" title=""></p>
+<p>The corect structure of a slide/page is the following:</p>
+<pre>&lt;!--Page 1 content--&gt;
+ &lt;div class=&quot;swiper-slide sliderbg&quot;&gt;
+ &lt;div class=&quot;swiper-container swiper-nested&quot;&gt;
+ &lt;div class=&quot;swiper-wrapper&quot;&gt;
+ &lt;div class=&quot;swiper-slide&quot;&gt;
+ &lt;div class=&quot;slide-inner&quot;&gt;
+ &lt;div class=&quot;pages_container&quot;&gt;
+ &lt;h2 class=&quot;page_title&quot;&gt;About Us&lt;/h2&gt;
+.......................PAGE CONTENT HERE........................ 
+   &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;
+   &lt;div class=&quot;scrolltop radius20&quot;&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/icons/top.png&quot; alt=&quot;Go on top&quot; title=&quot;Go on top&quot; /&gt;&lt;/a&gt;&lt;/div&gt;
+   &lt;/div&gt;
+   &lt;!--End of page container--&gt;
+   &lt;/div&gt;
+   &lt;/div&gt;
+   &lt;/div&gt;
+   &lt;div class=&quot;swiper-scrollbar&quot;&gt;&lt;/div&gt;
+   &lt;/div&gt;
+   &lt;/div&gt;</pre>
+<h3 id="blog" class="subtitle"><span>2.C</span> The Blog page - <a href="#toc">top ^</a></h3>   
+<p>The Blog section is a static content page and not extracted from a database. Meaning it's not using a CMS to manage the posts. If you want to do that, you will need to integrate the template into a CMS like Wordpress for example.</p>
+<p>The HTML code of this section starts with a toogle menu for the categories</p>
+<pre> &lt;div class=&quot;toogle_wrap_blog radius8&quot;&gt;
+ &lt;div class=&quot;trigger_blog&quot;&gt;&lt;a href=&quot;#&quot;&gt;blog categories&lt;/a&gt;&lt;/div&gt;
+ &lt;div class=&quot;toggle_container_blog&quot;&gt;
+ &lt;ul class=&quot;listing_detailed&quot;&gt;
+ &lt;li&gt;&lt;a href=&quot;#&quot;&gt;webdesign work&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;#&quot;&gt;painted illustrations&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;#&quot;&gt;programming and javascript&lt;/a&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;
+ </pre>
+<p>And continues with the posts archive. Listed using UL and LI elements.</p>
+<pre>
+   &lt;ul class=&quot;posts&quot;&gt;
+   &lt;li class=&quot;post&quot; id=&quot;postid1&quot;&gt;
+   &lt;a href=&quot;#&quot; class=&quot;post_more&quot;&gt;&lt;/a&gt; 
+   &lt;div class=&quot;post_right_reveal&quot;&gt;
+   &lt;h4&gt;&lt;a href=&quot;#&quot;&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit...&lt;/a&gt;&lt;/h4&gt;
+   &lt;/div&gt;
+   &lt;div class=&quot;post_right_unreveal&quot;&gt;
+   Posted in &lt;a href=&quot;#&quot;&gt;blog category&lt;/a&gt;
+   &lt;span class=&quot;post_comments&quot;&gt;25 Comments&lt;/span&gt;
+   &lt;a href=&quot;#&quot; class=&quot;post_readmore&quot;&gt;read more&lt;/a&gt;
+   &lt;/div&gt;&lt;div class=&quot;post_left&quot;&gt;
+   &lt;span class=&quot;day&quot;&gt;23&lt;/span&gt;
+   &lt;span class=&quot;month&quot;&gt;june&lt;/span&gt;
+   &lt;/div&gt; &lt;/li&gt;
+   &lt;li class=&quot;post&quot; id=&quot;postid2&quot;&gt;..............ANOTHER POST HERE...........&lt;/li&gt;
+   &lt;li class=&quot;post&quot; id=&quot;postid3&quot;&gt;..............ANOTHER POST HERE...........&lt;/li&gt;
+
+   &lt;/ul&gt;</pre>
+<p>The details sections of the posts are listed under the archive listing. The HTML structure starts with</p>
+<pre> &lt;ul class=&quot;post_details_page&quot;&gt;
+ &lt;li id=&quot;postid1&quot;&gt;........DETAILS POST CONTENT...............&lt;/li&gt;
+&lt;li id=&quot;postid2&quot;&gt;........DETAILS POST CONTENT...............&lt;/li&gt;
+&lt;li id=&quot;postid3&quot;&gt;........DETAILS POST CONTENT...............&lt;/li&gt;
+&lt;/ul&gt;</pre>
+<p>When a post from archive listing is clicked, and details section from the bottom will apear.</p>
+<div class="code">IMPORTANT <br />
+If you have in plan building the posts section dinamically, you need to make sure the post from the archive listing have the same ID as the one on the details listing. So when clicking on it, the corect details page will apear.</div>
+<p>&nbsp;</p>
+<p>Instead of a pagination for the posts we are using &quot;Load more posts&quot; function at the bottom of archive listing.</p>
+<p>We just want to remember if you want to change the nr of posts first to show you will need to see the js file called load.js</p>
+<p><img src="assets/images/screenshot5.jpg" alt="" title=""></p>
+<p>The function looks like:</p>
+<pre><strong>$(document).ready(function () {
+ containerHeight = $('.blogheight').height(); 
+ $(&quot;.blogheight&quot;).css({height: containerHeight}) 
+ $(&quot;.posts li&quot;).hide(); 
+ size_li = $(&quot;.posts li&quot;).size();
+ x=3;
+ $('.posts li:lt('+x+')').show();
+ $('#loadMore').click(function () {
+ x= (x+1 &lt;= size_li) ? x+1 : size_li;
+ $('.posts li:lt('+x+')').show();
+ if(x == size_li){
+ $('#loadMore').hide();
+ $('#showLess').show();
+ }
+ });
+ });</strong></pre>
+<p>The nr of posts to show can be changed from <strong>x=3;</strong></p>
+<p>The secondary pages contains a lot of design elements that you can use, like single responsive images, toggles, tabs, buttons..etc</p>
+<p>When editing this elements the most important thing is not to leave an unclose DIV or delete one that is important to the structure of the theme.</p>
+<p>Also when building buttons try to follow the CSS code to see what posibilities you have.</p>
+<p>For example a button can be created with round corners or square, and on a diferent color.</p>
+<pre><strong>&lt;a href=&quot;#&quot; class=&quot;button_12 green green_borderbottom radius4&quot;&gt;Button 1/2&lt;/a&gt;</strong></pre>
+<p>In the main style.css file we have some predefined colors that you use</p>
+<pre><strong>.green{ background-color:#85af5d;}
+   .blue{ background-color:#29aae3;}
+   .darkblue{ background-color:#035792;}
+   .red{ background-color:#c53238;}
+   .purple{ background-color:#8b2767;}
+   .pink{ background-color:#f87c68;}
+   .orange{ background-color:#f17225;}
+   .black{ background-color:#272625;}
+   .gray{ background-color:#6e6e6e;}
+   .yellow{ background-color:#ffb606;}
+   .bluegreen{ background-color:#06a78b;}</strong></pre>
+<pre><strong>.green_borderbottom{border-bottom:3px #759a51 solid;}
+   .blue_borderbottom{border-bottom:3px #198bbd solid;}
+   .red_borderbottom{border-bottom:3px #8e262c solid;}
+   .purple_borderbottom{border-bottom:3px #671a4b solid;}
+   .pink_borderbottom{border-bottom:3px #d36755 solid;}
+   .orange_borderbottom{border-bottom:3px #c55512 solid;}
+   .black_borderbottom{border-bottom:3px #000000 solid;}
+   .gray_borderbottom{border-bottom:3px #535150 solid;}
+   .yellow_borderbottom{border-bottom:3px #e3a000 solid;}
+   .bluegreen_borderbottom{border-bottom:3px #058770 solid;}
+   .darkblue_borderbottom{border-bottom:3px #003a62 solid;}</strong></pre>
+<p>And also some predefined corner radius</p>
+<pre><strong>/* Border radius
+   /*------------------------------------------*/
+   .radius4{-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}
+   .radius6{-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px;}
+   .radius8{-webkit-border-radius:8px;-moz-border-radius:8px;border-radius:8px;}
+   .radius20{-webkit-border-radius:20px;-moz-border-radius:20px;border-radius:20px;}</strong></pre>
+<h3 id="gallery" class="subtitle"><span>3.C</span> Gallery page - <a href="#toc">top ^</a></h3>
+<p>The gallery page is using the swipebox script.</p>
+<p>You can add your gallery photos on full width, 1/2 and 1/3 sections </p>
+<p> <img src="assets/images/screenshot6.jpg" alt="" title=""></p>
+<p>The HTML structure looks like:</p>
+<pre>&lt;ul class=&quot;photo_gallery_13&quot;&gt;
+ &lt;li&gt;&lt;a rel=&quot;gallery-3&quot; href=&quot;images/photos/photo1.jpg&quot; title=&quot;Photo title&quot; class=&quot;swipebox&quot;&gt;&lt;img src=&quot;images/photos/photo1.jpg&quot; alt=&quot;image&quot;/&gt;&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a rel=&quot;gallery-3&quot; href=&quot;images/photos/photo2.jpg&quot; title=&quot;Photo title&quot; class=&quot;swipebox&quot;&gt;&lt;img src=&quot;images/photos/photo2.jpg&quot; alt=&quot;image&quot;/&gt;&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a rel=&quot;gallery-3&quot; href=&quot;images/photos/photo3.jpg&quot; title=&quot;Photo title&quot; class=&quot;swipebox&quot;&gt;&lt;img src=&quot;images/photos/photo3.jpg&quot; alt=&quot;image&quot;/&gt;&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a rel=&quot;gallery-3&quot; href=&quot;images/photos/photo4.jpg&quot; title=&quot;Photo title&quot; class=&quot;swipebox&quot;&gt;&lt;img src=&quot;images/photos/photo4.jpg&quot; alt=&quot;image&quot;/&gt;&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a rel=&quot;gallery-3&quot; href=&quot;images/photos/photo5.jpg&quot; title=&quot;Photo title&quot; class=&quot;swipebox&quot;&gt;&lt;img src=&quot;images/photos/photo5.jpg&quot; alt=&quot;image&quot;/&gt;&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a rel=&quot;gallery-3&quot; href=&quot;images/photos/photo6.jpg&quot; title=&quot;Photo title&quot; class=&quot;swipebox&quot;&gt;&lt;img src=&quot;images/photos/photo6.jpg&quot; alt=&quot;image&quot;/&gt;&lt;/a&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;h2&gt;Photo Gallery 1/2&lt;/h2&gt;
+ &lt;ul class=&quot;photo_gallery_12&quot;&gt; 
+ &lt;li&gt;&lt;a rel=&quot;gallery-4&quot; href=&quot;images/photos/photo7.jpg&quot; title=&quot;Photo title&quot; class=&quot;swipebox&quot;&gt;&lt;img src=&quot;images/photos/photo7.jpg&quot; alt=&quot;image&quot;/&gt;&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a rel=&quot;gallery-4&quot; href=&quot;images/photos/photo8.jpg&quot; title=&quot;Photo title&quot; class=&quot;swipebox&quot;&gt;&lt;img src=&quot;images/photos/photo8.jpg&quot; alt=&quot;image&quot;/&gt;&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a rel=&quot;gallery-4&quot; href=&quot;images/photos/photo9.jpg&quot; title=&quot;Photo title&quot; class=&quot;swipebox&quot;&gt;&lt;img src=&quot;images/photos/photo9.jpg&quot; alt=&quot;image&quot;/&gt;&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a rel=&quot;gallery-4&quot; href=&quot;images/photos/photo10.jpg&quot; title=&quot;Photo title&quot; class=&quot;swipebox&quot;&gt;&lt;img src=&quot;images/photos/photo10.jpg&quot; alt=&quot;image&quot;/&gt;&lt;/a&gt;&lt;/li&gt;
+ 
+ &lt;/ul&gt;
+ &lt;h2&gt;Photo Gallery 1/1&lt;/h2&gt; 
+ &lt;ul class=&quot;photo_gallery_11&quot;&gt;
+ &lt;li&gt;&lt;a rel=&quot;gallery-5&quot; href=&quot;images/photos/photo11.jpg&quot; title=&quot;Photo title&quot; class=&quot;swipebox&quot;&gt;&lt;img src=&quot;images/photos/photo11.jpg&quot; alt=&quot;image&quot;/&gt;&lt;/a&gt;&lt;/li&gt;
+ &lt;/ul&gt;</pre>
+<p><strong>So using UL class with photo_gallery_13 is for 1/3 section, photo_gallery_12 for 1/2 and photo_gallery_11 for full width</strong></p>
+<p>The thumbs will automatically be resized from the main image, you don't need to use 2 images size. Just the big one, and try to use it at a bigger size than 640 in width. Your must look great also on retina display.</p>
+<h3 id="contact" class="subtitle"><span>3.D</span> Contact page - <a href="#toc">top ^</a></h3>
+<p>The template includes a functional contact form. All index HTML files are loading the php working form from an external php file called contact-send.php.</p>
+<p>Other than the contact form, the contact page include some social icons you can use, and 2 buttons for a map location and phone call.</p>
+<p>To actually call a phone number when the call button is pressed, just add a corect phone number under<strong> a href=&quot;tel:</strong>... Just like below.</p>
+<pre><strong>&lt;a href=&quot;tel:123 456 789&quot; class=&quot;call_button radius8&quot;&gt;Click To Call Now!&lt;/a&gt;</strong></pre>
+<p>And to link to a map use the button as:</p>
+<pre><strong>&lt;a href=&quot;http://maps.google.com/maps?q=houston+usa&amp;amp;hl=en&amp;amp;sll=37.0625,-95.677068&amp;amp;sspn=53.961216,114.169922&amp;amp;hnear=Houston,+Harris,+Texas&amp;amp;t=m&amp;amp;z=5&quot; 
+class=&quot;map_button radius8&quot;&gt;View our location&lt;/a&gt; </strong></pre>
+<p> <img src="assets/images/screenshot7.jpg" alt="" title=""></p>
+<p>The contact form HTML code looks like</p>
+<pre> &lt;div class=&quot;form&quot;&gt;
+ &lt;form class=&quot;cmxform&quot; id=&quot;CommentForm&quot; method=&quot;post&quot; action=&quot;&quot;&gt;
+ &lt;label&gt;Name:&lt;/label&gt;
+ &lt;input type=&quot;text&quot; name=&quot;ContactName&quot; id=&quot;ContactName&quot; value=&quot;&quot; class=&quot;form_input radius4 required&quot; /&gt;
+ &lt;label&gt;Email:&lt;/label&gt;
+ &lt;input type=&quot;text&quot; name=&quot;ContactEmail&quot; id=&quot;ContactEmail&quot; value=&quot;&quot; class=&quot;form_input radius4 required email&quot; /&gt;
+ &lt;label&gt;Message:&lt;/label&gt;
+ &lt;textarea name=&quot;ContactComment&quot; id=&quot;ContactComment&quot; class=&quot;form_textarea radius4 textarea required&quot; rows=&quot;&quot; cols=&quot;&quot;&gt;&lt;/textarea&gt;
+ &lt;input type=&quot;submit&quot; name=&quot;submit&quot; class=&quot;form_submit radius4 green green_borderbottom&quot; id=&quot;submit&quot; value=&quot;Send&quot; /&gt;
+ &lt;input class=&quot;&quot; type=&quot;hidden&quot; name=&quot;to&quot;  value=&quot;youremaill@yourwebsiteee.com&quot; /&gt;
+ &lt;input class=&quot;&quot; type=&quot;hidden&quot; name=&quot;subject&quot; value=&quot;Contacf form message&quot; /&gt;
+ &lt;label id=&quot;loader&quot; style=&quot;display:none;&quot;&gt;&lt;img src=&quot;images/loader.gif&quot; alt=&quot;Loading...&quot; id=&quot;LoadingGraphic&quot; /&gt;&lt;/label&gt;
+ &lt;/form&gt;
+ &lt;/div&gt;</pre>
+<p>To add your own email just edit the line</p>
+<pre>&lt;input class=&quot;&quot; type=&quot;hidden&quot; name=&quot;to&quot;  value=&quot;<strong>youremaill@yourwebsiteee.com</strong>&quot; /&gt;</pre>
+<p><strong>To edit the inputs and php code of the form you need to have some basic php knowledge.</strong></p>
+<h3 id="twitter" class="subtitle"><span>3.E</span> Twitter page - <a href="#toc">top ^</a></h3>
+<p>We have provided a custom code that will show you latest tweets.</p>
+<p>This can be see under the twitter section.</p>
+<p>In HTML code we have:</p>
+<pre> &lt;div class=&quot;pages_container&quot;&gt;
+ &lt;h2 class=&quot;page_title&quot;&gt;Latest Tweets&lt;/h2&gt;
+ <strong>&lt;div class=&quot;tweet&quot;&gt;&lt;/div&gt;</strong>
+ &lt;a href=&quot;#&quot; class=&quot;button_11 blue&quot;&gt;Follow Us!&lt;/a&gt;
+ &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;
+ &lt;div class=&quot;scrolltop radius20&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;scrolltop8&quot;&gt;&lt;img src=&quot;images/icons/top.png&quot; alt=&quot;Go on top&quot; title=&quot;Go on top&quot; /&gt;&lt;/a&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;!--End of page container--&gt;</pre>
+<p>The most important thing is <strong>&lt;div class=&quot;tweet&quot;&gt;&lt;/div&gt;</strong> , there our content will be loaded.</p>
+<p><strong>TO EDIT YOUR TWITTER SETTINGS YOU NEED TO:</strong></p>
+<p>1. Inside the js folder you will find the twitter folder. There the main files of the script are. </p>
+<p>Opening index.php file right on the top lines you will see</p>
+<pre> // Your Twitter App Consumer Key
+ private $consumer_key = '';
+ // Your Twitter App Consumer Secret
+   private $consumer_secret = '';
+ // Your Twitter App Access Token
+   private $user_token = '';
+ // Your Twitter App Access Token Secret
+   private $user_secret = '';</pre>
+<p>You will need to complete all this keys numbers from your twitter developer account. If you don't have an account just make one using twitter developers page https://dev.twitter.com/</p>
+<p>2. Load the js file at the bottom of index.html file</p>
+<pre><strong>&lt;!--Twitter Feed--&gt;
+ &lt;script type=&quot;text/javascript&quot; src=&quot;js/twitter/jquery.tweet.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;</strong></pre>
+<p>This is allready loaded by default in each index file</p>
+<p>3. Edit your username from the bottom javascript code, at the end of the page ...<strong>username: &quot;famousthemes&quot;,</strong></p>
+<pre><strong>&lt;script type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;
+   var $ = jQuery.noConflict(); 
+   jQuery(function($){
+   $(&quot;.tweet&quot;).tweet({
+ modpath: 'js/twitter/',
+ join_text: &quot;auto&quot;,
+ username: &quot;famousthemes&quot;,
+ count: 5,
+ auto_join_text_default: &quot;we said,&quot;,
+ auto_join_text_ed: &quot;we&quot;,
+ auto_join_text_ing: &quot;we were&quot;,
+ auto_join_text_reply: &quot;we replied&quot;,
+ auto_join_text_url: &quot;we were checking out&quot;,
+ loading_text: &quot;loading tweets...&quot;
+ });
+ });
+ &lt;/script&gt;</strong></pre>
+<p>&nbsp;</p>
+
+
+<h3 id="cssFiles" class="subtitle"><span>4</span> CSS Files and Structure - <a href="#toc">top ^</a></h3>
+
+<p>The template is using  more CSS files</p>
+<p>1. The general css file is style.css loaded in each index file</p>
+<p><strong>&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;css/style.css&quot;/&gt;</strong></p>
+<p>2. The color CSS file loaded for each color in each index file</p>
+<p><strong>&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;colors/green/green.css&quot;/&gt;</strong></p>
+<p>3. The slide-effect style and photo gallery style:</p>
+<p><strong>&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;css/idangerous.swiper.css&quot;/&gt;<br>
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;css/swipebox.css&quot; /&gt;</strong></p>
+<p>4. The google web custom font</p>
+<p><strong>&lt;link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css' /&gt;</strong></p>
+<p>All headers are using a custom google web font. Each theme design with his own web font style.</p>
+<p><strong>To add/edit the custom font we have used you will need to load it, like we have mentioned above, right under the CSS files. And add the class name into the CSS like</strong></p>
+<pre><strong>/* Google web font
+   /*------------------------------------------*/
+   h1, h2, h3, h4, h5, h6, .logo, .image_caption, a.button_12, a.button_11, .trigger a, .trigger_blog a, .post_left, .post_right_unreveal, #loadMore, 
+#showLess, a.backtoblog, .form label, .form_submit, a.call_button, a.map_button{font-family: 'Lato', sans-serif;}</strong></pre>
+<p>This can be added on each color CSS file.</p>
+<p>&nbsp;</p>
+<p><strong>If you would like to edit other specific section of the site, simply find the appropriate label in the CSS file, and then scroll down until you find the appropriate style that needs to be edited.</strong></p> 
+
+<hr>
+
+<h3 id="javascript" class="subtitle"><span>5</span> JavaScript Files And Functions - <a href="#toc">top ^</a></h3>
+
+
+<p>All the javascript file are loaded at the end of each index file</p>
+<p><strong>&lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery-1.10.1.min.js&quot;&gt;&lt;/script&gt;<br>
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery.swipebox.js&quot;&gt;&lt;/script&gt;<br>
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/idangerous.swiper-2.1.min.js&quot;&gt;&lt;/script&gt;<br>
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/idangerous.swiper.scrollbar-2.1.js&quot;&gt;&lt;/script&gt;<br>
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery.tabify.js&quot;&gt;&lt;/script&gt;<br>
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery.fitvids.js&quot;&gt;&lt;/script&gt;<br>
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/code.js&quot;&gt;&lt;/script&gt;<br>
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/load.js&quot;&gt;&lt;/script&gt;<br>
+&lt;!--Twitter Feed--&gt;<br>
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/twitter/jquery.tweet.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;<br>
+&lt;script type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;<br>
+  var $ = jQuery.noConflict(); <br>
+  jQuery(function($){<br>
+  $(&quot;.tweet&quot;).tweet({<br>
+modpath: 'js/twitter/',<br>
+join_text: &quot;auto&quot;,<br>
+username: &quot;famousthemes&quot;,<br>
+count: 5,<br>
+auto_join_text_default: &quot;we said,&quot;,<br>
+auto_join_text_ed: &quot;we&quot;,<br>
+auto_join_text_ing: &quot;we were&quot;,<br>
+auto_join_text_reply: &quot;we replied&quot;,<br>
+auto_join_text_url: &quot;we were checking out&quot;,<br>
+loading_text: &quot;loading tweets...&quot;<br>
+});<br>
+});<br>
+&lt;/script&gt;</strong></p>
+<p>1. <strong>&lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery-1.10.1.min.js&quot;&gt;&lt;/script&gt;</strong></p>
+<p>The basic jquery code</p>
+<p>2. <strong>&lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery.swipebox.js&quot;&gt;&lt;/script&gt;</strong></p>
+<p>The photo gallery script</p>
+<p>3. <strong>&lt;script type=&quot;text/javascript&quot; src=&quot;js/idangerous.swiper-2.1.min.js&quot;&gt;&lt;/script&gt;<br>
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/idangerous.swiper.scrollbar-2.1.js&quot;&gt;&lt;/script&gt;</strong></p>
+<p>The scripts used to make the slide-touch effect and scrollbar</p>
+<p>4. <strong>&lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery.tabify.js&quot;&gt;&lt;/script&gt;</strong></p>
+<p>The custom responsive tabs code. See About page to see it in action.</p>
+<p>5. <strong>&lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery.fitvids.js&quot;&gt;&lt;/script&gt;</strong></p>
+<p>The code to make videos responsive. Use videos like on our Video section page. Only for videos with responsive players, like youtube, vimeo...</p>
+<p>6. <strong>&lt;script type=&quot;text/javascript&quot; src=&quot;js/code.js&quot;&gt;&lt;/script&gt;</strong></p>
+<p>Diferent functions that are used to load the slider, tabs, toggles..</p>
+<p>7. <strong>&lt;script type=&quot;text/javascript&quot; src=&quot;js/load.js&quot;&gt;&lt;/script&gt;</strong></p>
+<p>The code to make the &quot;Load more&quot; posts function from blog</p>
+<p>8. <strong>&lt;!--Twitter Feed--&gt;<br>
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/twitter/jquery.tweet.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;<br>
+&lt;script type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;<br>
+var $ = jQuery.noConflict(); <br>
+jQuery(function($){<br>
+$(&quot;.tweet&quot;).tweet({<br>
+modpath: 'js/twitter/',<br>
+join_text: &quot;auto&quot;,<br>
+username: &quot;famousthemes&quot;,<br>
+count: 5,<br>
+auto_join_text_default: &quot;we said,&quot;,<br>
+auto_join_text_ed: &quot;we&quot;,<br>
+auto_join_text_ing: &quot;we were&quot;,<br>
+auto_join_text_reply: &quot;we replied&quot;,<br>
+auto_join_text_url: &quot;we were checking out&quot;,<br>
+loading_text: &quot;loading tweets...&quot;<br>
+});<br>
+});<br>
+&lt;/script&gt;</strong></p>
+<p>Twitter custom code to load the latest tweets from one twitter account.</p>
+
+<h3 id="credits" class="subtitle"><span>6</span> Sources and Credits - <a href="#toc">top ^</a></h3>
+
+<ul>
+    <li>jQuery - from http://jquery.com/</li>
+    <li>Swiper - https://github.com/nolimits4web/Swiper</li>
+    <li>Swipebox - http://brutaldesign.github.io/swipebox/</li>
+    <li>Fitvidsjs - http://fitvidsjs.com/</li>
+    <li>Free comercial icons from http://www.webalys.com/design-interface-application-framework.php</li>
+    </ul>
+
+
+<hr>
+
+<p><a href="#toc">Go To Table of Contents</a></p>
+
+<hr class="space">
+</div>
+</div><!-- end div .container -->
+</body>
+</html>

@@ -1,0 +1,165 @@
+<%- contentFor('head') %>	
+    <style>
+
+    </style>
+
+<%- contentFor('body') %>
+    <div id="header">
+        <div class="gohome radius20">
+            <a href="#">
+                <img src="/go-mobile/images/icons/home.png" alt="" title="" />
+            </a>
+        </div>
+        <div class="gomenu radius20">
+            <a href="#" onclick="swiperParent.swipeTo(8);">
+                <img src="/go-mobile/images/icons/contact.png" alt="" title="" />
+            </a>
+        </div>
+    </div>    
+    <div class="swiper-container swiper-parent">
+        <div class="swiper-wrapper">
+
+
+            <!--Page 1 content-->
+            <div class="swiper-slide sliderbg">
+                <div class="swiper-container swiper-nested">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div id="top_logo"></div>
+                            <div class="slide-inner">
+                                <div class="pages_container" id="page_profile">
+                                    <div class="profile_div">
+                                        <div class="profile_image">
+                                            <%
+                                                console.log(session.passport);
+                                                if(session.passport.user.provider=="google"){
+                                                    %>
+                                                        <img src="<%=JSON.parse(session.passport.user._raw).picture%>">
+                                                    <%
+                                                }
+                                                else {
+                                                    %>
+                                                        <img src="http://graph.facebook.com/<%=session.passport.user.id%>/picture?type=square&height=200&width=200">
+                                                    <%
+                                                }
+                                            %>
+                                        </div>
+                                        <div class="profile_text">
+                                            <h2>
+                                                <span class="socicon"><%=(session.passport.user.provider=="google"?"c":"b")%></span>&nbsp;&nbsp;<%=session.passport.user.displayName%>
+                                            </h2>
+                                            <ul class="listing">
+                                                <li>등록된 기기 &nbsp;: &nbsp;<span class="profile_device_count"><%=userInfo.master_cnt+userInfo.device_cnt%></span>개 ( 메인 <span class="profile_device_master_count"><%=userInfo.master_cnt%></span>개, 서브 <span class="profile_device_sub_count"><%=userInfo.device_cnt%></span>개 )</li>
+                                                <li>미확인 기록 &nbsp;: &nbsp;<span class="profile_unconfirmed_log">-</span>건</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    &nbsp;
+                                    <div class="posts_archive_page">
+                                        <h2 style="padding:0px 0px 15px 15px;">메인 기기</h2>
+
+                                        <ul class="device_list">
+                                            <%
+                                                for(var index in deviceInfo){
+                                                    %>
+                                                    <li class="toogle_wrap_blog radius8">
+                                                        <div class="trigger_blog activeb">
+                                                            <a href="#"><%=parseInt(index)+1%>. <%=deviceInfo[index].master_name%></a>
+                                                        </div>
+                                                        <div class="toggle_container_blog">
+                                                            <ul class="listing_detailed">
+                                                                <%
+                                                                    for(var index_ in deviceInfo[index]._subList){
+                                                                        console.log(deviceInfo[index]._subList[index_]);
+                                                                        %>
+                                                                        <li><a href="#"><%=deviceInfo[index]._subList[index_].device_hash%></a></li>
+                                                                        <%
+                                                                    }
+                                                                %>
+                                                                <li><a href="#">서브 기기 등록하기</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </li>
+                                                    <%
+                                                }
+                                            %>
+                                        </ul>                                       
+                                        <div id="register_device" class="radius8">메인 기기 등록하기</div> 
+                                    </div>
+                                    <div class="clearfix">
+                                        <div class="scrolltop radius20">
+                                            <a href="#"><img src="/go-mobile/images/icons/top.png" alt="Go on top" title="Go on top" /></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                                <!--End of page container-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-scrollbar"></div>
+                </div>
+            </div>
+
+
+
+            <!--Page 2 content-->
+            <div class="swiper-slide sliderbg">
+                <div class="swiper-container swiper-nested">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="slide-inner">
+                                <div class="pages_container">
+                                    <h2 class="page_title">Test Page 2</h2>
+                                </div>
+                                <!--End of page container-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-scrollbar"></div>
+                </div>
+            </div>
+            
+            <!--Page 3 content-->
+            <div class="swiper-slide sliderbg">
+                <div class="swiper-container swiper-nested">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="slide-inner">
+                                <div class="pages_container">
+                                    <h2 class="page_title">Test Page 3</h2>
+                                </div>
+                                <!--End of page container-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-scrollbar"></div>
+                </div>
+            </div>
+
+            <!--Page 4 content-->
+            <div class="swiper-slide sliderbg">
+                <div class="swiper-container swiper-nested">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="slide-inner">
+                                <div class="pages_container">
+                                    <h2 class="page_title">Test Page 4</h2>
+                                </div>
+                                <!--End of page container-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-scrollbar"></div>
+                </div>
+            </div>
+            
+            <!--End of pages--> 
+        </div>
+        <div class="pagination"></div>
+    </div>
+
+<%- contentFor('script') %>
+    <script>
+    </script>

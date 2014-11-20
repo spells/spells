@@ -1,0 +1,80 @@
+/* socicon 세팅 */
+.socicon {
+    font-family: 'socicon' !important;
+}
+
+/* 상단 메뉴 위치 상세 조정 */
+.gohome {
+	margin-left: 16px;
+}
+.gomenu {
+	margin-right: 16px;
+}
+
+/* 첫페이지 로고 */
+@media (min-width: 640px) {
+    #top_logo {
+        float:left;
+        background: url(/images/logo_5_.png) no-repeat;
+        width:100%;
+        height:54px;
+    }
+}
+@media (max-width: 640px) {
+    #top_logo {
+        float:left;
+        background: url(/images/logo_5__.png) no-repeat;
+        width:100%;
+        height:54px;
+    }
+}
+
+/* profile page */
+#page_profile .profile_div {
+    border-bottom: 1px #ddd solid;
+    width: 100%;
+    float: left;
+    clear: both;
+    padding: 0 0 5px 0;
+    margin: 0 0 10px 0;
+}
+#page_profile .profile_image {
+    -webkit-border-radius: 200px;
+    -moz-border-radius: 200px;
+    border-radius: 200px;
+    padding: 1%;
+    margin: 0;
+    float: left;
+    display: block;
+    width: 28%;
+    background-color: #f4f4f4;
+    border: 1px solid #ececec;
+}
+#page_profile .profile_image img {
+    -webkit-border-radius: 200px;
+    -moz-border-radius: 200px;
+    border-radius: 200px;
+    max-width: 100%;
+    display: block;
+}
+#page_profile .profile_text {
+    float: left;
+    width: 65%;
+    padding: 0 0 0 4%;
+}
+#page_profile .profile_text .listing li {
+	margin-bottom: 5px;
+}
+#register_device {
+    background-color: #f0703f;
+    color: #FFFFFF;
+    width: 92%;
+    padding: 3% 4%;
+    margin: 0 0 10px 0;
+    text-align: center;
+    font-size: 14px;
+    display: block;
+    cursor: pointer;
+}
+
+/* */
