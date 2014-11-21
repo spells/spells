@@ -42,8 +42,8 @@ var sendStatusPacket = function (deviceHash, gatewayHash, userId, status) {
 
   var data = {
     subHash: deviceHash,
-    title: status ? '문 열림' : '문 닫힘',
-    message: '문이 닫힘 상태에서 열림 상태로 변경되었습니다.',
+    title: status ? '문 닫힘' : '문 열림',
+    message: status ? '문이 열림 상태에서 닫힘 상태로 변경되었습니다.' : '문이 닫힘 상태에서 열림 상태로 변경되었습니다.',
     flag: 3,
     isPush: true
   };
@@ -126,6 +126,7 @@ bt.on('found', function (address, name) {
       });
     }, 1000);
   });
+  bt.close();
 });
 
 bt.on('finished', function () {
